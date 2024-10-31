@@ -25,6 +25,7 @@ namespace GameplayScene
 	{
 		Player::Draw(player);
 		Obstacle::Draw(obstacle);
+		DrawText("v0.1", 10, 0, 40, GRAY);
 	}
 }
 
