@@ -5,6 +5,9 @@
     <ClCompile Include="src\objects\game.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\objects\player.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
     <ClCompile Include="src\scenes\gameplay_scene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -22,6 +25,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\objects\game.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\player.h">
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="src\scenes\gameplay_scene.h">

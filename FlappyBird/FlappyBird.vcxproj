@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\objects\player.cpp" />
     <ClCompile Include="src\objects\game.cpp" />
     <ClCompile Include="src\scenes\gameplay_scene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\objects\player.h" />
     <ClInclude Include="src\objects\game.h" />
     <ClInclude Include="src\scenes\gameplay_scene.h" />
   </ItemGroup>
