@@ -2,6 +2,8 @@
 
 #include "raylib.h"
 
+#include "scenes/gameplay_scene.h"
+
 namespace FlappyBird
 {
 	static void Load()
@@ -16,17 +18,22 @@ namespace FlappyBird
 
 	static void Init()
 	{
-
+		GameplayScene::Init();
 	}
 
 	static void Update()
 	{
+		GameplayScene::Update();
 
 	}
 
 	static void Draw()
 	{
+		BeginDrawing();
+		ClearBackground(BLACK);
+		GameplayScene::Draw();
 
+		EndDrawing();
 	}
 
 	static void Close()
@@ -59,7 +66,7 @@ namespace FlappyBird
 			//if (restart)
 			//{
 
-			Init();
+			//Init();
 
 			/*	restart = false;
 			}*/
