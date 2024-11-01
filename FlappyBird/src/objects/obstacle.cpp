@@ -5,7 +5,7 @@
 
 namespace Obstacle
 {
-	static float obstacleSpace = Player::playerSize * 2.0f;
+	static float obstacleSpace = Player::playerSize * 4.0f;
 
 	enum class Size
 	{
@@ -91,7 +91,7 @@ namespace Obstacle
 
 	void Draw(Obstacle& obstacle)
 	{
-		DrawRectangle(static_cast<int>(obstacle.lowerColisionShape.x), static_cast<int>(obstacle.lowerColisionShape.y), static_cast<int>(obstacle.lowerColisionShape.width), static_cast<int>(obstacle.lowerColisionShape.height), GREEN);
-		DrawRectangle(static_cast<int>(obstacle.higherColisionShape.x), static_cast<int>(obstacle.higherColisionShape.y), static_cast<int>(obstacle.higherColisionShape.width), static_cast<int>(obstacle.higherColisionShape.height), GREEN);
+		DrawRectangle(static_cast<int>(obstacle.lowerColisionShape.x), static_cast<int>(obstacle.lowerColisionShape.y), static_cast<int>(obstacle.lowerColisionShape.width), static_cast<int>(obstacle.lowerColisionShape.height), RED);
+		DrawRectangle(static_cast<int>(obstacle.higherColisionShape.x), static_cast<int>(obstacle.higherColisionShape.y), static_cast<int>(obstacle.higherColisionShape.width), static_cast<int>(obstacle.higherColisionShape.height), RED);
 	}
 }

@@ -5,8 +5,8 @@
 
 namespace GameplayScene
 {
-	Player::Player player;
-	Obstacle::Obstacle obstacle;
+	static Player::Player player;
+	static Obstacle::Obstacle obstacle;
 
 	static void ResetGameplay()
 	{
@@ -28,7 +28,7 @@ namespace GameplayScene
 		{
 			ResetGameplay();
 		}
-		else if (player.colisionShape.y + player.colisionShape.height >= GetScreenHeight())
+		else if (player.colisionShape.y + player.colisionShape.height >= screenHeight)
 			ResetGameplay();
 	}
 

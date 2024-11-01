@@ -3,17 +3,18 @@
 #include "raylib.h"
 
 #include "scenes/gameplay_scene.h"
+#include "utils/screen_info.h"
 
 namespace FlappyBird
 {
 	static void Load()
 	{
-
+		GameplayScene::Load();
 	}
 
 	static void Unload()
 	{
-
+		GameplayScene::Unload();
 	}
 
 	static void Init()
@@ -30,7 +31,7 @@ namespace FlappyBird
 	static void Draw()
 	{
 		BeginDrawing();
-		ClearBackground(BLACK);
+		ClearBackground(RAYWHITE);
 		GameplayScene::Draw();
 
 		EndDrawing();
@@ -48,7 +49,7 @@ namespace FlappyBird
 
 	void Play()
 	{
-		InitWindow(1024, 768, "Flappy Game");
+		InitWindow(screenWidth, screenHeight, "Flappy Game");
 		SetExitKey(KEY_NULL);
 		Load();
 		Init();

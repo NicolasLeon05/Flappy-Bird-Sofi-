@@ -13,7 +13,7 @@
     <ClCompile Include="src\objects\obstacle.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -40,6 +40,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\screen_info.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\texture_manager.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>

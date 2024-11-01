@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\objects\obstacle.cpp" />
     <ClCompile Include="src\objects\player.cpp" />
     <ClCompile Include="src\objects\game.cpp" />
@@ -31,6 +31,7 @@
     <ClInclude Include="src\objects\game.h" />
     <ClInclude Include="src\scenes\gameplay_scene.h" />
     <ClInclude Include="src\utils\screen_info.h" />
+    <ClInclude Include="src\utils\texture_manager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
