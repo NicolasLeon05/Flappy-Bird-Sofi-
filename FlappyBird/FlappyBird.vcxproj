@@ -23,7 +23,6 @@
     <ClCompile Include="src\objects\obstacle.cpp" />
     <ClCompile Include="src\objects\player.cpp" />
     <ClCompile Include="src\objects\game.cpp" />
-    <ClCompile Include="src\objects\text.cpp" />
     <ClCompile Include="src\scenes\gameplay_scene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -110,7 +109,7 @@
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)res\" "$(OutDir)res\" /i/y/s</Command>
+      <Command>xcopy "$(SolutionDir)res\" "$(OutDir)res\" /i /y /s</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>loading res...</Message>
