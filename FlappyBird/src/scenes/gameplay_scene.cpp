@@ -7,6 +7,7 @@ namespace GameplayScene
 {
 	static Player::Player player;
 	static Obstacle::Obstacle obstacle;
+	static Texture2D demonTexture;
 
 	static void ResetGameplay()
 	{
