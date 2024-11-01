@@ -24,6 +24,8 @@ namespace GameplayScene
 			ResetGameplay();
 
 		}
+		else if (player.colisionShape.y + player.colisionShape.height >= GetScreenHeight())
+			ResetGameplay();
 	}
 
 	void Init()

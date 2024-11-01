@@ -13,7 +13,6 @@ namespace Player
 		{
 			if (player.colisionShape.y + player.colisionShape.height < GetScreenHeight())
 				player.colisionShape.y += player.speed.y * GetFrameTime();
-
 		}
 
 	}
