@@ -2,6 +2,7 @@
 
 #include "objects/player.h"
 #include "objects/obstacle.h"
+#include "utils/screen_info.h"
 
 namespace GameplayScene
 {
@@ -33,11 +34,22 @@ namespace GameplayScene
 			ResetGameplay();
 	}
 
+	void Load()
+	{
+		demonTexture = LoadTexture(TextureManager::demonSprite.c_str());
+	}
+
+	void Unload()
+	{
+		UnloadTexture(demonTexture);
+	}
+
 	void Init()
 	{
 		player = Player::GetPlayer();
+		Player::InitSprite(player.sprite);
 		obstacle = Obstacle::GetObstacle();
-
+		Player::SaveTexture(demonTexture, player);
 	}
 
 	void Update()
