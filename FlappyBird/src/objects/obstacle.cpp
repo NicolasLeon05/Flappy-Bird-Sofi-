@@ -1,9 +1,12 @@
 #include "obstacle.h"
 
 #include "utils/screen_info.h"
+#include "objects/player.h"
 
 namespace Obstacle
 {
+	static float obstacleSpace = Player::playerSize * 2.0f;
+
 	enum class Size
 	{
 		small,
@@ -25,35 +28,42 @@ namespace Obstacle
 		switch (size)
 		{
 		case Size::small:
-			obstacle.colisionShape.y = static_cast<int>(SizeValues::small);
+			obstacle.lowerColisionShape.y = static_cast<int>(SizeValues::small);
 			break;
 
 		case Size::medium:
-			obstacle.colisionShape.y = static_cast<int>(SizeValues::medium);
+			obstacle.lowerColisionShape.y = static_cast<int>(SizeValues::medium);
 			break;
 
 		case Size::big:
-			obstacle.colisionShape.y = static_cast<int>(SizeValues::big);
+			obstacle.lowerColisionShape.y = static_cast<int>(SizeValues::big);
 			break;
 
 		default:
 			break;
 		}
 
-		obstacle.colisionShape.height = screenHeight - obstacle.colisionShape.y;
+		obstacle.lowerColisionShape.height = screenHeight - obstacle.lowerColisionShape.y;
+
+		obstacle.higherColisionShape.x = obstacle.lowerColisionShape.x;
+		obstacle.higherColisionShape.y = 0;
+		obstacle.higherColisionShape.height = screenHeight - obstacle.lowerColisionShape.height - obstacleSpace;
+
 	}
 
 	static void MoveObstacle(Obstacle& obstacle)
 	{
-		if (obstacle.colisionShape.x + obstacle.colisionShape.width > 0)
+		if (obstacle.lowerColisionShape.x + obstacle.lowerColisionShape.width > 0)
 		{
-			obstacle.colisionShape.x -= obstacle.speed.x * GetFrameTime();
+			obstacle.lowerColisionShape.x -= obstacle.speed.x * GetFrameTime();
+			obstacle.higherColisionShape.x = obstacle.lowerColisionShape.x;
 		}
 		else
 		{
-			obstacle.colisionShape.x = screenWidth;
+			obstacle.lowerColisionShape.x = screenWidth;
 			RandomizeHeight(obstacle);
 		}
+
 	}
 
 	void ResetObstacle(Obstacle& obstacle)
@@ -65,8 +75,9 @@ namespace Obstacle
 	{
 		Obstacle obstacle;
 
-		obstacle.colisionShape.x = screenWidth;
-		obstacle.colisionShape.width = 40.0f;
+		obstacle.lowerColisionShape.x = screenWidth;
+		obstacle.lowerColisionShape.width = 40.0f;
+		obstacle.higherColisionShape.width = obstacle.lowerColisionShape.width;
 		RandomizeHeight(obstacle);
 		obstacle.speed = { 400.0f, 400.0f };
 
@@ -80,6 +91,7 @@ namespace Obstacle
 
 	void Draw(Obstacle& obstacle)
 	{
-		DrawRectangle(static_cast<int>(obstacle.colisionShape.x), static_cast<int>(obstacle.colisionShape.y), static_cast<int>(obstacle.colisionShape.width), static_cast<int>(obstacle.colisionShape.height), GREEN);
+		DrawRectangle(static_cast<int>(obstacle.lowerColisionShape.x), static_cast<int>(obstacle.lowerColisionShape.y), static_cast<int>(obstacle.lowerColisionShape.width), static_cast<int>(obstacle.lowerColisionShape.height), GREEN);
+		DrawRectangle(static_cast<int>(obstacle.higherColisionShape.x), static_cast<int>(obstacle.higherColisionShape.y), static_cast<int>(obstacle.higherColisionShape.width), static_cast<int>(obstacle.higherColisionShape.height), GREEN);
 	}
 }

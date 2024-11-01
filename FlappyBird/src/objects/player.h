@@ -9,6 +9,8 @@ namespace Player
 		Rectangle colisionShape;
 	};
 
+	const float playerSize = 64.0f;
+
 	void ResetPlayer(Player& player);
 
 	Player GetPlayer();

@@ -7,7 +7,8 @@ namespace Obstacle
 	struct Obstacle
 	{
 		Vector2 speed;
-		Rectangle colisionShape;
+		Rectangle lowerColisionShape;
+		Rectangle higherColisionShape;
 	};
 
 	void ResetObstacle(Obstacle& obstacle);

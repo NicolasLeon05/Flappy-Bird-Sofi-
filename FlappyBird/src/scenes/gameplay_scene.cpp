@@ -14,15 +14,19 @@ namespace GameplayScene
 		Obstacle::ResetObstacle(obstacle);
 	}
 
+	static bool CheckObstacleColision(Rectangle colisionShape)
+	{
+		return player.colisionShape.x + player.colisionShape.width >= colisionShape.x &&
+			player.colisionShape.x <= colisionShape.x + colisionShape.width &&
+			player.colisionShape.y + player.colisionShape.height >= colisionShape.y &&
+			player.colisionShape.y <= colisionShape.y + colisionShape.height;
+	}
+
 	static void CheckObstacleColision()
 	{
-		if (player.colisionShape.x + player.colisionShape.width >= obstacle.colisionShape.x &&
-			player.colisionShape.x <= obstacle.colisionShape.x + obstacle.colisionShape.width &&
-			player.colisionShape.y + player.colisionShape.height >= obstacle.colisionShape.y &&
-			player.colisionShape.y <= obstacle.colisionShape.y + obstacle.colisionShape.height) 
+		if (CheckObstacleColision(obstacle.higherColisionShape) || CheckObstacleColision(obstacle.lowerColisionShape))
 		{
 			ResetGameplay();
-
 		}
 		else if (player.colisionShape.y + player.colisionShape.height >= GetScreenHeight())
 			ResetGameplay();

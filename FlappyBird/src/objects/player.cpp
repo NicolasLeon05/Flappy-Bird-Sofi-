@@ -29,7 +29,7 @@ namespace Player
 		player.speed = { 500.0f, 500.0f };
 		player.colisionShape.x = static_cast<float>(GetScreenWidth()) * 1 / 3;
 		player.colisionShape.y = static_cast<float>(GetScreenHeight()) / 2.0f;
-		player.colisionShape.width = 64.0f;
+		player.colisionShape.width = playerSize;
 		player.colisionShape.height = player.colisionShape.width;
 
 		return player;
