@@ -10,6 +10,7 @@ namespace Obstacle
 		Rectangle colisionShape;
 	};
 
+	void ResetObstacle(Obstacle& obstacle);
 	Obstacle GetObstacle();
 	void Update(Obstacle& obstacle);
 	void Draw(Obstacle& obstacle);

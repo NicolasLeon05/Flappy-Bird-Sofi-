@@ -5,10 +5,22 @@ namespace Player
 	static void MovePlayer(Player& player)
 	{
 		if (IsKeyDown(KEY_UP))
-			player.colisionShape.y -= player.speed.y * GetFrameTime();
+		{
+			if (player.colisionShape.y > 0)
+				player.colisionShape.y -= player.speed.y * GetFrameTime();
+		}
 		else if (IsKeyDown(KEY_DOWN))
-			player.colisionShape.y += player.speed.y * GetFrameTime();
+		{
+			if (player.colisionShape.y + player.colisionShape.height < GetScreenHeight())
+				player.colisionShape.y += player.speed.y * GetFrameTime();
 
+		}
+
+	}
+
+	void ResetPlayer(Player& player)
+	{
+		player = GetPlayer();
 	}
 
 	Player GetPlayer()

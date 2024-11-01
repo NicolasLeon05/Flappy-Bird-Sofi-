@@ -9,6 +9,8 @@ namespace Player
 		Rectangle colisionShape;
 	};
 
+	void ResetPlayer(Player& player);
+
 	Player GetPlayer();
 
 	void Update(Player& player);

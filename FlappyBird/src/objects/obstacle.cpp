@@ -56,12 +56,17 @@ namespace Obstacle
 		}
 	}
 
+	void ResetObstacle(Obstacle& obstacle)
+	{
+		obstacle = GetObstacle();
+	}
+
 	Obstacle GetObstacle()
 	{
 		Obstacle obstacle;
 
 		obstacle.colisionShape.x = screenWidth;
-		obstacle.colisionShape.width = 20.0f;
+		obstacle.colisionShape.width = 40.0f;
 		RandomizeHeight(obstacle);
 		obstacle.speed = { 400.0f, 400.0f };
 

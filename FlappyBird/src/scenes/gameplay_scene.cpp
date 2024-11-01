@@ -8,6 +8,24 @@ namespace GameplayScene
 	Player::Player player;
 	Obstacle::Obstacle obstacle;
 
+	static void ResetGameplay()
+	{
+		Player::ResetPlayer(player);
+		Obstacle::ResetObstacle(obstacle);
+	}
+
+	static void CheckObstacleColision()
+	{
+		if (player.colisionShape.x + player.colisionShape.width >= obstacle.colisionShape.x &&
+			player.colisionShape.x <= obstacle.colisionShape.x + obstacle.colisionShape.width &&
+			player.colisionShape.y + player.colisionShape.height >= obstacle.colisionShape.y &&
+			player.colisionShape.y <= obstacle.colisionShape.y + obstacle.colisionShape.height) 
+		{
+			ResetGameplay();
+
+		}
+	}
+
 	void Init()
 	{
 		player = Player::GetPlayer();
@@ -17,6 +35,7 @@ namespace GameplayScene
 
 	void Update()
 	{
+		CheckObstacleColision();
 		Player::Update(player);
 		Obstacle::Update(obstacle);
 	}
