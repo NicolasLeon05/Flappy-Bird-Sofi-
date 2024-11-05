@@ -22,6 +22,7 @@ static Button::Button howToPlayButton;
 
 static Text::Text titlePart1;
 static Text::Text titlePart2;
+static Text::Text versionText;
 
 void MenuScene::Init()
 {
@@ -48,7 +49,16 @@ void MenuScene::Init()
 	howToPlayButton = Button::GetButton(playButton.shape.x, creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny), playButton.shape.width, playButton.shape.height, "HOW TO PLAY", BLACK, YELLOW, WHITE /*playButton.textShown.font*/);
 
 	exitButton = Button::GetButton(playButton.shape.x, howToPlayButton.shape.y + howToPlayButton.shape.height + static_cast<int>(Text::Padding::tiny), playButton.shape.width, playButton.shape.height, "EXIT", BLACK, RED, WHITE/*, playButton.textShown.font*/);
+
+	//Version
+
+	versionText = Text::GetText(static_cast<float>(Text::Padding::tiny),
+								static_cast<float>(Text::Padding::tiny),
+								static_cast<int>(Text::FontSize::medium),
+								"v0.2",
+								GRAY);
 }
+								
 
 void MenuScene::Update()
 {
@@ -77,5 +87,5 @@ void MenuScene::Draw()
 	Button::DrawButton(creditsButton);
 	Button::DrawButton(howToPlayButton);
 	Button::DrawButton(exitButton);
-
+	Text::DrawText(versionText);
 }
