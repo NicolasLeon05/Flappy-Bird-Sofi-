@@ -29,6 +29,6 @@ namespace Button
 	void DrawButton(Button button);
 
 	//Create buttons
-	Button GetButton(float x, float y, float width, float height, string content, Color mainColor, Color highlightColor, Color textColor, Text::Fonts font);
+	Button GetButton(float x, float y, float width, float height, string content, Color mainColor, Color highlightColor, Color textColor/*, Text::Fonts font*/);
 };
 

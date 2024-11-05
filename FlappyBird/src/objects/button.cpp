@@ -75,7 +75,7 @@ namespace Button
 		DrawButtonText(button);
 	}
 
-	Button GetButton(float x, float y, float width, float height, string content, Color mainColor, Color highlightColor, Color textColor, Text::Fonts font)
+	Button GetButton(float x, float y, float width, float height, string content, Color mainColor, Color highlightColor, Color textColor/*, Text::Fonts font*/)
 	{
 		Button myButton;
 
@@ -90,7 +90,7 @@ namespace Button
 		myButton.textShown.fontSize = static_cast<int>(height) / 2;
 		myButton.textShown.currentColor = textColor;
 		myButton.textShown.location.x = x + width / 2.0f - static_cast<float>(MeasureText(myButton.textShown.content.c_str(), myButton.textShown.fontSize), myButton.textShown.fontSize);
-		myButton.textShown.font = font;
+		//myButton.textShown.font = font;
 
 		return myButton;
 	}

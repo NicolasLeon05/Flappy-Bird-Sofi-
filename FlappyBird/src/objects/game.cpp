@@ -5,6 +5,7 @@
 #include "scenes/gameplay_scene.h"
 #include "utils/screen_info.h"
 #include "utils/scene_manager.h"
+#include "scenes/menu_scene.h"
 
 namespace FlappyBird
 {
@@ -21,6 +22,7 @@ namespace FlappyBird
 	static void Init()
 	{
 		GameplayScene::Init();
+		MenuScene::Init();
 	}
 
 	static void Update()
@@ -32,6 +34,7 @@ namespace FlappyBird
 			break;
 
 		case SceneManager::Menu:
+			MenuScene::Update();
 			break;
 
 		case SceneManager::Credits:
@@ -59,6 +62,7 @@ namespace FlappyBird
 			break;
 
 		case SceneManager::Menu:
+			MenuScene::Draw();
 			break;
 
 		case SceneManager::Credits:
@@ -84,7 +88,7 @@ namespace FlappyBird
 
 	static bool ShouldWindowClose()
 	{
-		return WindowShouldClose(); //|| SceneManager::GetCurrentScene() == SceneManager::None;
+		return WindowShouldClose() || SceneManager::GetCurrentScene() == SceneManager::None;
 	}
 
 	void Play()

@@ -55,9 +55,9 @@ namespace Text
 
 	void CenterTextX(Text& text);
 
-	float GetTextWidth(Text text);
+	int GetTextWidth(Text text);
 
-	float GetTextHeight(Text text);
+	int GetTextHeight(Text text);
 
 	Font GetFont(Fonts font);
 
@@ -65,6 +65,8 @@ namespace Text
 
 	//Create texts
 	Text GetText(float x, float y, Fonts font, int fontSize, string content, Color color);
+
+	Text GetText(float x, float y, int fontSize, string content, Color color);
 
 	//If the text is the same and only the color changes at one point, then this is used.
 	//color1 is the current color.
