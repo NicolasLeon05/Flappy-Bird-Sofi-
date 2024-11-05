@@ -34,8 +34,6 @@ namespace TextureManager
 
 		sprite.atlas.source.x = static_cast<float>(sprite.xOffSet);
 
-		rotation = 45.0f;
-
 		DrawTexturePro(sprite.atlas.texture, sprite.atlas.source, sprite.atlas.dest, sprite.atlas.origin, rotation, WHITE);
 
 	}
@@ -46,7 +44,7 @@ namespace TextureManager
 
 		animatedSprite.atlas = sprite;
 		animatedSprite.frames = framesAmount;
-		animatedSprite.fps = framesPerSecond;		// GetTime() * (frames/fps) = frames
+		animatedSprite.fps = framesPerSecond;
 		animatedSprite.frameWidth = framesSize;
 		animatedSprite.start = static_cast<float>(GetTime());
 		animatedSprite.xOffSet = 0;
