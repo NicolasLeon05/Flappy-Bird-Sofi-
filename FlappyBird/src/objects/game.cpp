@@ -4,6 +4,7 @@
 
 #include "scenes/gameplay_scene.h"
 #include "utils/screen_info.h"
+#include "utils/scene_manager.h"
 
 namespace FlappyBird
 {
@@ -24,15 +25,54 @@ namespace FlappyBird
 
 	static void Update()
 	{
-		GameplayScene::Update();
+		switch (SceneManager::GetCurrentScene())
+		{
+		case SceneManager::Gameplay:
+			GameplayScene::Update();
+			break;
 
+		case SceneManager::Menu:
+			break;
+
+		case SceneManager::Credits:
+			break;
+		
+		case SceneManager::Result:
+			break;
+		
+		case SceneManager::HowToPlay:
+			break;
+		
+		default:
+			break;
+		}
 	}
 
 	static void Draw()
 	{
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
-		GameplayScene::Draw();
+		switch (SceneManager::GetCurrentScene())
+		{
+		case SceneManager::Gameplay:
+			GameplayScene::Draw();
+			break;
+
+		case SceneManager::Menu:
+			break;
+
+		case SceneManager::Credits:
+			break;
+
+		case SceneManager::Result:
+			break;
+
+		case SceneManager::HowToPlay:
+			break;
+
+		default:
+			break;
+		}
 
 		EndDrawing();
 	}
