@@ -2,6 +2,7 @@
 
 #include "objects/player.h"
 #include "objects/obstacle.h"
+#include "objects/button.h"
 #include "utils/screen_info.h"
 
 namespace GameplayScene
@@ -9,6 +10,7 @@ namespace GameplayScene
 	static Player::Player player;
 	static Obstacle::Obstacle obstacle;
 	static Texture2D demonTexture;
+	static Button::Button backButton;
 
 	static void ResetGameplay()
 	{
@@ -49,6 +51,7 @@ namespace GameplayScene
 		player = Player::GetPlayer();
 		obstacle = Obstacle::GetObstacle();
 		Player::SaveTexture(demonTexture, player);
+		backButton = Button::GetButton(0, screenHeight - static_cast<float>(Text::FontSize::medium), static_cast<float>(Text::Padding::medium), static_cast<float>(Text::FontSize::medium), "BACK", BLACK, RED, WHITE);
 	}
 
 	void Update()
@@ -56,12 +59,14 @@ namespace GameplayScene
 		CheckObstacleColision();
 		Player::Update(player);
 		Obstacle::Update(obstacle);
+		Button::CheckSceneChange(backButton, SceneManager::Menu);
 	}
 
 	void Draw()
 	{
 		Player::Draw(player);
 		Obstacle::Draw(obstacle);
+		Button::DrawButton(backButton);
 	}
 }
 
