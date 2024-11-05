@@ -47,7 +47,6 @@ namespace GameplayScene
 	void Init()
 	{
 		player = Player::GetPlayer();
-		Player::InitSprite(player.sprite);
 		obstacle = Obstacle::GetObstacle();
 		Player::SaveTexture(demonTexture, player);
 	}

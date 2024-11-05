@@ -9,7 +9,7 @@ namespace Player
 	{
 		Vector2 speed;
 		Rectangle colisionShape;
-		TextureManager::Sprite sprite;
+		TextureManager::AnimatedSprite sprite;
 		float angle;
 		int scale;
 	};
@@ -26,7 +26,7 @@ namespace Player
 
 	void Update(Player& player);
 
-	void Draw(Player player);
+	void Draw(Player& player);
 
 
 }

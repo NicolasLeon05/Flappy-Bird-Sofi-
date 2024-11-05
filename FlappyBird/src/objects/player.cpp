@@ -28,8 +28,8 @@ namespace Player
 				player.colisionShape.y += player.speed.y * GetFrameTime();
 		}*/
 
-		player.sprite.dest.y = player.colisionShape.y + player.colisionShape.height / 2;
-		player.sprite.dest.x = player.colisionShape.x + player.colisionShape.width;
+		player.sprite.atlas.dest.y = player.colisionShape.y+ player.colisionShape.height / 2;
+		player.sprite.atlas.dest.x = player.colisionShape.x+ player.colisionShape.width*2;
 	}
 
 	void ResetPlayer(Player& player)
@@ -41,37 +41,21 @@ namespace Player
 
 	void SaveTexture(Texture2D texture, Player& player)
 	{
-		player.sprite.texture = texture;
+		player.sprite.atlas.texture = texture;
 
-		player.sprite.source.width = static_cast<float>(player.sprite.texture.width / 2);
-		player.sprite.source.height = static_cast<float>(player.sprite.texture.height);
+		player.sprite.atlas.source.x = 0;
+		player.sprite.atlas.source.y = 0;
 
-		player.sprite.dest.width = player.sprite.source.width * player.scale;
-		player.sprite.dest.height = player.sprite.source.height * player.scale;
+		player.sprite.atlas.source.width = static_cast<float>(player.sprite.atlas.texture.width / 3);
+		player.sprite.atlas.source.height = static_cast<float>(player.sprite.atlas.texture.height);
 
-		player.sprite.origin = { static_cast<float>(player.sprite.texture.width),static_cast<float>(player.sprite.texture.height) };
-	}
+		player.sprite.atlas.dest.width = player.sprite.atlas.source.width * player.scale;
+		player.sprite.atlas.dest.height = player.sprite.atlas.source.height * player.scale;
 
-	void InitSprite(TextureManager::Sprite& sprite)
-	{
-		Rectangle sourceRect{};
+		player.sprite.atlas.origin = { static_cast<float>(player.sprite.atlas.texture.width),
+										static_cast<float>(player.sprite.atlas.texture.height) };
 
-		sourceRect.x = 0;
-		sourceRect.y = 0;
-
-		sprite.source = sourceRect;
-
-		Rectangle destRect{};
-
-		destRect.x = 0;
-		destRect.y = 0;
-
-		sprite.dest = destRect;
-
-		Vector2 origin{};
-
-		sprite.origin = origin;
-
+		player.sprite = TextureManager::GetAnimatedSprite(player.sprite.atlas, 3, 30, static_cast<int>(player.sprite.atlas.source.width));
 	}
 
 	Player GetPlayer()
@@ -85,8 +69,11 @@ namespace Player
 		player.colisionShape.width = playerSize;
 		player.colisionShape.height = player.colisionShape.width;
 
-		player.sprite.textureDir = TextureManager::demonSprite;
+		//TextureManager::InitSprite(player.sprite.atlas);
+
+		player.sprite.atlas.textureDir = TextureManager::demonSprite;
 		player.angle = 0.0f;
+
 
 		return player;
 	}
@@ -96,11 +83,11 @@ namespace Player
 		MovePlayer(player);
 	}
 
-	void Draw(Player player)
+	void Draw(Player& player)
 	{
 		DrawRectangle(static_cast<int>(player.colisionShape.x), static_cast<int>(player.colisionShape.y), static_cast<int>(player.colisionShape.width), static_cast<int>(player.colisionShape.height), YELLOW);
-		DrawTexturePro(player.sprite.texture, player.sprite.source, player.sprite.dest, player.sprite.origin, player.angle, WHITE);
-
+		//DrawTexturePro(player.sprite.atlas.texture, player.sprite.atlas.source, player.sprite.atlas.dest, player.sprite.atlas.origin, player.angle, WHITE);
+		TextureManager::AnimateSprite(player.sprite, player.angle);
 	}
 
 }
