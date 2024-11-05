@@ -3,9 +3,10 @@
 #include "raylib.h"
 
 #include "scenes/gameplay_scene.h"
+#include "scenes/credits_scene.h"
+#include "scenes/menu_scene.h"
 #include "utils/screen_info.h"
 #include "utils/scene_manager.h"
-#include "scenes/menu_scene.h"
 
 namespace FlappyBird
 {
@@ -23,6 +24,7 @@ namespace FlappyBird
 	{
 		GameplayScene::Init();
 		MenuScene::Init();
+		CreditsScene::Init();
 	}
 
 	static void Update()
@@ -38,6 +40,7 @@ namespace FlappyBird
 			break;
 
 		case SceneManager::Credits:
+			CreditsScene::Update();
 			break;
 		
 		case SceneManager::Result:
@@ -66,6 +69,7 @@ namespace FlappyBird
 			break;
 
 		case SceneManager::Credits:
+			CreditsScene::Draw();
 			break;
 
 		case SceneManager::Result:

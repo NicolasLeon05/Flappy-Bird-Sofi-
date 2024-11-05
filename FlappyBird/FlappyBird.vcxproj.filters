@@ -29,6 +29,9 @@
     <ClCompile Include="texture_manager.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\credits_scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -71,6 +74,9 @@
     </ClInclude>
     <ClInclude Include="src\utils\scene_manager.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\credits_scene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
