@@ -20,16 +20,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\objects\button.cpp" />
     <ClCompile Include="src\objects\obstacle.cpp" />
     <ClCompile Include="src\objects\player.cpp" />
     <ClCompile Include="src\objects\game.cpp" />
+    <ClCompile Include="src\objects\text.cpp" />
     <ClCompile Include="src\scenes\gameplay_scene.cpp" />
+    <ClCompile Include="src\scenes\menu_scene.cpp" />
+    <ClCompile Include="src\utils\scene_manager.cpp" />
+    <ClCompile Include="texture_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\objects\button.h" />
     <ClInclude Include="src\objects\obstacle.h" />
     <ClInclude Include="src\objects\player.h" />
     <ClInclude Include="src\objects\game.h" />
+    <ClInclude Include="src\objects\text.h" />
     <ClInclude Include="src\scenes\gameplay_scene.h" />
+    <ClInclude Include="src\scenes\menu_scene.h" />
+    <ClInclude Include="src\utils\scene_manager.h" />
     <ClInclude Include="src\utils\screen_info.h" />
     <ClInclude Include="src\utils\texture_manager.h" />
   </ItemGroup>

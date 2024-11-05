@@ -14,6 +14,21 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scenes\menu_scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objects\text.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objects\button.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\scene_manager.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="texture_manager.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -43,6 +58,18 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\texture_manager.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\menu_scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\text.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\button.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\scene_manager.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
