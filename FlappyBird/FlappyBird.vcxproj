@@ -121,8 +121,7 @@
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy "$(SolutionDir)res\" "$(OutDir)res\" /i/y/s</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>loading res...</Message>
@@ -150,8 +149,7 @@
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy "$(SolutionDir)res\" "$(OutDir)res\" /i/y/s</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>loading res...</Message>

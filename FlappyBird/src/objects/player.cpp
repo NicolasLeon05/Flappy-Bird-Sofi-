@@ -90,7 +90,7 @@ namespace Player
 
 	void Draw(Player& player)
 	{
-		DrawRectangle(static_cast<int>(player.colisionShape.x), static_cast<int>(player.colisionShape.y), static_cast<int>(player.colisionShape.width), static_cast<int>(player.colisionShape.height), YELLOW);
+		//DrawRectangle(static_cast<int>(player.colisionShape.x), static_cast<int>(player.colisionShape.y), static_cast<int>(player.colisionShape.width), static_cast<int>(player.colisionShape.height), YELLOW);
 		//DrawTexturePro(player.sprite.atlas.texture, player.sprite.atlas.source, player.sprite.atlas.dest, player.sprite.atlas.origin, player.angle, WHITE);
 		TextureManager::AnimateSprite(player.sprite, player.angle);
 	}
