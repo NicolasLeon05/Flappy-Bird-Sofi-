@@ -58,7 +58,7 @@ namespace FlappyBird
 	static void Draw()
 	{
 		BeginDrawing();
-		ClearBackground(RAYWHITE);
+		
 		switch (SceneManager::GetCurrentScene())
 		{
 		case SceneManager::Gameplay:
@@ -66,17 +66,21 @@ namespace FlappyBird
 			break;
 
 		case SceneManager::Menu:
+			ClearBackground(BLACK);
 			MenuScene::Draw();
 			break;
 
 		case SceneManager::Credits:
+			ClearBackground(BLACK);
 			CreditsScene::Draw();
 			break;
 
 		case SceneManager::Result:
+			ClearBackground(BLACK);
 			break;
 
 		case SceneManager::HowToPlay:
+			ClearBackground(BLACK);
 			break;
 
 		default:

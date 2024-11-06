@@ -64,6 +64,7 @@ namespace GameplayScene
 
 	void Draw()
 	{
+		ClearBackground(RAYWHITE);
 		Player::Draw(player);
 		Obstacle::Draw(obstacle);
 		Button::DrawButton(backButton);
