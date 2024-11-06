@@ -10,6 +10,7 @@
 
 namespace FlappyBird
 {
+
 	static void Load()
 	{
 		GameplayScene::Load();

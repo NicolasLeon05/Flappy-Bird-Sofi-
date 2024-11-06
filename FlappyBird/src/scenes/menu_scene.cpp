@@ -18,7 +18,7 @@ enum Options
 static Button::Button playButton;
 static Button::Button exitButton;
 static Button::Button creditsButton;
-static Button::Button howToPlayButton;
+//static Button::Button howToPlayButton;
 
 static Text::Text titlePart1;
 static Text::Text titlePart2;
@@ -46,9 +46,9 @@ void MenuScene::Init()
 	
 	creditsButton = Button::GetButton(playButton.shape.x, playButton.shape.y + playButton.shape.height + static_cast<int>(Text::Padding::tiny), playButton.shape.width, playButton.shape.height, "CREDITS", BLACK, SKYBLUE, WHITE /*playButton.textShown.font*/);
 
-	howToPlayButton = Button::GetButton(playButton.shape.x, creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny), playButton.shape.width, playButton.shape.height, "HOW TO PLAY", BLACK, YELLOW, WHITE /*playButton.textShown.font*/);
+	//howToPlayButton = Button::GetButton(playButton.shape.x, creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny), playButton.shape.width, playButton.shape.height, "HOW TO PLAY", BLACK, YELLOW, WHITE /*playButton.textShown.font*/);
 
-	exitButton = Button::GetButton(playButton.shape.x, howToPlayButton.shape.y + howToPlayButton.shape.height + static_cast<int>(Text::Padding::tiny), playButton.shape.width, playButton.shape.height, "EXIT", BLACK, RED, WHITE/*, playButton.textShown.font*/);
+	exitButton = Button::GetButton(playButton.shape.x, creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny), playButton.shape.width, playButton.shape.height, "EXIT", BLACK, RED, WHITE/*, playButton.textShown.font*/);
 
 	//Version
 
@@ -72,7 +72,7 @@ void MenuScene::Update()
 
 	Button::CheckSceneChange(creditsButton, SceneManager::Credits);
 
-	Button::CheckSceneChange(howToPlayButton, SceneManager::HowToPlay);
+	//Button::CheckSceneChange(howToPlayButton, SceneManager::HowToPlay);
 
 	Button::CheckSceneChange(exitButton, SceneManager::None/*, Audio::Song::menu*/);
 
@@ -85,7 +85,7 @@ void MenuScene::Draw()
 
 	Button::DrawButton(playButton);
 	Button::DrawButton(creditsButton);
-	Button::DrawButton(howToPlayButton);
+	//Button::DrawButton(howToPlayButton);
 	Button::DrawButton(exitButton);
 	Text::DrawText(versionText);
 }
