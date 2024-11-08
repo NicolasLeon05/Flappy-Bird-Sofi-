@@ -5,28 +5,6 @@
 
 namespace Player
 {
-	static void MovePlayer(Player& player)
-	{
-		if (player.colisionShape.y - player.colisionShape.height / 2 <= 0)
-		{
-			player.colisionShape.y = player.colisionShape.height / 2;
-			player.speed.y = 0;
-		}
-
-		const float gravity = 1000.0f;
-
-		if (IsKeyPressed(KEY_SPACE) && (player.colisionShape.y > 0))
-		{
-			player.speed.y = -gravity / 2.5f;
-		}
-
-		player.speed.y += gravity * GetFrameTime();
-		player.colisionShape.y += player.speed.y * GetFrameTime();
-
-		player.sprite.atlas.dest.y = player.colisionShape.y + player.colisionShape.height / 2;
-		player.sprite.atlas.dest.x = player.colisionShape.x + player.colisionShape.width * 2;
-	}
-
 	void ResetPlayer(Player& player)
 	{
 		player.colisionShape.x = static_cast<float>(screenWidth) * 1 / 3;
@@ -64,7 +42,6 @@ namespace Player
 
 	void Update(Player& player)
 	{
-		MovePlayer(player);
 		SpritesManager::AnimateSprite(player.sprite);
 	}
 
