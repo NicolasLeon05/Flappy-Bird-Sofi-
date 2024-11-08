@@ -10,28 +10,18 @@ namespace Player
 		if (player.colisionShape.y - player.colisionShape.height / 2 <= 0)
 		{
 			player.colisionShape.y = player.colisionShape.height / 2;
+			player.speed.y = 0;
 		}
 
 		const float gravity = 1000.0f;
 
 		if (IsKeyPressed(KEY_SPACE) && (player.colisionShape.y > 0))
 		{
-			player.speed.y = -gravity / 2;
+			player.speed.y = -gravity / 2.5f;
 		}
 
 		player.speed.y += gravity * GetFrameTime();
 		player.colisionShape.y += player.speed.y * GetFrameTime();
-
-		/*if (IsKeyDown(KEY_UP))
-		{
-			if (player.colisionShape.y > 0)
-				player.colisionShape.y -= player.speed.y * GetFrameTime();
-		}
-		else if (IsKeyDown(KEY_DOWN))
-		{
-			if (player.colisionShape.y + player.colisionShape.height < screenHeight)
-				player.colisionShape.y += player.speed.y * GetFrameTime();
-		}*/
 
 		player.sprite.atlas.dest.y = player.colisionShape.y + player.colisionShape.height / 2;
 		player.sprite.atlas.dest.x = player.colisionShape.x + player.colisionShape.width * 2;
@@ -57,7 +47,7 @@ namespace Player
 
 		//TextureManager::InitSprite(player.sprite.atlas);
 
-		player.sprite.atlas.textureDir = SpritesManager::demonSprite;
+		player.sprite.atlas.textureDir = SpritesManager::demon1Sprite;
 		player.sprite.atlas.rotation = 0.0f;
 
 		player.sprite.fps = 30;
