@@ -10,7 +10,8 @@ namespace GameplayScene
 {
 	static Player::Player player;
 	static Obstacle::Obstacle obstacle;
-	static Texture2D demonTexture;
+	static Texture2D demon1Texture;
+	static Texture2D demon2Texture;
 	static Button::Button backButton;
 	static Parallax::Parallax parallax;
 
@@ -40,7 +41,8 @@ namespace GameplayScene
 
 	void Load()
 	{
-		demonTexture = LoadTexture(SpritesManager::demonSprite.c_str());
+		demon1Texture = LoadTexture(SpritesManager::demon1Sprite.c_str());
+		demon2Texture = LoadTexture(SpritesManager::demon2Sprite.c_str());
 
 		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0004_bg.png");
 		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0003_far buildings.png");
@@ -53,7 +55,7 @@ namespace GameplayScene
 
 	void Unload()
 	{
-		UnloadTexture(demonTexture);
+		UnloadTexture(demon1Texture);
 		Parallax::Unload(parallax);
 	}
 
@@ -61,7 +63,7 @@ namespace GameplayScene
 	{
 		player = Player::GetPlayer();
 		obstacle = Obstacle::GetObstacle();
-		Player::SaveTexture(demonTexture, player);
+		Player::SaveTexture(demon1Texture, player);
 		backButton = Button::GetButton(0, screenHeight - static_cast<float>(Text::FontSize::medium), static_cast<float>(Text::Padding::medium), static_cast<float>(Text::FontSize::medium), "BACK", BLACK, RED, WHITE);
 	}
 
