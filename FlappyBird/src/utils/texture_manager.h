@@ -31,7 +31,8 @@ namespace SpritesManager
 		float start;
 	};
 
-	const string demonSprite = "res/sprites/demon.png";
+	const string demon1Sprite = "res/sprites/demon.png";
+	const string demon2Sprite = "res/sprites/demon2.png";
 
 	void AnimateSprite(AnimatedSprite& sprite);
 

@@ -107,6 +107,7 @@ namespace SpritesManager
 										static_cast<float>(sprite.texture.height) };
 
 	}
+
 	void SaveBGTexture(Texture2D texture, Sprite& sprite, float width, float height)
 	{
 		SaveTexture(texture, sprite);
