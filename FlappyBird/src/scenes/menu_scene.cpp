@@ -55,7 +55,7 @@ void MenuScene::Init()
 	versionText = Text::GetText(static_cast<float>(Text::Padding::tiny),
 								static_cast<float>(Text::Padding::tiny),
 								static_cast<int>(Text::FontSize::medium),
-								"v0.2",
+								"v0.3",
 								GRAY);
 }
 								
