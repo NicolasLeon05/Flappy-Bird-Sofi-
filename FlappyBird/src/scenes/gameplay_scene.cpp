@@ -3,6 +3,7 @@
 #include "objects/player.h"
 #include "objects/obstacle.h"
 #include "objects/button.h"
+#include "objects/parallax_handler.h"
 #include "utils/screen_info.h"
 
 namespace GameplayScene
@@ -11,6 +12,7 @@ namespace GameplayScene
 	static Obstacle::Obstacle obstacle;
 	static Texture2D demonTexture;
 	static Button::Button backButton;
+	static Parallax::Parallax parallax;
 
 	static void ResetGameplay()
 	{
@@ -38,12 +40,21 @@ namespace GameplayScene
 
 	void Load()
 	{
-		demonTexture = LoadTexture(TextureManager::demonSprite.c_str());
+		demonTexture = LoadTexture(SpritesManager::demonSprite.c_str());
+
+		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0004_bg.png");
+		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0003_far buildings.png");
+		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0002_3.png");
+		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0001_buildings.png");
+		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0000_foreground.png");
+
+		Parallax::Load(parallax);
 	}
 
 	void Unload()
 	{
 		UnloadTexture(demonTexture);
+		Parallax::Unload(parallax);
 	}
 
 	void Init()
@@ -60,11 +71,13 @@ namespace GameplayScene
 		Player::Update(player);
 		Obstacle::Update(obstacle);
 		Button::CheckSceneChange(backButton, SceneManager::Menu);
+		Parallax::Update(parallax);
 	}
 
 	void Draw()
 	{
 		ClearBackground(RAYWHITE);
+		Parallax::Draw(parallax);
 		Player::Draw(player);
 		Obstacle::Draw(obstacle);
 		Button::DrawButton(backButton);

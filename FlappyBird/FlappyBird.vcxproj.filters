@@ -26,11 +26,14 @@
     <ClCompile Include="src\utils\scene_manager.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="texture_manager.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="src\scenes\credits_scene.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objects\parallax_handler.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\texture_manager.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="src\scenes\credits_scene.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\parallax_handler.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

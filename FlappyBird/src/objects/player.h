@@ -9,9 +9,7 @@ namespace Player
 	{
 		Vector2 speed;
 		Rectangle colisionShape;
-		TextureManager::AnimatedSprite sprite;
-		float angle;
-		int scale;
+		SpritesManager::AnimatedSprite sprite;
 	};
 
 	const float playerSize = 32.0f;
@@ -19,8 +17,6 @@ namespace Player
 	void ResetPlayer(Player& player);
 
 	void SaveTexture(Texture2D texture, Player& player);
-
-	void InitSprite(TextureManager::Sprite& sprite);
 
 	Player GetPlayer();
 

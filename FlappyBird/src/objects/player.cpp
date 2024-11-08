@@ -44,30 +44,11 @@ namespace Player
 		player.speed.y = 0;
 	}
 
-	void SaveTexture(Texture2D texture, Player& player)
-	{
-		player.sprite.atlas.texture = texture;
-
-		player.sprite.atlas.source.x = 0;
-		player.sprite.atlas.source.y = 0;
-
-		player.sprite.atlas.source.width = static_cast<float>(player.sprite.atlas.texture.width / 3);
-		player.sprite.atlas.source.height = static_cast<float>(player.sprite.atlas.texture.height);
-
-		player.sprite.atlas.dest.width = player.sprite.atlas.source.width * player.scale;
-		player.sprite.atlas.dest.height = player.sprite.atlas.source.height * player.scale;
-
-		player.sprite.atlas.origin = { static_cast<float>(player.sprite.atlas.texture.width),
-										static_cast<float>(player.sprite.atlas.texture.height) };
-
-		player.sprite = TextureManager::GetAnimatedSprite(player.sprite.atlas, 3, 30, static_cast<int>(player.sprite.atlas.source.width));
-	}
-
 	Player GetPlayer()
 	{
 		Player player;
 
-		player.scale = 2;
+		player.sprite.atlas.scale = 2;
 		player.speed = { 0.0f, 0.0f };
 		player.colisionShape.x = static_cast<float>(screenWidth) * 1 / 3;
 		player.colisionShape.y = static_cast<float>(screenHeight) / 2.0f;
@@ -76,23 +57,32 @@ namespace Player
 
 		//TextureManager::InitSprite(player.sprite.atlas);
 
-		player.sprite.atlas.textureDir = TextureManager::demonSprite;
-		player.angle = 0.0f;
+		player.sprite.atlas.textureDir = SpritesManager::demonSprite;
+		player.sprite.atlas.rotation = 0.0f;
+
+		player.sprite.fps = 30;
+		player.sprite.frames = 3;
 
 
 		return player;
 	}
 
+	void SaveTexture(Texture2D texture, Player& player)
+	{
+		SpritesManager::SaveTexture(texture, player.sprite, player.sprite.frames, player.sprite.fps);
+	}
+
 	void Update(Player& player)
 	{
 		MovePlayer(player);
+		SpritesManager::AnimateSprite(player.sprite);
 	}
 
 	void Draw(Player& player)
 	{
 		//DrawRectangle(static_cast<int>(player.colisionShape.x), static_cast<int>(player.colisionShape.y), static_cast<int>(player.colisionShape.width), static_cast<int>(player.colisionShape.height), YELLOW);
 		//DrawTexturePro(player.sprite.atlas.texture, player.sprite.atlas.source, player.sprite.atlas.dest, player.sprite.atlas.origin, player.angle, WHITE);
-		TextureManager::AnimateSprite(player.sprite, player.angle);
+		SpritesManager::DrawAnimatedSprite(player.sprite);
 	}
 
 }
