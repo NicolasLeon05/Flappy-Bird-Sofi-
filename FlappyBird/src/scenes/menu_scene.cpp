@@ -15,7 +15,8 @@ enum Options
 	Exit
 };
 
-static Button::Button playButton;
+static Button::Button singlePlayerButton;
+static Button::Button twoPlayersButton;
 static Button::Button exitButton;
 static Button::Button creditsButton;
 //static Button::Button howToPlayButton;
@@ -36,19 +37,36 @@ void MenuScene::Init()
 
 #pragma endregion
 
-	playButton = Button::GetButton
+	singlePlayerButton = Button::GetButton
 	(static_cast<float>(GetScreenWidth()) / 2.0f - static_cast<float>(Text::GetTextWidth(titlePart2)) / 2.0f, 
 		static_cast<float>(GetScreenHeight()) / 2.0f - titlePart2.fontSize, 
 		static_cast<float>(Text::GetTextWidth(titlePart2)), 
 		static_cast<float>(titlePart2.fontSize) / 2.0f,
-		"PLAY",
+		"SINGLE PLAYER",
 		BLACK, MAGENTA, WHITE/*, Text::Fonts::Title2*/);
 	
-	creditsButton = Button::GetButton(playButton.shape.x, playButton.shape.y + playButton.shape.height + static_cast<int>(Text::Padding::tiny), playButton.shape.width, playButton.shape.height, "CREDITS", BLACK, SKYBLUE, WHITE /*playButton.textShown.font*/);
+	twoPlayersButton = Button::GetButton
+	(singlePlayerButton.shape.x,
+		singlePlayerButton.shape.y + singlePlayerButton.shape.height + static_cast<int>(Text::Padding::tiny),
+		singlePlayerButton.shape.width, singlePlayerButton.shape.height,
+		"TWO PLAYERS",
+		BLACK, MAGENTA, WHITE /*playButton.textShown.font*/);
+
+	creditsButton = Button::GetButton
+	(singlePlayerButton.shape.x, 
+		twoPlayersButton.shape.y + twoPlayersButton.shape.height + static_cast<int>(Text::Padding::tiny),
+		singlePlayerButton.shape.width, singlePlayerButton.shape.height, 
+		"CREDITS", 
+		BLACK, SKYBLUE, WHITE /*playButton.textShown.font*/);
 
 	//howToPlayButton = Button::GetButton(playButton.shape.x, creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny), playButton.shape.width, playButton.shape.height, "HOW TO PLAY", BLACK, YELLOW, WHITE /*playButton.textShown.font*/);
 
-	exitButton = Button::GetButton(playButton.shape.x, creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny), playButton.shape.width, playButton.shape.height, "EXIT", BLACK, RED, WHITE/*, playButton.textShown.font*/);
+	exitButton = Button::GetButton
+	(singlePlayerButton.shape.x, 
+		creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny), 
+		singlePlayerButton.shape.width, singlePlayerButton.shape.height, 
+		"EXIT", 
+		BLACK, RED, WHITE/*, playButton.textShown.font*/);
 
 	//Version
 
@@ -68,7 +86,9 @@ void MenuScene::Update()
 	if (Audio::IsPlaying(Audio::Song::menu))
 		Audio::Update(Audio::Song::menu);*/
 
-	Button::CheckSceneChange(playButton, SceneManager::Gameplay/*, Audio::Song::menu*/);
+	Button::CheckSceneChange(singlePlayerButton, SceneManager::Gameplay/*, Audio::Song::menu*/);
+
+	Button::CheckSceneChange(twoPlayersButton, SceneManager::Gameplay/*, Audio::Song::menu*/);
 
 	Button::CheckSceneChange(creditsButton, SceneManager::Credits);
 
@@ -83,7 +103,8 @@ void MenuScene::Draw()
 	DrawText(titlePart1);
 	DrawText(titlePart2);
 
-	Button::DrawButton(playButton);
+	Button::DrawButton(singlePlayerButton);
+	Button::DrawButton(twoPlayersButton);
 	Button::DrawButton(creditsButton);
 	//Button::DrawButton(howToPlayButton);
 	Button::DrawButton(exitButton);
