@@ -86,9 +86,9 @@ void MenuScene::Update()
 	if (Audio::IsPlaying(Audio::Song::menu))
 		Audio::Update(Audio::Song::menu);*/
 
-	Button::CheckSceneChange(singlePlayerButton, SceneManager::Gameplay/*, Audio::Song::menu*/);
+	Button::CheckSceneChange(singlePlayerButton, SceneManager::Gameplay, true/*, Audio::Song::menu*/);
 
-	Button::CheckSceneChange(twoPlayersButton, SceneManager::Gameplay/*, Audio::Song::menu*/);
+	Button::CheckSceneChange(twoPlayersButton, SceneManager::Gameplay, false/*, Audio::Song::menu*/);
 
 	Button::CheckSceneChange(creditsButton, SceneManager::Credits);
 

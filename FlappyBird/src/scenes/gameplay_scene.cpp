@@ -11,6 +11,8 @@ namespace GameplayScene
 	static const float gravity = 1000.0f;
 	static const float jump = -gravity / 2.5f;
 
+	bool isSinglePlayer;
+
 	static Player::Player player1;
 	static Player::Player player2;
 
@@ -26,7 +28,9 @@ namespace GameplayScene
 	static void ResetGameplay()
 	{
 		Player::ResetPlayer(player1);
-		Player::ResetPlayer(player2);
+
+		if (!isSinglePlayer)
+			Player::ResetPlayer(player2);
 
 		Obstacle::ResetObstacle(obstacle);
 	}
@@ -83,7 +87,8 @@ namespace GameplayScene
 	void Load()
 	{
 		demon1Texture = LoadTexture(SpritesManager::demon1Sprite.c_str());
-		demon2Texture = LoadTexture(SpritesManager::demon2Sprite.c_str());
+		if (!isSinglePlayer)
+			demon2Texture = LoadTexture(SpritesManager::demon2Sprite.c_str());
 
 		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0004_bg.png");
 		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0003_far buildings.png");
@@ -96,8 +101,11 @@ namespace GameplayScene
 
 	void Unload()
 	{
-		UnloadTexture(demon1Texture);
 		Parallax::Unload(parallax);
+
+		UnloadTexture(demon1Texture);
+		if (!isSinglePlayer)
+			UnloadTexture(demon2Texture);
 	}
 
 	void Init()
@@ -105,8 +113,11 @@ namespace GameplayScene
 		player1 = Player::GetPlayer();
 		Player::SaveTexture(demon1Texture, player1);
 
-		player2 = Player::GetPlayer();
-		Player::SaveTexture(demon2Texture, player2);
+		if (!isSinglePlayer)
+		{
+			player2 = Player::GetPlayer();
+			Player::SaveTexture(demon2Texture, player2);
+		}
 
 		obstacle = Obstacle::GetObstacle();
 		backButton = Button::GetButton(0, screenHeight - static_cast<float>(Text::FontSize::medium), static_cast<float>(Text::Padding::medium), static_cast<float>(Text::FontSize::medium), "BACK", BLACK, RED, WHITE);
@@ -114,18 +125,23 @@ namespace GameplayScene
 
 	void Update()
 	{
-		CheckObstacleColision(player1);
-		CheckObstacleColision(player2);
-
-		MovePlayer(player1);
-		MovePlayer(player2);
-
+		//Player 1
 		Player::Update(player1);
-		Player::Update(player2);
-
+		CheckObstacleColision(player1);
+		MovePlayer(player1);
 		JumpPlayer1();
-		JumpPlayer2();
 
+		
+		//Player 2
+		if (!isSinglePlayer)
+		{
+			Player::Update(player2);
+			CheckObstacleColision(player2);
+			MovePlayer(player2);
+			JumpPlayer2();
+		}
+
+		//Obstacle
 		Obstacle::Update(obstacle);
 
 		Button::CheckSceneChange(backButton, SceneManager::Menu);
@@ -138,7 +154,8 @@ namespace GameplayScene
 		Parallax::Draw(parallax);
 
 		Player::Draw(player1);
-		Player::Draw(player2);
+		if (!isSinglePlayer)
+			Player::Draw(player2);
 
 		Obstacle::Draw(obstacle);
 

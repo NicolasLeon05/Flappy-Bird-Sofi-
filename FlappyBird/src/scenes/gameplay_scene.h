@@ -2,6 +2,8 @@
 
 namespace GameplayScene
 {
+	extern bool isSinglePlayer;
+
 	void Load();
 	void Unload();
 	void Init();
