@@ -23,6 +23,7 @@ namespace Button
 	bool IsMouseOnButton(Button button);
 
 	void CheckSceneChange(Button& button, SceneManager::Scene scene);
+	void CheckSceneChange(Button& button, SceneManager::Scene scene, bool isSinglePlayer);
 
 	//void CheckSceneChange(Button& button, SceneManager::Scene scene /*Audio::Song songToStop*/);
 

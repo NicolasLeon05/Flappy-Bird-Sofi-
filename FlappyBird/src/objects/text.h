@@ -11,6 +11,7 @@ namespace Text
 
 	enum class Padding
 	{
+		minimum = 10,
 		tiny = 20,
 		small = 30,
 		medium = 60,

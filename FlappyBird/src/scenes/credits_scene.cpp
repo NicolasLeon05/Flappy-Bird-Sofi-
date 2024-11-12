@@ -17,7 +17,8 @@ namespace CreditsScene
 
 	enum Roles
 	{
-		dev,
+		dev1,
+		dev2,
 		artist1,
 		artist2,
 		font1,
@@ -89,7 +90,7 @@ namespace CreditsScene
 		{
 		case CreditsScene::Pages::page1:
 
-			for (int i = dev; i < artist2 + 1; i++)
+			for (int i = dev1; i < artist2 + 1; i++)
 				CheckURLButton(creditsInfo[i]);
 
 			break;
@@ -140,7 +141,7 @@ namespace CreditsScene
 	{
 		Color highlightColor = SKYBLUE;
 
-		if (credit.name == creditsInfo[dev].name)
+		if (credit.name == creditsInfo[dev1].name || credit.name == creditsInfo[dev2].name)
 			highlightColor = MAGENTA;
 
 		credit.text = Text::GetText(screenWidth / 2, y, Text::Fonts::Default, static_cast<int>(Text::FontSize::small), credit.role, WHITE);
@@ -159,13 +160,14 @@ namespace CreditsScene
 		devTitle = Text::GetText(screenWidth / 2, creditsTitle.location.y + creditsTitle.fontSize + static_cast<int>(Text::Padding::tiny), Text::Fonts::Title2, creditsTitle.fontSize * 3 / 4, "DEVELOPMENT", MAGENTA);
 		Text::CenterTextX(devTitle);
 
-		InitCredit(creditsInfo[dev], devTitle.location.y + devTitle.fontSize + static_cast<int>(Text::Padding::tiny));
+		InitCredit(creditsInfo[dev1], devTitle.location.y + devTitle.fontSize - static_cast<int>(Text::Padding::minimum));
+		InitCredit(creditsInfo[dev2], creditsInfo[dev1].button.shape.y + creditsInfo[dev1].text.fontSize);
 
-		artTitle = Text::GetText(screenWidth / 2, creditsInfo[dev].button.shape.y + creditsInfo[dev].button.shape.height + static_cast<int>(Text::Padding::tiny), Text::Fonts::Title2, devTitle.fontSize, "ART", YELLOW);
+		artTitle = Text::GetText(screenWidth / 2, creditsInfo[dev2].button.shape.y + creditsInfo[dev2].button.shape.height + static_cast<int>(Text::Padding::tiny), Text::Fonts::Title2, devTitle.fontSize, "ART", YELLOW);
 		Text::CenterTextX(artTitle);
 
 		InitCredit(creditsInfo[artist1], artTitle.location.y + artTitle.fontSize + static_cast<int>(Text::Padding::tiny));
-		InitCredit(creditsInfo[artist2], creditsInfo[artist1].button.shape.y + creditsInfo[artist1].text.fontSize + static_cast<int>(Text::Padding::medium));
+		InitCredit(creditsInfo[artist2], creditsInfo[artist1].button.shape.y + creditsInfo[artist1].text.fontSize + static_cast<int>(Text::Padding::small));
 
 #pragma endregion
 
@@ -205,12 +207,17 @@ namespace CreditsScene
 
 	}
 
-	static void DrawCredit(Credit& credit)
+	static void DrawCredit(Credit& credit, bool drawRole)
 	{
-		Text::DrawText(credit.text);
+		if (drawRole)
+		{
+			Text::DrawText(credit.text);
+
+		}
 
 		Button::DrawButton(credit.button);
 	}
+
 
 	void Init()
 	{
@@ -218,9 +225,13 @@ namespace CreditsScene
 
 #pragma region DEV_ROLE
 		//DEV (ME)
-		creditsInfo[dev].name = "Sofia Alvarez";
-		creditsInfo[dev].url = "https://gensofi24.itch.io/";
-		creditsInfo[dev].role = "DEV";
+		creditsInfo[dev1].name = "Sofia Alvarez";
+		creditsInfo[dev1].url = "https://gensofi24.itch.io/";
+		creditsInfo[dev1].role = "DEV";
+
+		creditsInfo[dev2].name = "Nicolas Leon";
+		creditsInfo[dev2].url = "https://leon-05.itch.io/";
+		creditsInfo[dev2].role = "DEV";
 #pragma endregion
 
 #pragma region ART_ROLE
@@ -337,13 +348,15 @@ namespace CreditsScene
 		case CreditsScene::Pages::page1:
 
 			Text::DrawText(devTitle);
-			DrawCredit(creditsInfo[dev]);
+			DrawCredit(creditsInfo[dev1], false);
+
+			DrawCredit(creditsInfo[dev2], false);
 
 			Text::DrawText(artTitle);
-			DrawCredit(creditsInfo[artist1]);
+			DrawCredit(creditsInfo[artist1], true);
 
 			Text::DrawText(artTitle);
-			DrawCredit(creditsInfo[artist2]);
+			DrawCredit(creditsInfo[artist2], true);
 
 			break;
 		case CreditsScene::Pages::page2:
@@ -351,7 +364,7 @@ namespace CreditsScene
 			Text::DrawText(fontTitle);
 
 			for (int i = font1; i < font3 + 1; i++)
-				DrawCredit(creditsInfo[i]);
+				DrawCredit(creditsInfo[i], true);
 
 			break;
 		case CreditsScene::Pages::page3:
@@ -359,7 +372,7 @@ namespace CreditsScene
 			Text::DrawText(toolsTitle);
 
 			for (int i = language; i < soundTool2 + 1; i++)
-				DrawCredit(creditsInfo[i]);
+				DrawCredit(creditsInfo[i], true);
 
 			break;
 		default:

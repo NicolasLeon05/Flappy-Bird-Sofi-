@@ -1,4 +1,5 @@
 #include "Objects/button.h"
+#include "scenes/gameplay_scene.h"
 
 
 namespace Button
@@ -32,6 +33,29 @@ namespace Button
 		else
 			button.currentColor = button.defaultColor;
 		
+	}
+	void CheckSceneChange(Button& button, SceneManager::Scene scene, bool isSinglePlayer)
+	{
+		//Audio::ButtonSfx sfx{};
+
+		if (IsMouseOnButton(button))
+		{
+			button.currentColor = button.highlightColor;
+
+			//sfx = Audio::GetRandomSfx();
+
+			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+			{
+				/*if (!Audio::IsPlaying(sfx))
+					Audio::Play(sfx);*/
+
+				GameplayScene::isSinglePlayer = isSinglePlayer;
+				SceneManager::SetCurrentScene(scene);
+			}
+		}
+		else
+			button.currentColor = button.defaultColor;
+
 	}
 	/*
 	void CheckSceneChange(Button& button, SceneManager::Scene scene Audio::Song songToStop)
