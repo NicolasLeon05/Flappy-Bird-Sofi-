@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sound_manager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\objects\button.cpp" />
     <ClCompile Include="src\objects\obstacle.cpp" />
@@ -33,6 +34,7 @@
     <ClCompile Include="src\utils\texture_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="sound_manager.h" />
     <ClInclude Include="src\objects\button.h" />
     <ClInclude Include="src\objects\obstacle.h" />
     <ClInclude Include="src\objects\parallax_handler.h" />
