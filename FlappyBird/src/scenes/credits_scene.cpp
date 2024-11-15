@@ -333,7 +333,8 @@ namespace CreditsScene
 		//Audio::Update(Audio::Song::menu);
 		CheckURLButtons();
 
-		if (Button::IsButtonPrssed(backToMenuButton))
+		if (Button::IsButtonPrssed(backToMenuButton) ||
+			IsKeyReleased(KEY_ESCAPE))
 		{
 			Button::ChangeScene(SceneManager::Menu);
 		}
