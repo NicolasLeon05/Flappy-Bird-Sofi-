@@ -1,10 +1,9 @@
 #include "Objects/button.h"
-#include "scenes/gameplay_scene.h"
 
 
 namespace Button
 {
-	bool IsMouseOnButton(Button button)
+	bool IsMouseOnButton(Button& button)
 	{
 		return GetMouseX() > button.shape.x &&
 			GetMouseY() > button.shape.y &&
@@ -12,10 +11,8 @@ namespace Button
 			GetMouseY() < (button.shape.y + button.shape.height);
 	}
 
-	void CheckSceneChange(Button& button, SceneManager::Scene scene)
+	bool IsButtonPrssed(Button& button)
 	{
-		//Audio::ButtonSfx sfx{};
-
 		if (IsMouseOnButton(button))
 		{
 			button.currentColor = button.highlightColor;
@@ -24,39 +21,22 @@ namespace Button
 
 			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 			{
-				/*if (!Audio::IsPlaying(sfx))
-					Audio::Play(sfx);*/
-				
-				SceneManager::SetCurrentScene(scene);
+				return true;
 			}
 		}
 		else
 			button.currentColor = button.defaultColor;
-		
+
+		return false;
 	}
-	void CheckSceneChange(Button& button, SceneManager::Scene scene, bool isSinglePlayer)
+
+
+	void ChangeScene(SceneManager::Scene scene)
 	{
-		//Audio::ButtonSfx sfx{};
-
-		if (IsMouseOnButton(button))
-		{
-			button.currentColor = button.highlightColor;
-
-			//sfx = Audio::GetRandomSfx();
-
-			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
-			{
-				/*if (!Audio::IsPlaying(sfx))
-					Audio::Play(sfx);*/
-
-				GameplayScene::isSinglePlayer = isSinglePlayer;
-				SceneManager::SetCurrentScene(scene);
-			}
-		}
-		else
-			button.currentColor = button.defaultColor;
-
+		SceneManager::SetCurrentScene(scene);	
 	}
+
+
 	/*
 	void CheckSceneChange(Button& button, SceneManager::Scene scene Audio::Song songToStop)
 	{

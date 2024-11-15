@@ -20,10 +20,10 @@ namespace Button
 	};
 
 	//Detects the mouse inside the bounds of a button
-	bool IsMouseOnButton(Button button);
+	bool IsMouseOnButton(Button& button);
+	bool IsButtonPrssed(Button& button);
 
-	void CheckSceneChange(Button& button, SceneManager::Scene scene);
-	void CheckSceneChange(Button& button, SceneManager::Scene scene, bool isSinglePlayer);
+	void ChangeScene(SceneManager::Scene scene);
 
 	//void CheckSceneChange(Button& button, SceneManager::Scene scene /*Audio::Song songToStop*/);
 
