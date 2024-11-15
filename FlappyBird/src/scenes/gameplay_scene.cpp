@@ -8,9 +8,6 @@
 
 namespace GameplayScene
 {
-	static const float gravity = 1000.0f;
-	static const float jump = -gravity / 2.5f;
-
 	bool isSinglePlayer;
 
 	static Player::Player player1;
@@ -53,26 +50,11 @@ namespace GameplayScene
 			ResetGameplay();
 	}
 
-	static void MovePlayer(Player::Player& player)
-	{
-		if (player.colisionShape.y - player.colisionShape.height / 2 <= 0)
-		{
-			player.colisionShape.y = player.colisionShape.height / 2;
-			player.speed.y = 0;
-		}	
-
-		player.speed.y += gravity * GetFrameTime();
-		player.colisionShape.y += player.speed.y * GetFrameTime();
-
-		player.sprite.atlas.dest.y = player.colisionShape.y + player.colisionShape.height / 2;
-		player.sprite.atlas.dest.x = player.colisionShape.x + player.colisionShape.width * 2;
-	}
-
 	static void JumpPlayer1()
 	{
 		if (IsKeyPressed(KEY_SPACE) && (player1.colisionShape.y > 0))
 		{
-			player1.speed.y = jump;
+			Player::Jump(player1);
 		}
 	}
 
@@ -80,7 +62,16 @@ namespace GameplayScene
 	{
 		if (IsMouseButtonPressed(0) && (player2.colisionShape.y > 0))
 		{
-			player2.speed.y = jump;
+			Player::Jump(player2);
+		}
+	}
+
+	static void CheckTopCollision(Player::Player& player)
+	{
+		if (player.colisionShape.y - player.colisionShape.height / 2 <= 0)
+		{
+			player.colisionShape.y = player.colisionShape.height / 2;
+			player.speed.y = 0;
 		}
 	}
 
@@ -127,24 +118,30 @@ namespace GameplayScene
 	{
 		//Player 1
 		Player::Update(player1);
-		CheckObstacleColision(player1);
-		MovePlayer(player1);
 		JumpPlayer1();
+		CheckObstacleColision(player1);
+		CheckTopCollision(player1);
 
 		
 		//Player 2
 		if (!isSinglePlayer)
 		{
 			Player::Update(player2);
-			CheckObstacleColision(player2);
-			MovePlayer(player2);
 			JumpPlayer2();
+			CheckObstacleColision(player2);
+			CheckTopCollision(player2);
 		}
 
 		//Obstacle
 		Obstacle::Update(obstacle);
 
-		Button::CheckSceneChange(backButton, SceneManager::Menu);
+		//Back button
+		if (Button::IsButtonPrssed(backButton) ||
+			IsKeyReleased(KEY_ESCAPE))
+		{
+			Button::ChangeScene(SceneManager::Menu);
+		}
+
 		Parallax::Update(parallax);
 	}
 

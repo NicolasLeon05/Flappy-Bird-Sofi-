@@ -5,6 +5,23 @@
 
 namespace Player
 {
+	static const float gravity = 1000.0f;
+	static const float jump = -gravity / 2.5f;
+
+	void Move(Player& player)
+	{	
+		player.speed.y += gravity * GetFrameTime();
+		player.colisionShape.y += player.speed.y * GetFrameTime();
+
+		player.sprite.atlas.dest.y = player.colisionShape.y + player.colisionShape.height / 2;
+		player.sprite.atlas.dest.x = player.colisionShape.x + player.colisionShape.width * 2;
+	}
+
+	void Jump(Player& player)
+	{
+		player.speed.y = jump;
+	}
+
 	void ResetPlayer(Player& player)
 	{
 		player.colisionShape.x = static_cast<float>(screenWidth) * 1 / 3;
@@ -42,6 +59,7 @@ namespace Player
 
 	void Update(Player& player)
 	{
+		Move(player);
 		SpritesManager::AnimateSprite(player.sprite);
 	}
 

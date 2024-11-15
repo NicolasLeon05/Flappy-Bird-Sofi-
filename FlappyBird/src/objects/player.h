@@ -20,6 +20,10 @@ namespace Player
 
 	Player GetPlayer();
 
+	void Move(Player& player);
+
+	void Jump(Player& player);
+
 	void Update(Player& player);
 
 	void Draw(Player& player);
