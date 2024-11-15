@@ -40,7 +40,7 @@ namespace GameplayScene
 			player.colisionShape.y <= colisionShape.y + colisionShape.height;
 	}
 
-	static void CheckObstacleColision(Player::Player player)
+	static void IsCollidingWithObstacle(Player::Player player)
 	{
 		if (CheckObstacleColision(obstacle.higherColisionShape, player) || CheckObstacleColision(obstacle.lowerColisionShape, player))
 		{
@@ -119,7 +119,7 @@ namespace GameplayScene
 		//Player 1
 		Player::Update(player1);
 		JumpPlayer1();
-		CheckObstacleColision(player1);
+		IsCollidingWithObstacle(player1);
 		CheckTopCollision(player1);
 
 		
@@ -128,7 +128,7 @@ namespace GameplayScene
 		{
 			Player::Update(player2);
 			JumpPlayer2();
-			CheckObstacleColision(player2);
+			IsCollidingWithObstacle(player2);
 			CheckTopCollision(player2);
 		}
 
@@ -139,6 +139,7 @@ namespace GameplayScene
 		if (Button::IsButtonPrssed(backButton) ||
 			IsKeyReleased(KEY_ESCAPE))
 		{
+			ResetGameplay();
 			Button::ChangeScene(SceneManager::Menu);
 		}
 
