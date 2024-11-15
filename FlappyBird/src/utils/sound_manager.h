@@ -3,14 +3,16 @@
 
 namespace SoundManager
 {
-	extern Music menuMusic;
-	extern Music gameplayMusic;
+	extern Music currentBgm;
 
-	extern Sound jumpSound;
-	extern Sound collideSound;
-	extern Sound scoreUpSound;
-	extern Sound gameOverSound;
-	extern Sound clickButtonSound;
+	extern Music menuBgm;
+	extern Music gameplayBgm;
+
+	extern Sound jumpSfx;
+	extern Sound collideSfx;
+	extern Sound scoreUpSfx;
+	extern Sound gameOverSfx;
+	extern Sound clickButtonSfx;
 
 	void Load();
 	void Unload();
