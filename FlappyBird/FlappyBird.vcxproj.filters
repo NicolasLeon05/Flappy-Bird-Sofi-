@@ -35,7 +35,7 @@
     <ClCompile Include="src\utils\texture_manager.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="sound_manager.cpp">
+    <ClCompile Include="src\utils\sound_manager.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,7 +87,7 @@
     <ClInclude Include="src\objects\parallax_handler.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="sound_manager.h">
+    <ClInclude Include="src\utils\sound_manager.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>

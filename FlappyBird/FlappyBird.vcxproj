@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sound_manager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\objects\button.cpp" />
     <ClCompile Include="src\objects\obstacle.cpp" />
@@ -31,10 +30,10 @@
     <ClCompile Include="src\scenes\gameplay_scene.cpp" />
     <ClCompile Include="src\scenes\menu_scene.cpp" />
     <ClCompile Include="src\utils\scene_manager.cpp" />
+    <ClCompile Include="src\utils\sound_manager.cpp" />
     <ClCompile Include="src\utils\texture_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sound_manager.h" />
     <ClInclude Include="src\objects\button.h" />
     <ClInclude Include="src\objects\obstacle.h" />
     <ClInclude Include="src\objects\parallax_handler.h" />
@@ -46,6 +45,7 @@
     <ClInclude Include="src\scenes\menu_scene.h" />
     <ClInclude Include="src\utils\scene_manager.h" />
     <ClInclude Include="src\utils\screen_info.h" />
+    <ClInclude Include="src\utils\sound_manager.h" />
     <ClInclude Include="src\utils\texture_manager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

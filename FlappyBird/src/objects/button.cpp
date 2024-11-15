@@ -1,5 +1,6 @@
 #include "Objects/button.h"
 
+#include "utils/sound_manager.h"
 
 namespace Button
 {
@@ -21,6 +22,7 @@ namespace Button
 
 			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 			{
+				PlaySound(SoundManager::clickButtonSfx);
 				return true;
 			}
 		}
@@ -36,31 +38,6 @@ namespace Button
 		SceneManager::SetCurrentScene(scene);	
 	}
 
-
-	/*
-	void CheckSceneChange(Button& button, SceneManager::Scene scene Audio::Song songToStop)
-	{
-		Audio::ButtonSfx sfx{};
-
-		if (IsMouseOnButton(button))
-		{
-			button.currentColor = button.highlightColor;
-
-			sfx = Audio::GetRandomSfx();
-
-			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
-			{
-				if (!Audio::IsPlaying(sfx))
-					Audio::Play(sfx);
-				Audio::Stop(songToStop);
-				SceneManager::SetCurrentScene(scene);
-			}
-		}
-		else
-			button.currentColor = button.defaultColor;
-	}
-	*/
-	
 
 	static void DrawButtonText(Button button)
 	{
