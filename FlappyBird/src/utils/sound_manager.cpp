@@ -24,7 +24,7 @@ namespace SoundManager
 
 
 		jumpSfx = LoadSound("res/sfx/jump.wav");
-		SetSoundVolume(jumpSfx, 0.3f);
+		SetSoundVolume(jumpSfx, 0.2f);
 
 		collideSfx = LoadSound("res/sfx/collide.wav");
 		SetSoundVolume(collideSfx, 0.3f);
@@ -36,7 +36,7 @@ namespace SoundManager
 		SetSoundVolume(gameOverSfx, 1.0f);
 
 		clickButtonSfx = LoadSound("res/sfx/click_button.wav");
-		SetSoundVolume(clickButtonSfx, 1.5f);
+		SetSoundVolume(clickButtonSfx, 1.0f);
 	}
 	void Unload()
 	{

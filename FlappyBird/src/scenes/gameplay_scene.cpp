@@ -7,9 +7,14 @@
 #include "utils/screen_info.h"
 #include "utils/sound_manager.h"
 
+#include <iostream>
+#include <string>
+
 namespace GameplayScene
 {
 	bool isSinglePlayer;
+
+	int score;
 
 	static Player::Player player1;
 	static Player::Player player2;
@@ -50,6 +55,16 @@ namespace GameplayScene
 		}
 		else if (player.colisionShape.y + player.colisionShape.height >= screenHeight)
 			ResetGameplay();
+	}
+
+	static void CheckScoreUp()
+	{
+		if (player1.colisionShape.x > obstacle.higherColisionShape.x + obstacle.higherColisionShape.width &&
+			obstacle.scoreGiven == false)
+		{
+			score++;
+			obstacle.scoreGiven = true;
+		}
 	}
 
 	static void JumpPlayer1()
@@ -105,6 +120,8 @@ namespace GameplayScene
 
 	void Init()
 	{
+		score = 0;
+
 		player1 = Player::GetPlayer();
 		Player::SaveTexture(demon1Texture, player1);
 
@@ -147,6 +164,8 @@ namespace GameplayScene
 			Button::ChangeScene(SceneManager::Menu);
 		}
 
+		CheckScoreUp();
+
 		Parallax::Update(parallax);
 	}
 
@@ -162,6 +181,12 @@ namespace GameplayScene
 		Obstacle::Draw(obstacle);
 
 		Button::DrawButton(backButton);
+
+		DrawText((to_string(score)).c_str(),
+			30,
+			30,
+			30,
+			RED);
 	}
 }
 

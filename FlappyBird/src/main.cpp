@@ -7,6 +7,7 @@
 //Agregar pantalla de result y pantalla de pausa
 //Quizas hacer que los obstaculos se muevan de arriba a abajo una vez alcanzado cierto score
 //Completar los creditos con los sonidos
+//Añadir textura a los obstaculos
 
 int main()
 {

@@ -80,6 +80,7 @@ namespace Obstacle
 		obstacle.higherColisionShape.width = obstacle.lowerColisionShape.width;
 		RandomizeHeight(obstacle);
 		obstacle.speed = { 400.0f, 400.0f };
+		obstacle.scoreGiven = false;
 
 		return obstacle;
 	}

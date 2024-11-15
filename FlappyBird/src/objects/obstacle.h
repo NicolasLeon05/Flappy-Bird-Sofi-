@@ -9,6 +9,7 @@ namespace Obstacle
 		Vector2 speed;
 		Rectangle lowerColisionShape;
 		Rectangle higherColisionShape;
+		bool scoreGiven;
 	};
 
 	void ResetObstacle(Obstacle& obstacle);
