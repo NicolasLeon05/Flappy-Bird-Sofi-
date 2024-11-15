@@ -332,7 +332,11 @@ namespace CreditsScene
 	{
 		//Audio::Update(Audio::Song::menu);
 		CheckURLButtons();
-		Button::CheckSceneChange(backToMenuButton, SceneManager::Menu);
+
+		if (Button::IsButtonPrssed(backToMenuButton))
+		{
+			Button::ChangeScene(SceneManager::Menu);
+		}
 
 		CheckPagesButton(page1);
 		CheckPagesButton(page2);

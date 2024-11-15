@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include "utils/scene_manager.h"
+#include "scenes/gameplay_scene.h"
 #include "utils/screen_info.h"
 #include "objects/button.h"
 //NOTE: All of the above are used
@@ -86,15 +87,34 @@ void MenuScene::Update()
 	if (Audio::IsPlaying(Audio::Song::menu))
 		Audio::Update(Audio::Song::menu);*/
 
-	Button::CheckSceneChange(singlePlayerButton, SceneManager::Gameplay, true/*, Audio::Song::menu*/);
+	if (Button::IsButtonPrssed(singlePlayerButton))
+	{
+		GameplayScene::isSinglePlayer = true;
+		Button::ChangeScene(SceneManager::Gameplay);
+	}
 
-	Button::CheckSceneChange(twoPlayersButton, SceneManager::Gameplay, false/*, Audio::Song::menu*/);
+	if (Button::IsButtonPrssed(twoPlayersButton))
+	{
+		GameplayScene::isSinglePlayer = false;
+		Button::ChangeScene(SceneManager::Gameplay);
+	}
 
-	Button::CheckSceneChange(creditsButton, SceneManager::Credits);
+	if (Button::IsButtonPrssed(creditsButton))
+	{
+		Button::ChangeScene(SceneManager::Credits);
+	}
 
-	//Button::CheckSceneChange(howToPlayButton, SceneManager::HowToPlay);
+	/*if (Button::IsButtonPrssed(howToPlayButton))
+	{
+		Button::ChangeScene(SceneManager::HowToPlay);
+	}
+	*/
 
-	Button::CheckSceneChange(exitButton, SceneManager::None/*, Audio::Song::menu*/);
+	if (Button::IsButtonPrssed(exitButton))
+	{
+		Button::ChangeScene(SceneManager::None);
+	}
+
 
 }
 
