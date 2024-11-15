@@ -7,17 +7,21 @@
 #include "scenes/menu_scene.h"
 #include "utils/screen_info.h"
 #include "utils/scene_manager.h"
+#include "utils/sound_manager.h"
 
 namespace FlappyBird
 {
 
 	static void Load()
 	{
-		GameplayScene::Load();
+		SoundManager::Load(); 
+		GameplayScene::LoadTextures();
+		SoundManager::currentBgm = SoundManager::menuBgm;
 	}
 
 	static void Unload()
 	{
+		SoundManager::Unload();
 		GameplayScene::Unload();
 	}
 
@@ -33,26 +37,38 @@ namespace FlappyBird
 		switch (SceneManager::GetCurrentScene())
 		{
 		case SceneManager::Gameplay:
+		{
 			GameplayScene::Update();
 			break;
+		}
 
 		case SceneManager::Menu:
+		{
 			MenuScene::Update();
 			break;
+		}
 
 		case SceneManager::Credits:
+		{
 			CreditsScene::Update();
 			break;
+		}
 		
 		case SceneManager::Result:
+		{
 			break;
+		}
 		
 		case SceneManager::HowToPlay:
+		{
 			break;
+		}
 		
 		default:
 			break;
 		}
+
+		UpdateMusicStream(SoundManager::currentBgm);
 	}
 
 	static void Draw()
@@ -104,27 +120,13 @@ namespace FlappyBird
 	{
 		InitWindow(screenWidth, screenHeight, "Flappy Game");
 		SetExitKey(KEY_NULL);
+
 		Load();
 		Init();
+		PlayMusicStream(SoundManager::menuBgm);
 
 		while (!ShouldWindowClose())
 		{
-			/*if ((previousScene == SceneManager::Result || (previousScene == SceneManager::Gameplay) &&
-				SceneManager::GetCurrentScene() != SceneManager::Result) &&
-				SceneManager::GetCurrentScene() != SceneManager::Gameplay)
-			{
-				restart = true;
-				previousScene = SceneManager::None;
-			}*/
-
-			//if (restart)
-			//{
-
-			//Init();
-
-			/*	restart = false;
-			}*/
-
 			Update();
 			Draw();
 		}

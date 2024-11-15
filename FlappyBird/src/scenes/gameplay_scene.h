@@ -4,7 +4,7 @@ namespace GameplayScene
 {
 	extern bool isSinglePlayer;
 
-	void Load();
+	void LoadTextures();
 	void Unload();
 	void Init();
 	void Update();

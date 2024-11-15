@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include "utils/scene_manager.h"
+#include "utils/sound_manager.h"
 #include "scenes/gameplay_scene.h"
 #include "utils/screen_info.h"
 #include "objects/button.h"
@@ -30,7 +31,7 @@ void MenuScene::Init()
 {
 #pragma region TITLE_TEXTS
 
-	titlePart1 = Text::GetText(screenWidth/2, 0,/* Text::Fonts::Title1,*/ static_cast<int>(Text::FontSize::big), "PLACE", MAGENTA);
+	titlePart1 = Text::GetText(screenWidth / 2, 0,/* Text::Fonts::Title1,*/ static_cast<int>(Text::FontSize::big), "PLACE", MAGENTA);
 	Text::CenterTextX(titlePart1);
 	titlePart1.location.y = static_cast<float>(Text::Padding::medium);
 	titlePart2 = Text::GetText(screenWidth / 2, titlePart1.location.y + titlePart1.fontSize/*, Text::Fonts::Title2*/, static_cast<int>(Text::FontSize::big), "HOLDER", YELLOW);
@@ -39,13 +40,13 @@ void MenuScene::Init()
 #pragma endregion
 
 	singlePlayerButton = Button::GetButton
-	(static_cast<float>(GetScreenWidth()) / 2.0f - static_cast<float>(Text::GetTextWidth(titlePart2)) / 2.0f, 
-		static_cast<float>(GetScreenHeight()) / 2.0f - titlePart2.fontSize, 
-		static_cast<float>(Text::GetTextWidth(titlePart2)), 
+	(static_cast<float>(GetScreenWidth()) / 2.0f - static_cast<float>(Text::GetTextWidth(titlePart2)) / 2.0f,
+		static_cast<float>(GetScreenHeight()) / 2.0f - titlePart2.fontSize,
+		static_cast<float>(Text::GetTextWidth(titlePart2)),
 		static_cast<float>(titlePart2.fontSize) / 2.0f,
 		"SINGLE PLAYER",
 		BLACK, MAGENTA, WHITE/*, Text::Fonts::Title2*/);
-	
+
 	twoPlayersButton = Button::GetButton
 	(singlePlayerButton.shape.x,
 		singlePlayerButton.shape.y + singlePlayerButton.shape.height + static_cast<int>(Text::Padding::tiny),
@@ -54,30 +55,30 @@ void MenuScene::Init()
 		BLACK, MAGENTA, WHITE /*playButton.textShown.font*/);
 
 	creditsButton = Button::GetButton
-	(singlePlayerButton.shape.x, 
+	(singlePlayerButton.shape.x,
 		twoPlayersButton.shape.y + twoPlayersButton.shape.height + static_cast<int>(Text::Padding::tiny),
-		singlePlayerButton.shape.width, singlePlayerButton.shape.height, 
-		"CREDITS", 
+		singlePlayerButton.shape.width, singlePlayerButton.shape.height,
+		"CREDITS",
 		BLACK, SKYBLUE, WHITE /*playButton.textShown.font*/);
 
 	//howToPlayButton = Button::GetButton(playButton.shape.x, creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny), playButton.shape.width, playButton.shape.height, "HOW TO PLAY", BLACK, YELLOW, WHITE /*playButton.textShown.font*/);
 
 	exitButton = Button::GetButton
-	(singlePlayerButton.shape.x, 
-		creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny), 
-		singlePlayerButton.shape.width, singlePlayerButton.shape.height, 
-		"EXIT", 
+	(singlePlayerButton.shape.x,
+		creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny),
+		singlePlayerButton.shape.width, singlePlayerButton.shape.height,
+		"EXIT",
 		BLACK, RED, WHITE/*, playButton.textShown.font*/);
 
 	//Version
 
 	versionText = Text::GetText(static_cast<float>(Text::Padding::tiny),
-								static_cast<float>(Text::Padding::tiny),
-								static_cast<int>(Text::FontSize::medium),
-								"v0.4",
-								GRAY);
+		static_cast<float>(Text::Padding::tiny),
+		static_cast<int>(Text::FontSize::medium),
+		"v0.4",
+		GRAY);
 }
-								
+
 
 void MenuScene::Update()
 {
@@ -88,7 +89,7 @@ void MenuScene::Update()
 		Audio::Update(Audio::Song::menu);*/
 
 	if (Button::IsButtonPrssed(singlePlayerButton))
-	{
+	{		
 		GameplayScene::isSinglePlayer = true;
 		Button::ChangeScene(SceneManager::Gameplay);
 	}
@@ -97,6 +98,13 @@ void MenuScene::Update()
 	{
 		GameplayScene::isSinglePlayer = false;
 		Button::ChangeScene(SceneManager::Gameplay);
+	}
+
+	if (SceneManager::GetCurrentScene() == SceneManager::Gameplay)
+	{
+		StopMusicStream(SoundManager::currentBgm);
+		SoundManager::currentBgm = SoundManager::gameplayBgm;
+		PlayMusicStream(SoundManager::currentBgm);
 	}
 
 	if (Button::IsButtonPrssed(creditsButton))

@@ -5,6 +5,7 @@
 #include "objects/button.h"
 #include "objects/parallax_handler.h"
 #include "utils/screen_info.h"
+#include "utils/sound_manager.h"
 
 namespace GameplayScene
 {
@@ -44,6 +45,7 @@ namespace GameplayScene
 	{
 		if (CheckObstacleColision(obstacle.higherColisionShape, player) || CheckObstacleColision(obstacle.lowerColisionShape, player))
 		{
+			PlaySound(SoundManager::collideSfx);
 			ResetGameplay();
 		}
 		else if (player.colisionShape.y + player.colisionShape.height >= screenHeight)
@@ -55,6 +57,7 @@ namespace GameplayScene
 		if (IsKeyPressed(KEY_SPACE) && (player1.colisionShape.y > 0))
 		{
 			Player::Jump(player1);
+			PlaySound(SoundManager::jumpSfx);
 		}
 	}
 
@@ -63,6 +66,7 @@ namespace GameplayScene
 		if (IsMouseButtonPressed(0) && (player2.colisionShape.y > 0))
 		{
 			Player::Jump(player2);
+			PlaySound(SoundManager::jumpSfx);
 		}
 	}
 
@@ -75,7 +79,7 @@ namespace GameplayScene
 		}
 	}
 
-	void Load()
+	void LoadTextures()
 	{
 		demon1Texture = LoadTexture(SpritesManager::demon1Sprite.c_str());
 		if (!isSinglePlayer)
