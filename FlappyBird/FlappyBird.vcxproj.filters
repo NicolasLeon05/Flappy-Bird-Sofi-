@@ -38,6 +38,15 @@
     <ClCompile Include="src\utils\sound_manager.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\result_scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\pause_menu.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\how2play_scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -89,6 +98,15 @@
     </ClInclude>
     <ClInclude Include="src\utils\sound_manager.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\result_scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\pause_menu.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\how2play_scene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

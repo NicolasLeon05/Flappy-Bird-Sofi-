@@ -21,7 +21,7 @@ static Button::Button singlePlayerButton;
 static Button::Button twoPlayersButton;
 static Button::Button exitButton;
 static Button::Button creditsButton;
-//static Button::Button howToPlayButton;
+static Button::Button howToPlayButton;
 
 static Text::Text titlePart1;
 static Text::Text titlePart2;
@@ -61,17 +61,17 @@ void MenuScene::Init()
 		"CREDITS",
 		BLACK, SKYBLUE, WHITE /*playButton.textShown.font*/);
 
-	//howToPlayButton = Button::GetButton(playButton.shape.x, creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny), playButton.shape.width, playButton.shape.height, "HOW TO PLAY", BLACK, YELLOW, WHITE /*playButton.textShown.font*/);
+	howToPlayButton = Button::GetButton(creditsButton.shape.x, creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny), singlePlayerButton.shape.width, singlePlayerButton.shape.height, "HOW TO PLAY", BLACK, YELLOW, WHITE /*playButton.textShown.font*/);
 
 	exitButton = Button::GetButton
 	(singlePlayerButton.shape.x,
-		creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny),
+		howToPlayButton.shape.y + howToPlayButton.shape.height + static_cast<int>(Text::Padding::tiny),
 		singlePlayerButton.shape.width, singlePlayerButton.shape.height,
 		"EXIT",
 		BLACK, RED, WHITE/*, playButton.textShown.font*/);
 
-	//Version
 
+	//Version
 	versionText = Text::GetText(static_cast<float>(Text::Padding::tiny),
 		static_cast<float>(Text::Padding::tiny),
 		static_cast<int>(Text::FontSize::medium),
@@ -82,12 +82,6 @@ void MenuScene::Init()
 
 void MenuScene::Update()
 {
-	/*if (!Audio::IsPlaying(Audio::Song::menu))
-		Audio::Play(Audio::Song::menu);
-
-	if (Audio::IsPlaying(Audio::Song::menu))
-		Audio::Update(Audio::Song::menu);*/
-
 	if (Button::IsButtonPrssed(singlePlayerButton))
 	{		
 		GameplayScene::isSinglePlayer = true;
@@ -112,11 +106,10 @@ void MenuScene::Update()
 		Button::ChangeScene(SceneManager::Credits);
 	}
 
-	/*if (Button::IsButtonPrssed(howToPlayButton))
+	if (Button::IsButtonPrssed(howToPlayButton))
 	{
 		Button::ChangeScene(SceneManager::HowToPlay);
 	}
-	*/
 
 	if (Button::IsButtonPrssed(exitButton))
 	{
@@ -134,7 +127,7 @@ void MenuScene::Draw()
 	Button::DrawButton(singlePlayerButton);
 	Button::DrawButton(twoPlayersButton);
 	Button::DrawButton(creditsButton);
-	//Button::DrawButton(howToPlayButton);
+	Button::DrawButton(howToPlayButton);
 	Button::DrawButton(exitButton);
 	Text::DrawText(versionText);
 }

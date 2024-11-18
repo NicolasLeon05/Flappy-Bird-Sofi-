@@ -8,6 +8,7 @@ namespace SceneManager
 		None,
 		Menu,
 		Gameplay,
+		Pause,
 		Result,
 		Credits,
 		HowToPlay

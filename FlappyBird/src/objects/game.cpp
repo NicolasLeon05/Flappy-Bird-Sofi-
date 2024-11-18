@@ -5,6 +5,8 @@
 #include "scenes/gameplay_scene.h"
 #include "scenes/credits_scene.h"
 #include "scenes/menu_scene.h"
+#include "scenes/how2play_scene.h"
+#include "scenes/result_scene.h"
 #include "utils/screen_info.h"
 #include "utils/scene_manager.h"
 #include "utils/sound_manager.h"
@@ -56,11 +58,13 @@ namespace FlappyBird
 		
 		case SceneManager::Result:
 		{
+			ResultScene::Update();
 			break;
 		}
 		
 		case SceneManager::HowToPlay:
 		{
+			HowToPlayScene::Update();
 			break;
 		}
 		
@@ -93,10 +97,12 @@ namespace FlappyBird
 
 		case SceneManager::Result:
 			ClearBackground(BLACK);
+			ResultScene::Draw();
 			break;
 
 		case SceneManager::HowToPlay:
 			ClearBackground(BLACK);
+			HowToPlayScene::Draw();
 			break;
 
 		default:
