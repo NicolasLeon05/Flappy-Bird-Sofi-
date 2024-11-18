@@ -28,13 +28,6 @@ namespace Text
 		giant = 140
 	};
 
-	enum class Fonts
-	{
-		Title1,
-		Title2,
-		Default
-	};
-
 	struct Text
 	{
 		string content = " ";
@@ -43,10 +36,8 @@ namespace Text
 		Color currentColor;
 		Color alt1Color;
 		Color alt2Color;
-		Fonts font;
 	};
 
-	void UnloadFonts();
 
 	//Prints a text
 	void DrawText(Text myText);
@@ -60,17 +51,7 @@ namespace Text
 
 	int GetTextHeight(Text text);
 
-	Font GetFont(Fonts font);
-
-	void InitFonts();
-
 	//Create texts
-	Text GetText(float x, float y, Fonts font, int fontSize, string content, Color color);
-
 	Text GetText(float x, float y, int fontSize, string content, Color color);
-
-	//If the text is the same and only the color changes at one point, then this is used.
-	//color1 is the current color.
-	Text GetText(float x, float y, Fonts font, int fontSize, string content, Color color1, Color color2);
 };
 

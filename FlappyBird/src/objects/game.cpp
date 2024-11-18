@@ -32,6 +32,7 @@ namespace FlappyBird
 		GameplayScene::Init();
 		MenuScene::Init();
 		CreditsScene::Init();
+		HowToPlayScene::Init();
 	}
 
 	static void Update()

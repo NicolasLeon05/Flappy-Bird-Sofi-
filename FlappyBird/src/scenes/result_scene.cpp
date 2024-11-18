@@ -27,8 +27,8 @@ namespace ResultScene
 	{
 		resultText = Text::GetText(screenWidth / 2,
 			screenHeight / 2 - static_cast<int>(Text::Padding::big),
-			Text::Fonts::Title2, static_cast<int>(Text::FontSize::big),
-			"YOU LOST", RED, YELLOW);
+			 static_cast<int>(Text::FontSize::big),
+			"YOU LOST", RED);
 		Text::CenterTextX(resultText);
 
 		scoreText = Text::GetText(screenWidth / 2,

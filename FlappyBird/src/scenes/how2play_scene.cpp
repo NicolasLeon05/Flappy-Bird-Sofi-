@@ -8,77 +8,61 @@ namespace HowToPlayScene
 {
 	static Text::Text howToPlayTitle;
 	static Text::Text controlsTitle;
+	static Text::Text spaceControl;
 	static Text::Text leftClickControl;
-	static Text::Text rightClickControl;
 	static Text::Text objectiveTitle;
 	static Text::Text objectiveText;
-	static Text::Text powerUpsText;
-	static Text::Text specialEnemyText;
-	static Text::Text ammoText;
+	static Text::Text specialObstacleText;
 	static Button::Button backToMenuButton;
 
 	void Init()
 	{
 		howToPlayTitle = Text::GetText(screenWidth / 2, 
 			static_cast<int>(Text::Padding::medium),
-			Text::Fonts::Title1, static_cast<int>(Text::FontSize::big), 
+			static_cast<int>(Text::FontSize::big), 
 			"HOW TO PLAY",
 			SKYBLUE);
 		Text::CenterTextX(howToPlayTitle);
 
 		controlsTitle = Text::GetText(screenWidth / 2,
 			howToPlayTitle.location.y + Text::GetTextHeight(howToPlayTitle) + static_cast<int>(Text::Padding::medium),
-			Text::Fonts::Title2, static_cast<int>(Text::FontSize::big),
+			 static_cast<int>(Text::FontSize::big),
 			"CONTROLS",
 			WHITE);
 		Text::CenterTextX(controlsTitle);
 
-		leftClickControl = Text::GetText(screenWidth / 2,
+		spaceControl = Text::GetText(screenWidth / 2,
 			controlsTitle.location.y + Text::GetTextHeight(controlsTitle) + static_cast<int>(Text::Padding::small),
-			Text::Fonts::Default, static_cast<int>(Text::FontSize::small),
-			"- Left click to SHOOT!",
+			 static_cast<int>(Text::FontSize::small),
+			"- Space to jump as player 1 or singleplayer!",
+			WHITE);
+		Text::CenterTextX(spaceControl);
+
+		leftClickControl = Text::GetText(screenWidth / 2,
+			spaceControl.location.y + Text::GetTextHeight(spaceControl) + static_cast<int>(Text::Padding::tiny), static_cast<int>(Text::FontSize::small),
+			"- Space to jump as player 2!",
 			WHITE);
 		Text::CenterTextX(leftClickControl);
 
-		rightClickControl = Text::GetText(screenWidth / 2,
-			leftClickControl.location.y + Text::GetTextHeight(leftClickControl) + static_cast<int>(Text::Padding::tiny), Text::Fonts::Default, static_cast<int>(Text::FontSize::small),
-			"- Right click to BOOST MOVEMENT!",
-			WHITE);
-		Text::CenterTextX(rightClickControl);
-
 		objectiveTitle = Text::GetText(screenWidth / 2,
-			rightClickControl.location.y + Text::GetTextHeight(rightClickControl) + static_cast<int>(Text::Padding::small), Text::Fonts::Title2, static_cast<int>(Text::FontSize::big),
+			leftClickControl.location.y + Text::GetTextHeight(leftClickControl) + static_cast<int>(Text::Padding::small), static_cast<int>(Text::FontSize::big),
 			"OBJECTIVES",
 			WHITE);
 		Text::CenterTextX(objectiveTitle);
 
 		objectiveText = Text::GetText(screenWidth / 2,
-			objectiveTitle.location.y + Text::GetTextHeight(objectiveTitle) + static_cast<int>(Text::Padding::small), Text::Fonts::Default,
+			objectiveTitle.location.y + Text::GetTextHeight(objectiveTitle) + static_cast<int>(Text::Padding::small),
 			static_cast<int>(Text::FontSize::small),
-			"- Destroy as many planets as you can!",
+			"- Get as far as you can!",
 			WHITE);
 		Text::CenterTextX(objectiveText);
 
-		powerUpsText = Text::GetText(screenWidth / 2,
+		specialObstacleText = Text::GetText(screenWidth / 2,
 			objectiveText.location.y + Text::GetTextHeight(objectiveText) + static_cast<int>(Text::Padding::small),
-			objectiveText.font, objectiveText.fontSize,
-			"- Power-Up: Remove all planets on screen!",
+			objectiveText.fontSize,
+			"- Once you reach a certain score the obstacles will move up and down!",
 			WHITE);
-		Text::CenterTextX(powerUpsText);
-
-		specialEnemyText = Text::GetText(screenWidth / 2,
-			powerUpsText.location.y + Text::GetTextHeight(powerUpsText) + static_cast<int>(Text::Padding::small),
-			powerUpsText.font,
-			powerUpsText.fontSize,
-			"- Destroy the PLANET DEFENDERS!", WHITE);
-		Text::CenterTextX(specialEnemyText);
-
-		ammoText = Text::GetText(screenWidth / 2,
-			specialEnemyText.location.y + Text::GetTextHeight(specialEnemyText) + static_cast<int>(Text::Padding::small), specialEnemyText.font,
-			specialEnemyText.fontSize,
-			"- Click LEFT CLICK once to RELOAD AMMO!",
-			WHITE);
-		Text::CenterTextX(ammoText);
+		Text::CenterTextX(specialObstacleText);
 
 		backToMenuButton = Button::GetButton(static_cast<float>(Text::Padding::tiny),
 			screenHeight, 80, 40, "BACK", BLACK, YELLOW, WHITE);
@@ -97,13 +81,11 @@ namespace HowToPlayScene
 	{
 		Text::DrawText(howToPlayTitle);
 		Text::DrawText(controlsTitle);
+		Text::DrawText(spaceControl);
 		Text::DrawText(leftClickControl);
-		Text::DrawText(rightClickControl);
 		Text::DrawText(objectiveTitle);
 		Text::DrawText(objectiveText);
-		Text::DrawText(powerUpsText);
-		Text::DrawText(specialEnemyText);
-		Text::DrawText(ammoText);
+		Text::DrawText(specialObstacleText);
 		Button::DrawButton(backToMenuButton);
 	}
 }

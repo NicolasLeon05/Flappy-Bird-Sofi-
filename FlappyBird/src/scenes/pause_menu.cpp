@@ -18,7 +18,7 @@ namespace PauseMenu
 	void Init()
 	{
 		pauseTitle = Text::GetText(screenWidth / 2, screenHeight / 2 - static_cast<int>(Text::FontSize::big),
-			Text::Fonts::Title1, static_cast<int>(Text::FontSize::big),
+			static_cast<int>(Text::FontSize::big),
 			"PAUSED", WHITE);
 		Text::CenterTextX(pauseTitle);
 

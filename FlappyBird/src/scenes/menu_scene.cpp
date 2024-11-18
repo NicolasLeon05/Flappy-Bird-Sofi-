@@ -34,7 +34,7 @@ void MenuScene::Init()
 	titlePart1 = Text::GetText(screenWidth / 2, 0,/* Text::Fonts::Title1,*/ static_cast<int>(Text::FontSize::big), "PLACE", MAGENTA);
 	Text::CenterTextX(titlePart1);
 	titlePart1.location.y = static_cast<float>(Text::Padding::medium);
-	titlePart2 = Text::GetText(screenWidth / 2, titlePart1.location.y + titlePart1.fontSize/*, Text::Fonts::Title2*/, static_cast<int>(Text::FontSize::big), "HOLDER", YELLOW);
+	titlePart2 = Text::GetText(screenWidth / 2, titlePart1.location.y + titlePart1.fontSize/**/, static_cast<int>(Text::FontSize::big), "HOLDER", YELLOW);
 	Text::CenterTextX(titlePart2);
 
 #pragma endregion
@@ -45,7 +45,7 @@ void MenuScene::Init()
 		static_cast<float>(Text::GetTextWidth(titlePart2)),
 		static_cast<float>(titlePart2.fontSize) / 2.0f,
 		"SINGLE PLAYER",
-		BLACK, MAGENTA, WHITE/*, Text::Fonts::Title2*/);
+		BLACK, MAGENTA, WHITE/**/);
 
 	twoPlayersButton = Button::GetButton
 	(singlePlayerButton.shape.x,
