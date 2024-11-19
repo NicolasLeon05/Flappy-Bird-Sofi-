@@ -144,7 +144,8 @@ namespace CreditsScene
 		credit.text = Text::GetText(screenWidth / 2, y, static_cast<int>(Text::FontSize::small), credit.role, WHITE);
 		Text::CenterTextX(credit.text);
 
-		credit.button = Button::GetButton(screenWidth / 2,
+		credit.button = Button::GetButton
+		(screenWidth / 2,
 			credit.text.location.y + credit.text.fontSize + static_cast<int>(Text::Padding::minimum),
 			static_cast<float>(Text::GetTextWidth(creditsTitle)) + static_cast<float>(Text::Padding::giant) + 10,
 			static_cast<float>(credit.text.fontSize) * 2.0f,
