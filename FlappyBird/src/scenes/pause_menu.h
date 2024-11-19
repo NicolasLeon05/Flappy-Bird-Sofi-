@@ -1,6 +1,6 @@
 #pragma once
 
-namespace PauseMenu
+namespace PauseScene
 {
 	void Init();
 	void Update();

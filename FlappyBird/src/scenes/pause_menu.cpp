@@ -6,14 +6,15 @@
 #include "utils/scene_manager.h"
 #include "utils/screen_info.h"
 #include "scenes/gameplay_scene.h"
-//NOTE: All of the above are used
 
-namespace PauseMenu
+namespace PauseScene
 {
 	Text::Text pauseTitle;
 	Button::Button continueButton;
 	Button::Button backToMenuButton;
-	//Button::Button exitButton;
+
+	static float opacity = 0.01f;
+	static Color semiTransparentBlack = { 0, 0, 0, static_cast <unsigned char>(opacity * 255) };
 
 	void Init()
 	{
@@ -40,18 +41,10 @@ namespace PauseMenu
 
 	void Update()
 	{
-		if (Button::IsMouseOnButton(continueButton))
+		if (Button::IsButtonPrssed(continueButton) ||
+			IsKeyReleased(KEY_ESCAPE))
 		{
-			continueButton.currentColor = continueButton.highlightColor;
-
-			if (Button::IsButtonPrssed(continueButton))
-			{
-				//GameplayScene::UnPauseGame();
-			}
-		}
-		else
-		{
-			continueButton.currentColor = continueButton.defaultColor;
+			SceneManager::SetCurrentScene(SceneManager::Gameplay);
 		}
 
 		if (Button::IsButtonPrssed(backToMenuButton))
@@ -62,6 +55,7 @@ namespace PauseMenu
 
 	void Draw()
 	{
+		DrawRectangle(0, 0, screenWidth, screenHeight, semiTransparentBlack);
 		Text::DrawText(pauseTitle);
 		Button::DrawButton(continueButton);
 		Button::DrawButton(backToMenuButton);
