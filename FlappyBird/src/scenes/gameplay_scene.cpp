@@ -30,6 +30,7 @@ namespace GameplayScene
 	static void ResetGameplay()
 	{
 		Player::ResetPlayer(player1);
+		score = 0;
 
 		if (!isSinglePlayer)
 			Player::ResetPlayer(player2);
