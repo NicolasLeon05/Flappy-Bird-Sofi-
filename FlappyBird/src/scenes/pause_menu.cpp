@@ -56,6 +56,7 @@ namespace PauseScene
 		if (Button::IsButtonPrssed(backToMenuButton))
 		{
 			SceneManager::SetCurrentScene(SceneManager::Menu);
+			GameplayScene::ResetGameplay();
 		}
 	}
 
