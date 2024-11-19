@@ -3,7 +3,6 @@
 namespace GameplayScene
 {
 	extern bool isSinglePlayer;
-	extern int score;
 
 	void LoadTextures();
 	void Unload();

@@ -3,6 +3,7 @@
 #include "objects/player.h"
 #include "objects/obstacle.h"
 #include "objects/parallax_handler.h"
+#include "scenes/result_scene.h"
 #include "utils/screen_info.h"
 #include "utils/sound_manager.h"
 #include "utils/scene_manager.h"
@@ -36,6 +37,14 @@ namespace GameplayScene
 		Obstacle::ResetObstacle(obstacle);
 	}
 
+	static void Lose()
+	{
+		PlaySound(SoundManager::gameOverSfx);
+		ResultScene::SaveScore(score);
+		ResetGameplay();
+		SceneManager::SetCurrentScene(SceneManager::Result);
+	}
+
 	static bool CheckObstacleColision(Rectangle colisionShape, Player::Player player)
 	{
 		return player.colisionShape.x + player.colisionShape.width >= colisionShape.x &&
@@ -49,10 +58,13 @@ namespace GameplayScene
 		if (CheckObstacleColision(obstacle.higherColisionShape, player) || CheckObstacleColision(obstacle.lowerColisionShape, player))
 		{
 			PlaySound(SoundManager::collideSfx);
-			ResetGameplay();
+			Lose();
+
 		}
 		else if (player.colisionShape.y + player.colisionShape.height >= screenHeight)
-			ResetGameplay();
+		{
+			Lose();
+		}
 	}
 
 	static void CheckScoreUp()
@@ -156,7 +168,7 @@ namespace GameplayScene
 		//Back button
 		if (IsKeyReleased(KEY_ESCAPE))
 		{
-			SceneManager::SetCurrentScene(SceneManager::Menu);
+			SceneManager::SetCurrentScene(SceneManager::Pause);
 		}
 
 		CheckScoreUp();
