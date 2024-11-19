@@ -18,21 +18,27 @@ namespace PauseScene
 
 	void Init()
 	{
-		pauseTitle = Text::GetText(screenWidth / 2, screenHeight / 2 - static_cast<int>(Text::FontSize::big),
+		pauseTitle = Text::GetText
+		(screenWidth / 2,
+			screenHeight / 3 - static_cast<int>(Text::FontSize::big),
 			static_cast<int>(Text::FontSize::big),
 			"PAUSED", WHITE);
+
 		Text::CenterTextX(pauseTitle);
 
-		continueButton = Button::GetButton(pauseTitle.location.x,
-			pauseTitle.location.y + Text::GetTextHeight(pauseTitle) + static_cast<float>(Text::Padding::medium),
+
+		continueButton = Button::GetButton
+		(pauseTitle.location.x,
+			pauseTitle.location.y + pauseTitle.fontSize + static_cast<float>(Text::Padding::big),
 			static_cast <float> (Text::GetTextWidth(pauseTitle)),
-			static_cast <float> (Text::GetTextHeight(pauseTitle) / 2),
+			static_cast <float> (pauseTitle.fontSize / 2),
 			"CONTINUE", BLACK, MAGENTA, WHITE);
 
-		backToMenuButton = Button::GetButton(continueButton.shape.x,
-			continueButton.shape.y + static_cast<float>(Text::Padding::medium),
+		backToMenuButton = Button::GetButton
+		(continueButton.shape.x,
+			continueButton.shape.y + pauseTitle.fontSize + static_cast<float>(Text::Padding::small),
 			static_cast <float>(Text::GetTextWidth(pauseTitle)),
-			static_cast <float>(Text::GetTextHeight(pauseTitle) / 2),
+			static_cast <float>(pauseTitle.fontSize / 2),
 			"BACK TO MENU", BLACK, SKYBLUE, WHITE);
 
 	}
