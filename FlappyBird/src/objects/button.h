@@ -23,10 +23,6 @@ namespace Button
 	bool IsMouseOnButton(Button& button);
 	bool IsButtonPrssed(Button& button);
 
-	void ChangeScene(SceneManager::Scene scene);
-
-	//void CheckSceneChange(Button& button, SceneManager::Scene scene /*Audio::Song songToStop*/);
-
 	void DrawButton(Button button);
 
 	//Create buttons

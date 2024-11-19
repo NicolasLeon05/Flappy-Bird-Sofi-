@@ -33,12 +33,6 @@ namespace Button
 	}
 
 
-	void ChangeScene(SceneManager::Scene scene)
-	{
-		SceneManager::SetCurrentScene(scene);	
-	}
-
-
 	static void DrawButtonText(Button button)
 	{
 		DrawText(button.textShown.content.c_str(), static_cast<int>(button.shape.x) + static_cast<int>(button.shape.width / 2) - MeasureText(button.textShown.content.c_str(), button.textShown.fontSize) / 2, static_cast<int>(button.shape.y) + static_cast<int>(button.shape.height / 2) - button.textShown.fontSize / 2, button.textShown.fontSize, button.textShown.currentColor);
