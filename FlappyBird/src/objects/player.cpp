@@ -13,8 +13,8 @@ namespace Player
 		player.speed.y += gravity * GetFrameTime();
 		player.colisionShape.y += player.speed.y * GetFrameTime();
 
+		player.sprite.atlas.dest.x = player.colisionShape.x + player.colisionShape.width * 2.4f;
 		player.sprite.atlas.dest.y = player.colisionShape.y + player.colisionShape.height / 2;
-		player.sprite.atlas.dest.x = player.colisionShape.x + player.colisionShape.width * 2;
 	}
 
 	void Jump(Player& player)
@@ -35,7 +35,7 @@ namespace Player
 
 		player.sprite.atlas.scale = 2;
 		player.speed = { 0.0f, 0.0f };
-		player.colisionShape.x = static_cast<float>(screenWidth) * 1 / 3;
+		player.colisionShape.x = static_cast<float>(screenWidth) / 4;
 		player.colisionShape.y = static_cast<float>(screenHeight) / 2.0f;
 		player.colisionShape.width = playerSize;
 		player.colisionShape.height = player.colisionShape.width;
@@ -66,7 +66,6 @@ namespace Player
 	void Draw(Player& player)
 	{
 		//DrawRectangle(static_cast<int>(player.colisionShape.x), static_cast<int>(player.colisionShape.y), static_cast<int>(player.colisionShape.width), static_cast<int>(player.colisionShape.height), YELLOW);
-		//DrawTexturePro(player.sprite.atlas.texture, player.sprite.atlas.source, player.sprite.atlas.dest, player.sprite.atlas.origin, player.angle, WHITE);
 		SpritesManager::DrawAnimatedSprite(player.sprite);
 	}
 
