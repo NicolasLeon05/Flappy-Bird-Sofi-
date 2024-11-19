@@ -17,10 +17,10 @@ namespace SoundManager
 	{
 		InitAudioDevice();
 		menuBgm = LoadMusicStream("res/bgm/menu_bgm.mp3");
-		SetMusicVolume(menuBgm, 0.5f);
+		SetMusicVolume(menuBgm, 0.6f);
 
 		gameplayBgm = LoadMusicStream("res/bgm/gameplay_bgm.mp3");
-		SetMusicVolume(gameplayBgm, 0.5f);
+		SetMusicVolume(gameplayBgm, 0.6f);
 
 
 		jumpSfx = LoadSound("res/sfx/jump.wav");
@@ -36,7 +36,7 @@ namespace SoundManager
 		SetSoundVolume(gameOverSfx, 0.5f);
 
 		clickButtonSfx = LoadSound("res/sfx/click_button.wav");
-		SetSoundVolume(clickButtonSfx, 1.0f);
+		SetSoundVolume(clickButtonSfx, 0.7f);
 	}
 
 	void Unload()
