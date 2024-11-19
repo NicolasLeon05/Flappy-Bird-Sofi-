@@ -7,6 +7,7 @@
 #include "scenes/menu_scene.h"
 #include "scenes/how2play_scene.h"
 #include "scenes/result_scene.h"
+#include "scenes/pause_menu.h"
 #include "utils/screen_info.h"
 #include "utils/scene_manager.h"
 #include "utils/sound_manager.h"
@@ -33,6 +34,8 @@ namespace FlappyBird
 		MenuScene::Init();
 		CreditsScene::Init();
 		HowToPlayScene::Init();
+		ResultScene::Init();
+		PauseScene::Init();
 	}
 
 	static void Update()
@@ -66,6 +69,12 @@ namespace FlappyBird
 		case SceneManager::HowToPlay:
 		{
 			HowToPlayScene::Update();
+			break;
+		}
+
+		case SceneManager::Pause:
+		{
+			PauseScene::Update();
 			break;
 		}
 		
@@ -104,6 +113,10 @@ namespace FlappyBird
 		case SceneManager::HowToPlay:
 			ClearBackground(BLACK);
 			HowToPlayScene::Draw();
+			break;
+
+		case SceneManager::Pause:
+			PauseScene::Draw();
 			break;
 
 		default:
