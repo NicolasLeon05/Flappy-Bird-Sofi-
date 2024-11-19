@@ -2,10 +2,10 @@
 
 #include "objects/player.h"
 #include "objects/obstacle.h"
-#include "objects/button.h"
 #include "objects/parallax_handler.h"
 #include "utils/screen_info.h"
 #include "utils/sound_manager.h"
+#include "utils/scene_manager.h"
 
 #include <iostream>
 #include <string>
@@ -23,8 +23,6 @@ namespace GameplayScene
 
 	static Texture2D demon1Texture;
 	static Texture2D demon2Texture;
-
-	static Button::Button backButton;
 
 	static Parallax::Parallax parallax;
 
@@ -132,7 +130,6 @@ namespace GameplayScene
 		}
 
 		obstacle = Obstacle::GetObstacle();
-		backButton = Button::GetButton(0, screenHeight - static_cast<float>(Text::FontSize::medium), static_cast<float>(Text::Padding::medium), static_cast<float>(Text::FontSize::medium), "BACK", BLACK, RED, WHITE);
 	}
 
 	void Update()
@@ -157,11 +154,9 @@ namespace GameplayScene
 		Obstacle::Update(obstacle);
 
 		//Back button
-		if (Button::IsButtonPrssed(backButton) ||
-			IsKeyReleased(KEY_ESCAPE))
+		if (IsKeyReleased(KEY_ESCAPE))
 		{
-			ResetGameplay();
-			Button::ChangeScene(SceneManager::Menu);
+			SceneManager::SetCurrentScene(SceneManager::Menu);
 		}
 
 		CheckScoreUp();
@@ -179,8 +174,6 @@ namespace GameplayScene
 			Player::Draw(player2);
 
 		Obstacle::Draw(obstacle);
-
-		Button::DrawButton(backButton);
 
 		DrawText((to_string(score)).c_str(),
 			30,
