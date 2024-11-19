@@ -6,7 +6,6 @@
 
 namespace HowToPlayScene
 {
-	static Text::Text howToPlayTitle;
 	static Text::Text controlsTitle;
 	static Text::Text spaceControl;
 	static Text::Text leftClickControl;
@@ -17,56 +16,63 @@ namespace HowToPlayScene
 
 	void Init()
 	{
-		howToPlayTitle = Text::GetText(screenWidth / 2, 
-			static_cast<int>(Text::Padding::medium),
-			static_cast<int>(Text::FontSize::big), 
-			"HOW TO PLAY",
-			SKYBLUE);
-		Text::CenterTextX(howToPlayTitle);
 
-		controlsTitle = Text::GetText(screenWidth / 2,
-			howToPlayTitle.location.y + Text::GetTextHeight(howToPlayTitle) + static_cast<int>(Text::Padding::medium),
-			 static_cast<int>(Text::FontSize::big),
+		controlsTitle = Text::GetText
+		(screenWidth / 2,
+			static_cast<int>(Text::Padding::medium),
+			static_cast<int>(Text::FontSize::medium),
 			"CONTROLS",
 			WHITE);
 		Text::CenterTextX(controlsTitle);
 
-		spaceControl = Text::GetText(screenWidth / 2,
-			controlsTitle.location.y + Text::GetTextHeight(controlsTitle) + static_cast<int>(Text::Padding::small),
-			 static_cast<int>(Text::FontSize::small),
+		spaceControl = Text::GetText
+		(screenWidth / 2,
+			controlsTitle.location.y + static_cast<int>(Text::Padding::medium),
+			static_cast<int>(Text::FontSize::small),
 			"- Space to jump as player 1 or singleplayer!",
 			WHITE);
 		Text::CenterTextX(spaceControl);
 
-		leftClickControl = Text::GetText(screenWidth / 2,
-			spaceControl.location.y + Text::GetTextHeight(spaceControl) + static_cast<int>(Text::Padding::tiny), static_cast<int>(Text::FontSize::small),
+		leftClickControl = Text::GetText
+		(screenWidth / 2,
+			spaceControl.location.y + static_cast<int>(Text::Padding::medium),
+			static_cast<int>(Text::FontSize::small),
 			"- Space to jump as player 2!",
 			WHITE);
 		Text::CenterTextX(leftClickControl);
 
-		objectiveTitle = Text::GetText(screenWidth / 2,
-			leftClickControl.location.y + Text::GetTextHeight(leftClickControl) + static_cast<int>(Text::Padding::small), static_cast<int>(Text::FontSize::big),
+		objectiveTitle = Text::GetText
+		(screenWidth / 2,
+			leftClickControl.location.y + static_cast<int>(Text::Padding::big),
+			static_cast<int>(Text::FontSize::medium),
 			"OBJECTIVES",
 			WHITE);
 		Text::CenterTextX(objectiveTitle);
 
-		objectiveText = Text::GetText(screenWidth / 2,
-			objectiveTitle.location.y + Text::GetTextHeight(objectiveTitle) + static_cast<int>(Text::Padding::small),
+		objectiveText = Text::GetText
+		(screenWidth / 2,
+			objectiveTitle.location.y + static_cast<int>(Text::Padding::medium),
 			static_cast<int>(Text::FontSize::small),
 			"- Get as far as you can!",
 			WHITE);
 		Text::CenterTextX(objectiveText);
 
-		specialObstacleText = Text::GetText(screenWidth / 2,
-			objectiveText.location.y + Text::GetTextHeight(objectiveText) + static_cast<int>(Text::Padding::small),
+		specialObstacleText = Text::GetText
+		(screenWidth / 2,
+			objectiveText.location.y + static_cast<int>(Text::Padding::medium),
 			objectiveText.fontSize,
 			"- Once you reach a certain score the obstacles will move up and down!",
 			WHITE);
 		Text::CenterTextX(specialObstacleText);
 
-		backToMenuButton = Button::GetButton(static_cast<float>(Text::Padding::tiny),
-			screenHeight, 80, 40, "BACK", BLACK, YELLOW, WHITE);
-		backToMenuButton.shape.y -= backToMenuButton.shape.height + static_cast<float>(Text::Padding::tiny);
+		backToMenuButton = Button::GetButton
+		(static_cast<float>(Text::Padding::small),
+			screenHeight,
+			80, 40,
+			"BACK",
+			BLACK, YELLOW, WHITE);
+		backToMenuButton.shape.y -= backToMenuButton.shape.height + static_cast<float>(Text::Padding::small);
+
 	}
 
 	void Update()
@@ -79,7 +85,6 @@ namespace HowToPlayScene
 
 	void Draw()
 	{
-		Text::DrawText(howToPlayTitle);
 		Text::DrawText(controlsTitle);
 		Text::DrawText(spaceControl);
 		Text::DrawText(leftClickControl);
