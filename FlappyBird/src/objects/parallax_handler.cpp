@@ -14,8 +14,10 @@ namespace Parallax
 		layer.spriteClone.dest.x += layer.sprite.dest.width;
 	}
 
+	Parallax parallax;
+
 	//the first one to enter is the background layer.
-	void PushBackLayer(Parallax& parallax, string textureDir)
+	void PushBackLayer(string textureDir)
 	{
 		Layer layer{};
 
@@ -28,7 +30,7 @@ namespace Parallax
 		parallax.parallaxLayers.push_back(layer);
 	}
 
-	void Load(Parallax& parallax)
+	void Load()
 	{
 		for (list<Layer>::iterator it = parallax.parallaxLayers.begin(); it != parallax.parallaxLayers.end(); it++)
 		{
@@ -40,7 +42,7 @@ namespace Parallax
 		}
 	}
 
-	void Unload(Parallax& parallax)
+	void Unload()
 	{
 		for (list<Layer>::iterator it = parallax.parallaxLayers.begin(); it != parallax.parallaxLayers.end(); it++)
 			UnloadTexture((*it).sprite.texture);
@@ -48,7 +50,7 @@ namespace Parallax
 		parallax.parallaxLayers.clear();
 	}
 
-	void Update(Parallax& parallax)
+	void Update()
 	{
 		for (list<Layer>::iterator it = parallax.parallaxLayers.begin(); it != parallax.parallaxLayers.end(); it++)
 		{
@@ -64,7 +66,7 @@ namespace Parallax
 		}
 	}
 
-	void Draw(Parallax parallax)
+	void Draw()
 	{
 		for (list<Layer>::iterator it = parallax.parallaxLayers.begin(); it != parallax.parallaxLayers.end(); it++)
 		{

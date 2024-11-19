@@ -22,14 +22,16 @@ namespace Parallax
 		list<Layer> parallaxLayers;
 	};
 
-	void PushBackLayer(Parallax& parallax, string textureDir);
+	extern Parallax parallax;
 
-	void Load(Parallax& parallax);
+	void PushBackLayer(string textureDir);
 
-	void Unload(Parallax& parallax);
+	void Load();
 
-	void Update(Parallax& parallax);
+	void Unload();
 
-	void Draw(Parallax parallax);
+	void Update();
+
+	void Draw();
 
 }
