@@ -3,6 +3,9 @@
 
 namespace SoundManager
 {
+	extern bool isMusicMuted;
+	extern bool isSfxMuted;
+
 	extern Music currentBgm;
 
 	extern Music menuBgm;
@@ -16,7 +19,7 @@ namespace SoundManager
 
 	void Load();
 	void Unload();
-	void Mute();
-	void Unmute();
+	void MuteMusic();
+	void MuteSounds();
 
 }

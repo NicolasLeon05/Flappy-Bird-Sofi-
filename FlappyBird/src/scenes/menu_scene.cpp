@@ -23,6 +23,9 @@ static Button::Button exitButton;
 static Button::Button creditsButton;
 static Button::Button howToPlayButton;
 
+static Button::Button muteBgm;
+static Button::Button muteSfx;
+
 static Text::Text titlePart1;
 static Text::Text titlePart2;
 static Text::Text versionText;
@@ -84,10 +87,26 @@ void MenuScene::Init()
 	exitButton = Button::GetButton
 	(singlePlayerButton.shape.x,
 		howToPlayButton.shape.y + howToPlayButton.shape.height + static_cast<int>(Text::Padding::tiny),
-		singlePlayerButton.shape.width, singlePlayerButton.shape.height,
+		singlePlayerButton.shape.width,
+		singlePlayerButton.shape.height,
 		"EXIT",
 		BLACK, RED, WHITE);
 
+	muteBgm = Button::GetButton
+	(titlePart1.location.x + GetTextWidth(titlePart1) + static_cast<int>(Text::Padding::big),
+		static_cast<int>(Text::Padding::small),
+		singlePlayerButton.shape.width / 3,
+		singlePlayerButton.shape.height,
+		"Music",
+		BLACK, RED, WHITE);
+
+	muteSfx = Button::GetButton
+	(muteBgm.shape.x,
+		muteBgm.shape.y + muteBgm.shape.height + static_cast<int>(Text::Padding::minimum),
+		singlePlayerButton.shape.width / 3,
+		singlePlayerButton.shape.height,
+		"Sounds",
+		BLACK, RED, WHITE);
 
 	//Version
 	versionText = Text::GetText
@@ -101,6 +120,16 @@ void MenuScene::Init()
 
 void MenuScene::Update()
 {
+	if (Button::IsButtonPrssed(muteBgm))
+	{
+		SoundManager::MuteMusic();
+	}
+
+	if (Button::IsButtonPrssed(muteSfx))
+	{
+		SoundManager::MuteSounds();
+	}
+
 	if (Button::IsButtonPrssed(singlePlayerButton))
 	{
 		GameplayScene::isSinglePlayer = true;
@@ -142,6 +171,9 @@ void MenuScene::Draw()
 {
 	DrawText(titlePart1);
 	DrawText(titlePart2);
+
+	Button::DrawButton(muteBgm);
+	Button::DrawButton(muteSfx);
 
 	Button::DrawButton(singlePlayerButton);
 	Button::DrawButton(twoPlayersButton);

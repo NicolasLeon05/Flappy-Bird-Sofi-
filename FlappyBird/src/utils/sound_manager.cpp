@@ -2,7 +2,8 @@
 
 namespace SoundManager
 {
-	static bool isMute;
+	bool isMusicMuted;
+	bool isSfxMuted;
 
 	Music currentBgm;
 
@@ -17,7 +18,8 @@ namespace SoundManager
 
 	void Load()
 	{
-		isMute = false;
+		isMusicMuted = false;
+		isSfxMuted = false;
 
 		InitAudioDevice();
 		menuBgm = LoadMusicStream("res/bgm/menu_bgm.mp3");
@@ -57,25 +59,43 @@ namespace SoundManager
 		CloseAudioDevice();
 	}
 
-	void Mute()
+	void MuteMusic()
 	{
-		SetMusicVolume(menuBgm, 0.0f);
-		SetMusicVolume(gameplayBgm, 0.0f);
-		SetSoundVolume(jumpSfx, 0.0f);
-		SetSoundVolume(collideSfx, 0.0f);
-		SetSoundVolume(scoreUpSfx, 0.0f);
-		SetSoundVolume(gameOverSfx, 0.0f);
-		SetSoundVolume(clickButtonSfx, 0.0f);
+		if (!isMusicMuted)
+		{
+			isMusicMuted = true;
+			SetMusicVolume(menuBgm, 0.0f);
+			SetMusicVolume(gameplayBgm, 0.0f);
+		}
+		else
+		{
+			isMusicMuted = false;
+			SetMusicVolume(menuBgm, 0.6f);
+			SetMusicVolume(gameplayBgm, 0.6f);
+		}
+		
 	}
 
-	void Unmute()
+	void MuteSounds()
 	{
-		SetMusicVolume(menuBgm, 0.6f);
-		SetMusicVolume(gameplayBgm, 0.6f);
-		SetSoundVolume(jumpSfx, 0.2f);
-		SetSoundVolume(collideSfx, 0.3f);
-		SetSoundVolume(scoreUpSfx, 0.3f);
-		SetSoundVolume(gameOverSfx, 0.5f);
-		SetSoundVolume(clickButtonSfx, 0.7f);
+		if (!isSfxMuted)
+		{
+			isSfxMuted = true;
+			SetSoundVolume(jumpSfx, 0.0f);
+			SetSoundVolume(collideSfx, 0.0f);
+			SetSoundVolume(scoreUpSfx, 0.0f);
+			SetSoundVolume(gameOverSfx, 0.0f);
+			SetSoundVolume(clickButtonSfx, 0.0f);
+		}
+		else
+		{
+			isSfxMuted = false;
+			SetSoundVolume(jumpSfx, 0.2f);
+			SetSoundVolume(collideSfx, 0.3f);
+			SetSoundVolume(scoreUpSfx, 0.3f);
+			SetSoundVolume(gameOverSfx, 0.5f);
+			SetSoundVolume(clickButtonSfx, 0.7f);
+		}
+		
 	}
 }
