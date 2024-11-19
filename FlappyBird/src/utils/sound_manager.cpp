@@ -33,11 +33,12 @@ namespace SoundManager
 		SetSoundVolume(scoreUpSfx, 0.3f);
 
 		gameOverSfx = LoadSound("res/sfx/game_over.wav");
-		SetSoundVolume(gameOverSfx, 1.0f);
+		SetSoundVolume(gameOverSfx, 0.5f);
 
 		clickButtonSfx = LoadSound("res/sfx/click_button.wav");
 		SetSoundVolume(clickButtonSfx, 1.0f);
 	}
+
 	void Unload()
 	{
 		UnloadMusicStream(menuBgm);
