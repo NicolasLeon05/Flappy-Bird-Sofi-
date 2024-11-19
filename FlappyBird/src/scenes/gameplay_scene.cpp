@@ -2,7 +2,7 @@
 
 #include "objects/player.h"
 #include "objects/obstacle.h"
-#include "objects/parallax_handler.h"
+#include "objects/Parallax_handler.h"
 #include "scenes/result_scene.h"
 #include "utils/screen_info.h"
 #include "utils/sound_manager.h"
@@ -24,8 +24,6 @@ namespace GameplayScene
 
 	static Texture2D demon1Texture;
 	static Texture2D demon2Texture;
-
-	static Parallax::Parallax parallax;
 
 	static void Lose()
 	{
@@ -100,18 +98,18 @@ namespace GameplayScene
 		if (!isSinglePlayer)
 			demon2Texture = LoadTexture(SpritesManager::demon2Sprite.c_str());
 
-		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0004_bg.png");
-		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0003_far buildings.png");
-		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0002_3.png");
-		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0001_buildings.png");
-		Parallax::PushBackLayer(parallax, "res/sprites/parallax_bg/industrial-hell_0000_foreground.png");
+		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0004_bg.png");
+		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0003_far buildings.png");
+		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0002_3.png");
+		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0001_buildings.png");
+		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0000_foreground.png");
 
-		Parallax::Load(parallax);
+		Parallax::Load();
 	}
 
 	void Unload()
 	{
-		Parallax::Unload(parallax);
+		Parallax::Unload();
 
 		UnloadTexture(demon1Texture);
 		if (!isSinglePlayer)
@@ -163,13 +161,13 @@ namespace GameplayScene
 
 		CheckScoreUp();
 
-		Parallax::Update(parallax);
+		Parallax::Update();
 	}
 
 	void Draw()
 	{
 		ClearBackground(RAYWHITE);
-		Parallax::Draw(parallax);
+		Parallax::Draw();
 
 		Player::Draw(player1);
 		if (!isSinglePlayer)

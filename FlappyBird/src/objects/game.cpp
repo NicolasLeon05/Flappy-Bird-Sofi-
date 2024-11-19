@@ -2,6 +2,7 @@
 
 #include "raylib.h"
 
+#include "objects/parallax_handler.h"
 #include "scenes/gameplay_scene.h"
 #include "scenes/credits_scene.h"
 #include "scenes/menu_scene.h"
@@ -12,18 +13,27 @@
 #include "utils/scene_manager.h"
 #include "utils/sound_manager.h"
 
+
 namespace FlappyBird
 {
-
 	static void Load()
 	{
 		SoundManager::Load(); 
 		GameplayScene::LoadTextures();
 		SoundManager::currentBgm = SoundManager::menuBgm;
+
+		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0004_bg.png");
+		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0003_far buildings.png");
+		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0002_3.png");
+		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0001_buildings.png");
+		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0000_foreground.png");
+
+		Parallax::Load();
 	}
 
 	static void Unload()
 	{
+		Parallax::Unload();
 		SoundManager::Unload();
 		GameplayScene::Unload();
 	}
@@ -40,6 +50,7 @@ namespace FlappyBird
 
 	static void Update()
 	{
+	
 		switch (SceneManager::GetCurrentScene())
 		{
 		case SceneManager::Gameplay:
@@ -51,12 +62,14 @@ namespace FlappyBird
 		case SceneManager::Menu:
 		{
 			MenuScene::Update();
+			Parallax::Update();
 			break;
 		}
 
 		case SceneManager::Credits:
 		{
 			CreditsScene::Update();
+			Parallax::Update();
 			break;
 		}
 		
@@ -69,6 +82,7 @@ namespace FlappyBird
 		case SceneManager::HowToPlay:
 		{
 			HowToPlayScene::Update();
+			Parallax::Update();
 			break;
 		}
 
@@ -89,6 +103,7 @@ namespace FlappyBird
 	{
 		BeginDrawing();
 		
+
 		switch (SceneManager::GetCurrentScene())
 		{
 		case SceneManager::Gameplay:
@@ -97,25 +112,29 @@ namespace FlappyBird
 
 		case SceneManager::Menu:
 			ClearBackground(BLACK);
+			Parallax::Draw();
 			MenuScene::Draw();
 			break;
 
 		case SceneManager::Credits:
 			ClearBackground(BLACK);
+			Parallax::Draw();
 			CreditsScene::Draw();
 			break;
 
 		case SceneManager::Result:
-			ClearBackground(BLACK);
+			GameplayScene::Draw();
 			ResultScene::Draw();
 			break;
 
 		case SceneManager::HowToPlay:
 			ClearBackground(BLACK);
+			Parallax::Draw();
 			HowToPlayScene::Draw();
 			break;
 
 		case SceneManager::Pause:
+			GameplayScene::Draw();
 			PauseScene::Draw();
 			break;
 
