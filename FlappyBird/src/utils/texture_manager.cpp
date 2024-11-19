@@ -96,15 +96,15 @@ namespace SpritesManager
 
 		sprite.source.x = 0;
 		sprite.source.y = 0;
-
 		sprite.source.width = static_cast<float>(sprite.texture.width);
 		sprite.source.height = static_cast<float>(sprite.texture.height);
 
 		sprite.dest.width = sprite.source.width * sprite.scale;
 		sprite.dest.height = sprite.source.height * sprite.scale;
 
-		sprite.origin = { static_cast<float>(sprite.texture.width),
-										static_cast<float>(sprite.texture.height) };
+		sprite.origin =
+		{ static_cast<float>(sprite.texture.width),
+			static_cast<float>(sprite.texture.height) };
 
 	}
 

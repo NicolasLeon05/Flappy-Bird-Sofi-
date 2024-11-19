@@ -25,6 +25,9 @@ namespace GameplayScene
 	static Texture2D demon1Texture;
 	static Texture2D demon2Texture;
 
+	static Texture2D higherObstacleTexture;
+	static Texture2D lowerObstacleTexture;
+
 	static void Lose()
 	{
 		PlaySound(SoundManager::gameOverSfx);
@@ -94,22 +97,21 @@ namespace GameplayScene
 
 	void LoadTextures()
 	{
+
 		demon1Texture = LoadTexture(SpritesManager::demon1Sprite.c_str());
 		if (!isSinglePlayer)
 			demon2Texture = LoadTexture(SpritesManager::demon2Sprite.c_str());
 
-		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0004_bg.png");
-		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0003_far buildings.png");
-		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0002_3.png");
-		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0001_buildings.png");
-		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0000_foreground.png");
-
-		Parallax::Load();
+		lowerObstacleTexture = LoadTexture(SpritesManager::obstacleSprite.c_str());
+		higherObstacleTexture = LoadTexture(SpritesManager::obstacleSprite.c_str());
 	}
 
 	void Unload()
 	{
 		Parallax::Unload();
+
+		UnloadTexture(higherObstacleTexture);
+		UnloadTexture(lowerObstacleTexture);
 
 		UnloadTexture(demon1Texture);
 		if (!isSinglePlayer)
@@ -123,13 +125,16 @@ namespace GameplayScene
 		player1 = Player::GetPlayer();
 		Player::SaveTexture(demon1Texture, player1);
 
+		SpritesManager::SaveTexture(lowerObstacleTexture, obstacle.higherSprite);
+		SpritesManager::SaveTexture(lowerObstacleTexture, obstacle.lowerSprite);
+
 		if (!isSinglePlayer)
 		{
 			player2 = Player::GetPlayer();
 			Player::SaveTexture(demon2Texture, player2);
 		}
 
-		obstacle = Obstacle::GetObstacle();
+		obstacle = Obstacle::GetObstacle(obstacle.lowerSprite);
 	}
 
 	void Update()
@@ -169,11 +174,12 @@ namespace GameplayScene
 		ClearBackground(RAYWHITE);
 		Parallax::Draw();
 
+		Obstacle::Draw(obstacle);
+
 		Player::Draw(player1);
 		if (!isSinglePlayer)
 			Player::Draw(player2);
 
-		Obstacle::Draw(obstacle);
 
 		DrawText((to_string(score)).c_str(),
 			30,

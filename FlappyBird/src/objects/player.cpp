@@ -40,8 +40,6 @@ namespace Player
 		player.colisionShape.width = playerSize;
 		player.colisionShape.height = player.colisionShape.width;
 
-		//TextureManager::InitSprite(player.sprite.atlas);
-
 		player.sprite.atlas.textureDir = SpritesManager::demon1Sprite;
 		player.sprite.atlas.rotation = 0.0f;
 

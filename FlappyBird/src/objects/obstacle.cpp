@@ -63,23 +63,63 @@ namespace Obstacle
 			ResetObstacle(obstacle);
 		}
 
+		obstacle.lowerSprite.dest.x = obstacle.lowerColisionShape.x;
+		obstacle.lowerSprite.dest.y = obstacle.lowerColisionShape.y;
+		obstacle.lowerSprite.dest.width = obstacle.lowerColisionShape.width;
+		obstacle.lowerSprite.dest.height = obstacle.lowerColisionShape.height;
+
+		obstacle.higherSprite = obstacle.lowerSprite;
+
+		obstacle.higherSprite.dest.x = obstacle.higherColisionShape.x;
+		obstacle.higherSprite.dest.y = obstacle.higherColisionShape.y;
+		obstacle.higherSprite.dest.width = obstacle.higherColisionShape.width;
+		obstacle.higherSprite.dest.height = obstacle.higherColisionShape.height;
 	}
 
 	void ResetObstacle(Obstacle& obstacle)
 	{
-		obstacle = GetObstacle();
+		obstacle.lowerColisionShape.x = screenWidth;
+		obstacle.lowerColisionShape.width = 25.0f;
+
+		obstacle.higherColisionShape.width = obstacle.lowerColisionShape.width;
+		RandomizeHeight(obstacle);
+		obstacle.scoreGiven = false;
 	}
 
-	Obstacle GetObstacle()
+	Obstacle GetObstacle(SpritesManager::Sprite sprite)
 	{
 		Obstacle obstacle;
 
+		obstacle.lowerSprite.texture = sprite.texture;
+		obstacle.higherSprite.texture = sprite.texture;
+
 		obstacle.lowerColisionShape.x = screenWidth;
-		obstacle.lowerColisionShape.width = 40.0f;
+		obstacle.lowerColisionShape.width = 25.0f;
+
 		obstacle.higherColisionShape.width = obstacle.lowerColisionShape.width;
 		RandomizeHeight(obstacle);
+
+		obstacle.lowerSprite.rotation = 0;
+		obstacle.higherSprite.rotation = 0;
+
+		obstacle.lowerSprite.dest.x = obstacle.lowerColisionShape.x;
+		obstacle.lowerSprite.dest.y = obstacle.lowerColisionShape.y;
+		obstacle.lowerSprite.dest.width = obstacle.lowerColisionShape.width;
+		obstacle.lowerSprite.dest.height = obstacle.lowerColisionShape.height;
+
+
+		obstacle.higherSprite.rotation = 180;
+
+		obstacle.higherSprite.dest.x = obstacle.higherColisionShape.x;
+		obstacle.higherSprite.dest.y = obstacle.higherColisionShape.y;
+		obstacle.higherSprite.dest.width = obstacle.higherColisionShape.width;
+		obstacle.higherSprite.dest.height = obstacle.higherColisionShape.height;
+
 		obstacle.speed = { 400.0f, 400.0f };
 		obstacle.scoreGiven = false;
+
+		obstacle.lowerSprite.source.width = static_cast<float>(obstacle.lowerSprite.texture.width);
+		obstacle.lowerSprite.source.height = static_cast<float>(obstacle.lowerSprite.texture.height);
 
 		return obstacle;
 	}
@@ -91,7 +131,23 @@ namespace Obstacle
 
 	void Draw(Obstacle& obstacle)
 	{
-		DrawRectangle(static_cast<int>(obstacle.lowerColisionShape.x), static_cast<int>(obstacle.lowerColisionShape.y), static_cast<int>(obstacle.lowerColisionShape.width), static_cast<int>(obstacle.lowerColisionShape.height), RED);
-		DrawRectangle(static_cast<int>(obstacle.higherColisionShape.x), static_cast<int>(obstacle.higherColisionShape.y), static_cast<int>(obstacle.higherColisionShape.width), static_cast<int>(obstacle.higherColisionShape.height), RED);
+		/*DrawRectangle
+		(static_cast<int>(obstacle.higherColisionShape.x),
+			static_cast<int>(obstacle.higherColisionShape.y),
+			static_cast<int>(obstacle.higherColisionShape.width),
+			static_cast<int>(obstacle.higherColisionShape.height),
+			RED);
+			*/
+
+		//std::cout << "Dibujando obstáculo superior: "
+		//	<< " X: " << obstacle.higherSprite.dest.x
+		//	<< " Y: " << obstacle.higherSprite.dest.y << std::endl;
+
+		//std::cout << "Dibujando obstáculo inferior: "
+		//	<< " X: " << obstacle.lowerSprite.dest.x
+		//	<< " Y: " << obstacle.lowerSprite.dest.y << std::endl;
+		
+		SpritesManager::DrawSprite(obstacle.lowerSprite);
+		SpritesManager::DrawSprite(obstacle.higherSprite);
 	}
 }

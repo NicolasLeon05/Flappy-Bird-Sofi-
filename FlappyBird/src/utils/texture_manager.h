@@ -15,7 +15,7 @@ namespace SpritesManager
 		Vector2 origin;
 		Texture2D texture;
 		float rotation;
-		int scale;
+		float scale;
 	};
 
 	struct AnimatedSprite
@@ -33,6 +33,7 @@ namespace SpritesManager
 
 	const string demon1Sprite = "res/sprites/demon.png";
 	const string demon2Sprite = "res/sprites/demon2.png";
+	const string obstacleSprite = "res/sprites/pipe.png";
 
 	void AnimateSprite(AnimatedSprite& sprite);
 
