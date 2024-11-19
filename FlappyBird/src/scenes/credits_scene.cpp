@@ -2,6 +2,8 @@
 
 #include "objects/button.h"
 #include "utils/screen_info.h"
+#include "utils/sound_manager.h"
+
 //NOTE: All of the above are used
 
 namespace CreditsScene
@@ -21,14 +23,15 @@ namespace CreditsScene
 		dev2,
 		artist1,
 		artist2,
-		font1,
-		font2,
-		font3,
+		music1,
+		sfx1,
+		sfx2,
+		sfx3,
+		sfx4,
+		sfx5,
 		language,
 		library,
-		artTool,
-		soundTool1,
-		soundTool2
+		artTool
 	};
 
 	enum class Pages
@@ -44,7 +47,7 @@ namespace CreditsScene
 		Pages number;
 	};
 
-	static const int maxCredits = soundTool2 + 1;
+	static const int maxCredits = artTool + 1;
 
 	static Page page1{};
 	static Page page2{};
@@ -65,18 +68,13 @@ namespace CreditsScene
 
 	static void CheckURLButton(Credit& credit)
 	{
-		/*Audio::ButtonSfx sfx{};
-
-		sfx = Audio::GetRandomSfx();*/
-
 		if (Button::IsMouseOnButton(credit.button))
 		{
 			credit.button.currentColor = credit.button.highlightColor;
 
 			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 			{
-				/*if (!Audio::IsPlaying(sfx))
-					Audio::Play(sfx);*/
+				PlaySound(SoundManager::clickButtonSfx);
 				OpenURL(credit.url.c_str());
 			}
 		}
@@ -96,13 +94,13 @@ namespace CreditsScene
 			break;
 		case CreditsScene::Pages::page2:
 
-			for (int i = font1; i < font3 + 1; i++)
+			for (int i = music1; i < sfx5 + 1; i++)
 				CheckURLButton(creditsInfo[i]);
 
 			break;
 		case CreditsScene::Pages::page3:
 
-			for (int i = language; i < soundTool2 + 1; i++)
+			for (int i = language; i < maxCredits; i++)
 				CheckURLButton(creditsInfo[i]);
 
 			//both sound buttons
@@ -125,8 +123,7 @@ namespace CreditsScene
 			page.button.currentColor = page.button.highlightColor;
 			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 			{
-				/*if (!Audio::IsPlaying(sfx))
-					Audio::Play(sfx);*/
+				PlaySound(SoundManager::clickButtonSfx);
 				if (currentPage != page.number)
 					currentPage = page.number;
 			}
@@ -146,8 +143,22 @@ namespace CreditsScene
 
 		credit.text = Text::GetText(screenWidth / 2, y, static_cast<int>(Text::FontSize::small), credit.role, WHITE);
 		Text::CenterTextX(credit.text);
-		credit.button = Button::GetButton(screenWidth / 2, credit.text.location.y + credit.text.fontSize + static_cast<int>(Text::Padding::tiny), static_cast<float>(Text::GetTextWidth(creditsTitle)) + static_cast<float>(Text::Padding::giant), static_cast<float>(credit.text.fontSize) * 2.0f, credit.name, BLACK, highlightColor, WHITE/**/);
+
+		credit.button = Button::GetButton(screenWidth / 2,
+			credit.text.location.y + credit.text.fontSize + static_cast<int>(Text::Padding::minimum),
+			static_cast<float>(Text::GetTextWidth(creditsTitle)) + static_cast<float>(Text::Padding::giant) + 10,
+			static_cast<float>(credit.text.fontSize) * 2.0f,
+			credit.name,
+			BLACK, highlightColor, WHITE);
+
 		credit.button.shape.x -= credit.button.shape.width / 2;
+	}
+
+	static void InitCredit(Credit& credit, float y, float x)
+	{
+		InitCredit(credit, y);
+		credit.button.shape.x = x;
+		credit.text.location.x = x + credit.button.shape.width / 2 - MeasureText(credit.text.content.c_str(), credit.text.fontSize) / 2;
 	}
 
 	static void InitCredits()
@@ -160,48 +171,52 @@ namespace CreditsScene
 		devTitle = Text::GetText(screenWidth / 2, creditsTitle.location.y + creditsTitle.fontSize + static_cast<int>(Text::Padding::tiny), creditsTitle.fontSize * 3 / 4, "DEVELOPMENT", MAGENTA);
 		Text::CenterTextX(devTitle);
 
-		InitCredit(creditsInfo[dev1], devTitle.location.y + devTitle.fontSize - static_cast<int>(Text::Padding::minimum));
+		InitCredit(creditsInfo[dev1], devTitle.location.y + devTitle.fontSize - static_cast<int>(Text::Padding::tiny));
 		InitCredit(creditsInfo[dev2], creditsInfo[dev1].button.shape.y + creditsInfo[dev1].text.fontSize);
 
-		artTitle = Text::GetText(screenWidth / 2, creditsInfo[dev2].button.shape.y + creditsInfo[dev2].button.shape.height + static_cast<int>(Text::Padding::tiny), devTitle.fontSize, "ART", YELLOW);
+		artTitle = Text::GetText(screenWidth / 2, creditsInfo[dev2].button.shape.y + creditsInfo[dev2].button.shape.height + static_cast<int>(Text::Padding::medium), devTitle.fontSize, "ART", YELLOW);
 		Text::CenterTextX(artTitle);
 
-		InitCredit(creditsInfo[artist1], artTitle.location.y + artTitle.fontSize + static_cast<int>(Text::Padding::tiny));
+		InitCredit(creditsInfo[artist1], artTitle.location.y + artTitle.fontSize + static_cast<int>(Text::Padding::minimum));
 		InitCredit(creditsInfo[artist2], creditsInfo[artist1].button.shape.y + creditsInfo[artist1].text.fontSize + static_cast<int>(Text::Padding::small));
 
 #pragma endregion
 
 #pragma region PAGE_2
 
-		fontTitle = Text::GetText(screenWidth / 2, devTitle.location.y, artTitle.fontSize, "FONTS", artTitle.currentColor);
+		fontTitle = Text::GetText(screenWidth / 2, devTitle.location.y, artTitle.fontSize, "MUSIC AND SOUNDS", artTitle.currentColor);
 		Text::CenterTextX(fontTitle);
 
-		float posY = fontTitle.location.y + fontTitle.fontSize + static_cast<float>(Text::Padding::tiny);
+		float posY = fontTitle.location.y + fontTitle.fontSize + static_cast<float>(Text::Padding::medium);
 
-		for (int i = font1; i < font3 + 1; i++)
+		for (int i = music1; i < sfx5 + 1; i++)
 		{
-			InitCredit(creditsInfo[i], posY);
+			float posX = static_cast <float> ((i % 2 == 0) ? screenWidth / 10 : screenWidth / 10 * 5);
 
-			posY += creditsInfo[i].button.shape.height + static_cast<int>(Text::Padding::big);
+			InitCredit(creditsInfo[i], posY, posX);
+
+			if (i % 2 != 0)
+			{
+				posY += creditsInfo[i].button.shape.height + static_cast<int>(Text::Padding::medium);
+			}
+
 		}
 
 #pragma endregion
 
 #pragma region PAGE_3
 
-		toolsTitle = fontTitle;
-		toolsTitle.content = "TOOLS";
+		toolsTitle = Text::GetText(screenWidth / 2, devTitle.location.y, artTitle.fontSize, "TOOLS", artTitle.currentColor);
+		Text::CenterTextX(toolsTitle);
 
-		posY = toolsTitle.location.y + toolsTitle.fontSize;
+		posY = toolsTitle.location.y + toolsTitle.fontSize + static_cast<int>(Text::Padding::small);
 
-		for (int i = language; i < soundTool2/* + 1*/; i++)
+		for (int i = language; i < maxCredits; i++)
 		{
 			InitCredit(creditsInfo[i], posY);
 
 			posY += creditsInfo[i].button.shape.height + creditsInfo[i].text.fontSize + static_cast<int>(Text::Padding::small);
 		}
-
-		//both sound buttons
 
 #pragma endregion
 
@@ -240,33 +255,48 @@ namespace CreditsScene
 		creditsInfo[artist1].url = "https://gensofi24.itch.io/";
 		creditsInfo[artist1].role = "PIXEL ART";
 
-		creditsInfo[artist2].name = "???";
-		creditsInfo[artist2].url = "https://gensofi24.itch.io/";
-		creditsInfo[artist2].role = "???";
+		creditsInfo[artist2].name = "Ansimuz";
+		creditsInfo[artist2].url = "https://ansimuz.itch.io/industrial-parallax-background";
+		creditsInfo[artist2].role = "PARALLAX";
 #pragma endregion
 
-#pragma region FONTS_ROLE
-		//FONTS
+#pragma region MUSIC_AND_SOUNDS
+		//MUSIC_AND_SOUNDS
 		//title1
-		creditsInfo[font1].name = "???";
-		creditsInfo[font1].url = "https://gensofi24.itch.io/";
-		creditsInfo[font1].role = "???";
-
-		//title2
-		creditsInfo[font2].name = "???";
-		creditsInfo[font2].url = "https://gensofi24.itch.io/";
-		creditsInfo[font2].role = "???";
+		creditsInfo[music1].name = "Suno AI";
+		creditsInfo[music1].url = "https://suno.com/";
+		creditsInfo[music1].role = "Music";
 
 		//default text
-		creditsInfo[font3].name = "???";
-		creditsInfo[font3].url = "https://gensofi24.itch.io/";
-		creditsInfo[font3].role = "???";
+		creditsInfo[sfx1].name = "Player jumping in a video game";
+		creditsInfo[sfx1].url = "https://mixkit.co/free-sound-effects/game/";
+		creditsInfo[sfx1].role = "Jump SFX";
+
+		//default text
+		creditsInfo[sfx2].name = "Select click";
+		creditsInfo[sfx2].url = "https://mixkit.co/free-sound-effects/click/";
+		creditsInfo[sfx2].role = "Button Click SFX";
+
+		//default text
+		creditsInfo[sfx3].name = "Soft quick punch";
+		creditsInfo[sfx3].url = "https://mixkit.co/free-sound-effects/hit/";
+		creditsInfo[sfx3].role = "Crash SFX";
+
+		//default text
+		creditsInfo[sfx4].name = "Musical game over";
+		creditsInfo[sfx4].url = "https://mixkit.co/free-sound-effects/game-over/";
+		creditsInfo[sfx4].role = "Game Over SFX";
+
+		//default text
+		creditsInfo[sfx5].name = "Winning a coin, video game";
+		creditsInfo[sfx5].url = "https://mixkit.co/free-sound-effects/video-game/";
+		creditsInfo[sfx5].role = "Score Up SFX";
 #pragma endregion
 
 #pragma region LANGUAGE_TOOL
 
 		creditsInfo[language].name = "Github Repository";
-		creditsInfo[language].url = "https://github.com/aeffggbh/Flappy-Bird.git";
+		creditsInfo[language].url = "https://github.com/NicolasLeon05/Flappy-Bird-Sofi-";
 		creditsInfo[language].role = "SOURCE CODE";
 
 #pragma endregion
@@ -287,20 +317,6 @@ namespace CreditsScene
 
 #pragma endregion
 
-#pragma region SOUND_TOOL
-
-		creditsInfo[soundTool1].name = "???";
-		creditsInfo[soundTool1].url = "https://gensofi24.itch.io/";
-		creditsInfo[soundTool1].role = "???";
-
-		creditsInfo[soundTool2].name = "???";
-		creditsInfo[soundTool2].url = "https://gensofi24.itch.io/";
-		creditsInfo[soundTool2].role = "???";
-
-#pragma endregion
-
-
-#pragma endregion
 
 		InitCredits();
 
@@ -323,14 +339,17 @@ namespace CreditsScene
 
 #pragma endregion
 
-		backToMenuButton = Button::GetButton(static_cast<float>(Text::Padding::tiny), screenHeight, 80, 40, "BACK", BLACK, YELLOW, WHITE/**/);
+		backToMenuButton = Button::GetButton(static_cast<float>(Text::Padding::tiny),
+			screenHeight,
+			80, 40,
+			"BACK",
+			BLACK, YELLOW, WHITE);
 		backToMenuButton.shape.y -= backToMenuButton.shape.height + static_cast<float>(Text::Padding::tiny);
 
 	}
 
 	void Update()
 	{
-		//Audio::Update(Audio::Song::menu);
 		CheckURLButtons();
 
 		if (Button::IsButtonPrssed(backToMenuButton) ||
@@ -368,7 +387,7 @@ namespace CreditsScene
 
 			Text::DrawText(fontTitle);
 
-			for (int i = font1; i < font3 + 1; i++)
+			for (int i = music1; i < sfx5 + 1; i++)
 				DrawCredit(creditsInfo[i], true);
 
 			break;
@@ -376,7 +395,7 @@ namespace CreditsScene
 
 			Text::DrawText(toolsTitle);
 
-			for (int i = language; i < soundTool2 + 1; i++)
+			for (int i = language; i < maxCredits; i++)
 				DrawCredit(creditsInfo[i], true);
 
 			break;
