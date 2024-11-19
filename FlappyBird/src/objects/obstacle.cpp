@@ -60,8 +60,7 @@ namespace Obstacle
 		}
 		else
 		{
-			obstacle.lowerColisionShape.x = screenWidth;
-			RandomizeHeight(obstacle);
+			ResetObstacle(obstacle);
 		}
 
 	}
