@@ -21,6 +21,9 @@ namespace ResultScene
 	static Text::Text currentScoreText;
 	static Text::Text bestScoreText;
 
+	static float opacity = 0.5f;
+	static Color semiTransparentBlack = { 0, 0, 0, static_cast <unsigned char>(opacity * 255) };
+
 	void SaveScore(int score)
 	{
 		savedScore = score;
@@ -31,8 +34,6 @@ namespace ResultScene
 
 	void Init()
 	{
-		StopMusicStream(SoundManager::currentBgm);
-
 		resultText = Text::GetText
 		(screenWidth / 2,
 			screenHeight / 3 - static_cast<int>(Text::FontSize::giant),
@@ -74,6 +75,11 @@ namespace ResultScene
 
 	void Update()
 	{
+		if (IsMusicStreamPlaying(SoundManager::currentBgm))
+		{
+			StopMusicStream(SoundManager::currentBgm);
+		}
+
 		if (Button::IsButtonPrssed(backToMenuButton))
 		{
 			SceneManager::SetCurrentScene(SceneManager::Menu);
@@ -92,6 +98,7 @@ namespace ResultScene
 
 	void Draw()
 	{
+		DrawRectangle(0, 0, screenWidth, screenHeight, semiTransparentBlack);
 		Button::DrawButton(playAgainButton);
 		Button::DrawButton(backToMenuButton);
 

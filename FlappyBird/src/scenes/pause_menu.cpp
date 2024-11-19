@@ -13,7 +13,7 @@ namespace PauseScene
 	Button::Button continueButton;
 	Button::Button backToMenuButton;
 
-	static float opacity = 0.01f;
+	static float opacity = 0.5f;
 	static Color semiTransparentBlack = { 0, 0, 0, static_cast <unsigned char>(opacity * 255) };
 
 	void Init()
