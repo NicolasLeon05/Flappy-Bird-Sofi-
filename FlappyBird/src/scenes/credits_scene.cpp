@@ -355,7 +355,7 @@ namespace CreditsScene
 		if (Button::IsButtonPrssed(backToMenuButton) ||
 			IsKeyReleased(KEY_ESCAPE))
 		{
-			Button::ChangeScene(SceneManager::Menu);
+			SceneManager::SetCurrentScene(SceneManager::Menu);
 		}
 
 		CheckPagesButton(page1);

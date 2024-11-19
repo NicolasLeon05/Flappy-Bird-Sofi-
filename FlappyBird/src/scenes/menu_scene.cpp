@@ -85,13 +85,13 @@ void MenuScene::Update()
 	if (Button::IsButtonPrssed(singlePlayerButton))
 	{		
 		GameplayScene::isSinglePlayer = true;
-		Button::ChangeScene(SceneManager::Gameplay);
+		SceneManager::SetCurrentScene(SceneManager::Gameplay);
 	}
 
 	if (Button::IsButtonPrssed(twoPlayersButton))
 	{
 		GameplayScene::isSinglePlayer = false;
-		Button::ChangeScene(SceneManager::Gameplay);
+		SceneManager::SetCurrentScene(SceneManager::Gameplay);
 	}
 
 	if (SceneManager::GetCurrentScene() == SceneManager::Gameplay)
@@ -103,17 +103,17 @@ void MenuScene::Update()
 
 	if (Button::IsButtonPrssed(creditsButton))
 	{
-		Button::ChangeScene(SceneManager::Credits);
+		SceneManager::SetCurrentScene(SceneManager::Credits);
 	}
 
 	if (Button::IsButtonPrssed(howToPlayButton))
 	{
-		Button::ChangeScene(SceneManager::HowToPlay);
+		SceneManager::SetCurrentScene(SceneManager::HowToPlay);
 	}
 
 	if (Button::IsButtonPrssed(exitButton))
 	{
-		Button::ChangeScene(SceneManager::None);
+		SceneManager::SetCurrentScene(SceneManager::None);
 	}
 
 
