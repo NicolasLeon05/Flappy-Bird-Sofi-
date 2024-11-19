@@ -16,5 +16,7 @@ namespace SoundManager
 
 	void Load();
 	void Unload();
+	void Mute();
+	void Unmute();
 
 }

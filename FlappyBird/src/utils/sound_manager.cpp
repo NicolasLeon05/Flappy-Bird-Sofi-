@@ -2,6 +2,8 @@
 
 namespace SoundManager
 {
+	static bool isMute;
+
 	Music currentBgm;
 
 	Music menuBgm;
@@ -15,6 +17,8 @@ namespace SoundManager
 
 	void Load()
 	{
+		isMute = false;
+
 		InitAudioDevice();
 		menuBgm = LoadMusicStream("res/bgm/menu_bgm.mp3");
 		SetMusicVolume(menuBgm, 0.6f);
@@ -51,5 +55,27 @@ namespace SoundManager
 		UnloadSound(clickButtonSfx);
 
 		CloseAudioDevice();
+	}
+
+	void Mute()
+	{
+		SetMusicVolume(menuBgm, 0.0f);
+		SetMusicVolume(gameplayBgm, 0.0f);
+		SetSoundVolume(jumpSfx, 0.0f);
+		SetSoundVolume(collideSfx, 0.0f);
+		SetSoundVolume(scoreUpSfx, 0.0f);
+		SetSoundVolume(gameOverSfx, 0.0f);
+		SetSoundVolume(clickButtonSfx, 0.0f);
+	}
+
+	void Unmute()
+	{
+		SetMusicVolume(menuBgm, 0.6f);
+		SetMusicVolume(gameplayBgm, 0.6f);
+		SetSoundVolume(jumpSfx, 0.2f);
+		SetSoundVolume(collideSfx, 0.3f);
+		SetSoundVolume(scoreUpSfx, 0.3f);
+		SetSoundVolume(gameOverSfx, 0.5f);
+		SetSoundVolume(clickButtonSfx, 0.7f);
 	}
 }
