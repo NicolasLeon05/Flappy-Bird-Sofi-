@@ -16,11 +16,6 @@ namespace Text
 		return MeasureText(text.content.c_str(), text.fontSize);
 	}
 
-	int GetTextHeight(Text text)
-	{
-		return MeasureText(text.content.c_str(), text.fontSize);
-	}
-
 	void DrawText(Text myText)
 	{
 		DrawText(myText.content.c_str(), static_cast<int>(myText.location.x), static_cast<int>(myText.location.y), myText.fontSize, myText.currentColor);

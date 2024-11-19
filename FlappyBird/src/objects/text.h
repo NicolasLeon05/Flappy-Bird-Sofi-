@@ -49,8 +49,6 @@ namespace Text
 
 	int GetTextWidth(Text text);
 
-	int GetTextHeight(Text text);
-
 	//Create texts
 	Text GetText(float x, float y, int fontSize, string content, Color color);
 };
