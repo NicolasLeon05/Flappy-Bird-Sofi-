@@ -174,7 +174,7 @@ namespace CreditsScene
 		InitCredit(creditsInfo[dev1], devTitle.location.y + devTitle.fontSize - static_cast<int>(Text::Padding::tiny));
 		InitCredit(creditsInfo[dev2], creditsInfo[dev1].button.shape.y + creditsInfo[dev1].text.fontSize);
 
-		artTitle = Text::GetText(screenWidth / 2, creditsInfo[dev2].button.shape.y + creditsInfo[dev2].button.shape.height + static_cast<int>(Text::Padding::medium), devTitle.fontSize, "ART", YELLOW);
+		artTitle = Text::GetText(screenWidth / 2, creditsInfo[dev2].button.shape.y + creditsInfo[dev2].button.shape.height + static_cast<int>(Text::Padding::small), devTitle.fontSize, "ART", YELLOW);
 		Text::CenterTextX(artTitle);
 
 		InitCredit(creditsInfo[artist1], artTitle.location.y + artTitle.fontSize + static_cast<int>(Text::Padding::minimum));
@@ -187,7 +187,7 @@ namespace CreditsScene
 		fontTitle = Text::GetText(screenWidth / 2, devTitle.location.y, artTitle.fontSize, "MUSIC AND SOUNDS", artTitle.currentColor);
 		Text::CenterTextX(fontTitle);
 
-		float posY = fontTitle.location.y + fontTitle.fontSize + static_cast<float>(Text::Padding::medium);
+		float posY = fontTitle.location.y + fontTitle.fontSize + static_cast<float>(Text::Padding::small);
 
 		for (int i = music1; i < sfx5 + 1; i++)
 		{
