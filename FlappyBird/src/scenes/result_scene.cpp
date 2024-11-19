@@ -7,46 +7,69 @@
 #include "objects/text.h"
 #include "utils/scene_manager.h"
 #include "utils/screen_info.h"
+#include "utils/sound_manager.h"
 
 using namespace std;
 
 namespace ResultScene
 {
 	static int savedScore;
+	static int bestScore;
 	static Button::Button backToMenuButton;
 	static Button::Button playAgainButton;
 	static Text::Text resultText;
-	static Text::Text scoreText;
+	static Text::Text currentScoreText;
+	static Text::Text bestScoreText;
 
 	void SaveScore(int score)
 	{
 		savedScore = score;
+
+		if (savedScore > bestScore)
+			bestScore = savedScore;
 	}
 
 	void Init()
 	{
-		resultText = Text::GetText(screenWidth / 2,
-			screenHeight / 2 - static_cast<int>(Text::Padding::big),
-			 static_cast<int>(Text::FontSize::big),
-			"YOU LOST", RED);
+		StopMusicStream(SoundManager::currentBgm);
+
+		resultText = Text::GetText
+		(screenWidth / 2,
+			screenHeight / 3 - static_cast<int>(Text::FontSize::giant),
+			static_cast<int>(Text::FontSize::big),
+			"YOU LOST",
+			RED);
 		Text::CenterTextX(resultText);
 
-		scoreText = Text::GetText(screenWidth / 2,
-			resultText.location.y + Text::GetTextHeight(resultText) + static_cast<int>(Text::Padding::tiny),
+		currentScoreText = Text::GetText
+		(resultText.location.x,
+			resultText.location.y + resultText.fontSize + static_cast<float>(Text::Padding::medium),
 			resultText.fontSize / 2,
-			"SCORE: ", YELLOW);
+			"SCORE: ",
+			YELLOW);
 
-		playAgainButton = Button::GetButton(resultText.location.x,
-			resultText.location.y + Text::GetTextHeight(resultText) + static_cast<int>(Text::Padding::medium),
-			static_cast <float>(Text::GetTextWidth(resultText)),
-			static_cast <float>(Text::GetTextHeight(resultText) / 2),
-			"REPLAY", BLACK, MAGENTA, WHITE);
+		bestScoreText = Text::GetText
+		(resultText.location.x,
+			currentScoreText.location.y + currentScoreText.fontSize + static_cast<float>(Text::Padding::small),
+			resultText.fontSize / 2,
+			"BEST SCORE: ",
+			YELLOW);
 
-		backToMenuButton = Button::GetButton(resultText.location.x,
-			playAgainButton.shape.y + playAgainButton.shape.height + static_cast<int>(Text::Padding::tiny),
+		playAgainButton = Button::GetButton
+		(resultText.location.x,
+			bestScoreText.location.y + bestScoreText.fontSize + static_cast<float>(Text::Padding::medium),
 			static_cast <float>(Text::GetTextWidth(resultText)),
-			static_cast <float>(Text::GetTextHeight(resultText) / 2),
-			"MENU", BLACK, SKYBLUE, WHITE);
+			static_cast <float>(resultText.fontSize / 2),
+			"REPLAY",
+			BLACK, SKYBLUE, WHITE);
+
+		backToMenuButton = Button::GetButton
+		(resultText.location.x,
+			playAgainButton.shape.y + static_cast<float>(Text::Padding::medium),
+			static_cast <float>(Text::GetTextWidth(resultText)),
+			static_cast <float>(resultText.fontSize / 2),
+			"MENU",
+			BLACK, MAGENTA, WHITE);
 	}
 
 	void Update()
@@ -61,11 +84,9 @@ namespace ResultScene
 			SceneManager::SetCurrentScene(SceneManager::Gameplay);
 		}
 
-		if (scoreText.content != "SCORE: " + to_string(savedScore))
-		{
-			scoreText.content += to_string(savedScore);
-			Text::CenterTextX(scoreText);
-		}
+
+		currentScoreText.content = "SCORE: " + to_string(savedScore);
+		bestScoreText.content = "BEST SCORE: " + to_string(bestScore);
 
 	}
 
@@ -75,6 +96,7 @@ namespace ResultScene
 		Button::DrawButton(backToMenuButton);
 
 		Text::DrawText(resultText);
-		Text::DrawText(scoreText);
+		Text::DrawText(currentScoreText);
+		Text::DrawText(bestScoreText);
 	}
 }
