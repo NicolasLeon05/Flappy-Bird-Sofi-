@@ -27,17 +27,6 @@ namespace GameplayScene
 
 	static Parallax::Parallax parallax;
 
-	static void ResetGameplay()
-	{
-		Player::ResetPlayer(player1);
-		score = 0;
-
-		if (!isSinglePlayer)
-			Player::ResetPlayer(player2);
-
-		Obstacle::ResetObstacle(obstacle);
-	}
-
 	static void Lose()
 	{
 		PlaySound(SoundManager::gameOverSfx);
@@ -194,6 +183,18 @@ namespace GameplayScene
 			30,
 			RED);
 	}
+
+	void ResetGameplay()
+	{
+		Player::ResetPlayer(player1);
+		score = 0;
+
+		if (!isSinglePlayer)
+			Player::ResetPlayer(player2);
+
+		Obstacle::ResetObstacle(obstacle);
+	}
+
 }
 
 
