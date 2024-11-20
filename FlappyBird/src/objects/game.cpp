@@ -15,7 +15,7 @@
 #include "utils/sound_manager.h"
 
 
-namespace FlappyBird
+namespace HellEscape
 {
 	static void Load()
 	{
@@ -160,7 +160,7 @@ namespace FlappyBird
 
 	void Play()
 	{
-		InitWindow(screenWidth, screenHeight, "Flappy Game");
+		InitWindow(screenWidth, screenHeight, "Hell Escape");
 		SetExitKey(KEY_NULL);
 
 		Load();

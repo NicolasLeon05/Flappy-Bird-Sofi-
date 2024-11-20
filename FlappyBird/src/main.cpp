@@ -2,5 +2,5 @@
 
 int main()
 {
-	FlappyBird::Play();
+	HellEscape::Play();
 }
