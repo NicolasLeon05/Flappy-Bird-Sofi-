@@ -21,6 +21,6 @@ namespace Obstacle
 	void ResetObstacle(Obstacle& obstacle);
 	Obstacle GetObstacle(SpritesManager::Sprite sprite);
 
-	void Update(Obstacle& obstacle);
+	void Update(Obstacle& obstacle, bool difficultyUp);
 	void Draw(Obstacle& obstacle);
 }

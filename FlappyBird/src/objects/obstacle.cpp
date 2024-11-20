@@ -138,7 +138,7 @@ namespace Obstacle
 		obstacle.higherSprite.dest.width = obstacle.higherColisionShape.width;
 		obstacle.higherSprite.dest.height = obstacle.higherColisionShape.height;
 
-		obstacle.speed = { 400.0f, 100.0f };
+		obstacle.speed = { 350.0f, 100.0f };
 		obstacle.scoreGiven = false;
 
 		obstacle.lowerSprite.source.width = static_cast<float>(obstacle.lowerSprite.texture.width);
@@ -147,10 +147,12 @@ namespace Obstacle
 		return obstacle;
 	}
 
-	void Update(Obstacle& obstacle)
+	void Update(Obstacle& obstacle, bool difficultyUp)
 	{
 		MoveObstacle(obstacle);
-		MoveObstacleVertical(obstacle);
+
+		if (difficultyUp)
+			MoveObstacleVertical(obstacle);		
 	}
 
 	void Draw(Obstacle& obstacle)

@@ -14,13 +14,18 @@
 namespace GameplayScene
 {
 	bool isSinglePlayer;
-
 	int score;
+
+	static const int upDifficultyScore = 15;
+	static bool difficultyUp;
+
+	static float obstaclesDistance = 400.0f;
 
 	static Player::Player player1;
 	static Player::Player player2;
 
-	static Obstacle::Obstacle obstacle;
+	static Obstacle::Obstacle obstacle1;
+	static Obstacle::Obstacle obstacle2;
 
 	static Texture2D demon1Texture;
 	static Texture2D demon2Texture;
@@ -44,7 +49,7 @@ namespace GameplayScene
 			player.colisionShape.y <= colisionShape.y + colisionShape.height;
 	}
 
-	static void IsCollidingWithObstacle(Player::Player player)
+	static void IsCollidingWithObstacle(Player::Player player, Obstacle::Obstacle obstacle)
 	{
 		if (CheckObstacleColision(obstacle.higherColisionShape, player) || CheckObstacleColision(obstacle.lowerColisionShape, player))
 		{
@@ -58,13 +63,16 @@ namespace GameplayScene
 		}
 	}
 
-	static void CheckScoreUp()
+	static void CheckScoreUp(Obstacle::Obstacle& obstacle)
 	{
 		if (player1.colisionShape.x > obstacle.higherColisionShape.x + obstacle.higherColisionShape.width &&
 			obstacle.scoreGiven == false)
 		{
 			score++;
 			obstacle.scoreGiven = true;
+
+			if (score >= upDifficultyScore)
+				difficultyUp = true;
 		}
 	}
 
@@ -97,7 +105,6 @@ namespace GameplayScene
 
 	void LoadTextures()
 	{
-
 		demon1Texture = LoadTexture(SpritesManager::demon1Sprite.c_str());
 		if (!isSinglePlayer)
 			demon2Texture = LoadTexture(SpritesManager::demon2Sprite.c_str());
@@ -125,8 +132,8 @@ namespace GameplayScene
 		player1 = Player::GetPlayer();
 		Player::SaveTexture(demon1Texture, player1);
 
-		SpritesManager::SaveTexture(lowerObstacleTexture, obstacle.higherSprite);
-		SpritesManager::SaveTexture(lowerObstacleTexture, obstacle.lowerSprite);
+		SpritesManager::SaveTexture(lowerObstacleTexture, obstacle1.higherSprite);
+		SpritesManager::SaveTexture(lowerObstacleTexture, obstacle1.lowerSprite);
 
 		if (!isSinglePlayer)
 		{
@@ -134,7 +141,8 @@ namespace GameplayScene
 			Player::SaveTexture(demon2Texture, player2);
 		}
 
-		obstacle = Obstacle::GetObstacle(obstacle.lowerSprite);
+		obstacle1 = Obstacle::GetObstacle(obstacle1.lowerSprite);
+		obstacle2 = Obstacle::GetObstacle(obstacle2.lowerSprite);
 	}
 
 	void Update()
@@ -142,7 +150,8 @@ namespace GameplayScene
 		//Player 1
 		Player::Update(player1);
 		JumpPlayer1();
-		IsCollidingWithObstacle(player1);
+		IsCollidingWithObstacle(player1, obstacle1);
+		IsCollidingWithObstacle(player1, obstacle2);
 		CheckTopCollision(player1);
 
 		
@@ -151,12 +160,18 @@ namespace GameplayScene
 		{
 			Player::Update(player2);
 			JumpPlayer2();
-			IsCollidingWithObstacle(player2);
+			IsCollidingWithObstacle(player2, obstacle1);
+			IsCollidingWithObstacle(player2, obstacle2);
 			CheckTopCollision(player2);
 		}
 
 		//Obstacle
-		Obstacle::Update(obstacle);
+		Obstacle::Update(obstacle1, difficultyUp);
+		if (obstacle2.lowerColisionShape.x - obstacle1.lowerColisionShape.x > obstaclesDistance ||
+			obstacle1.lowerColisionShape.x - obstacle2.lowerColisionShape.x > obstaclesDistance)
+		{
+			Obstacle::Update(obstacle2, difficultyUp);
+		}
 
 		//Back button
 		if (IsKeyReleased(KEY_ESCAPE))
@@ -164,7 +179,8 @@ namespace GameplayScene
 			SceneManager::SetCurrentScene(SceneManager::Pause);
 		}
 
-		CheckScoreUp();
+		CheckScoreUp(obstacle1);
+		CheckScoreUp(obstacle2);
 
 		Parallax::Update();
 	}
@@ -174,7 +190,8 @@ namespace GameplayScene
 		ClearBackground(RAYWHITE);
 		Parallax::Draw();
 
-		Obstacle::Draw(obstacle);
+		Obstacle::Draw(obstacle1);
+		Obstacle::Draw(obstacle2);
 
 		Player::Draw(player1);
 		if (!isSinglePlayer)
@@ -196,7 +213,8 @@ namespace GameplayScene
 		if (!isSinglePlayer)
 			Player::ResetPlayer(player2);
 
-		Obstacle::ResetObstacle(obstacle);
+		Obstacle::ResetObstacle(obstacle1);
+		Obstacle::ResetObstacle(obstacle2);
 	}
 
 }
