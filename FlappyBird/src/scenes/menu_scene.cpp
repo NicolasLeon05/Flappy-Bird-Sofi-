@@ -40,7 +40,7 @@ void MenuScene::Init()
 		Text::Fonts::Title1,
 		static_cast<int>(Text::FontSize::big),
 		"HELL",
-		MAGENTA);
+		RED);
 
 	Text::CenterTextX(titlePart1);
 
@@ -50,7 +50,7 @@ void MenuScene::Init()
 		Text::Fonts::Title1,
 		static_cast<int>(Text::FontSize::big),
 		"ESCAPE",
-		YELLOW);
+		SKYBLUE);
 
 	Text::CenterTextX(titlePart2);
 
@@ -62,7 +62,7 @@ void MenuScene::Init()
 		Button::buttonWidth,
 		static_cast<float>(titlePart2.fontSize) / 2.0f,
 		"SINGLE PLAYER",
-		BLACK, MAGENTA, WHITE,
+		BLACK, RED, WHITE,
 		Text::Fonts::Default);
 
 	twoPlayersButton = Button::GetButton
@@ -71,7 +71,7 @@ void MenuScene::Init()
 		Button::buttonWidth,
 		singlePlayerButton.shape.height,
 		"TWO PLAYERS",
-		BLACK, MAGENTA, WHITE,
+		BLACK, RED, WHITE,
 		Text::Fonts::Default);
 
 	creditsButton = Button::GetButton
@@ -98,7 +98,7 @@ void MenuScene::Init()
 		Button::buttonWidth,
 		singlePlayerButton.shape.height,
 		"EXIT",
-		BLACK, RED, WHITE,
+		BLACK, MAGENTA, WHITE,
 		Text::Fonts::Default);
 
 	muteBgm = Button::GetButton
@@ -107,7 +107,7 @@ void MenuScene::Init()
 		Button::buttonWidth / 2.5f,
 		singlePlayerButton.shape.height,
 		"Music",
-		BLACK, RED, WHITE,
+		BLACK, ORANGE, WHITE,
 		Text::Fonts::Default);
 
 	cout << endl << endl << endl << GetTextWidth(titlePart1) << endl << endl << endl;
@@ -118,7 +118,7 @@ void MenuScene::Init()
 		Button::buttonWidth / 2.5f,
 		singlePlayerButton.shape.height,
 		"Sounds",
-		BLACK, RED, WHITE,
+		BLACK, ORANGE, WHITE,
 		Text::Fonts::Default);
 
 	//Version
