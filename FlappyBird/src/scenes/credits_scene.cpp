@@ -23,6 +23,7 @@ namespace CreditsScene
 		dev2,
 		artist1,
 		artist2,
+		artist3,
 		music1,
 		sfx1,
 		sfx2,
@@ -53,7 +54,6 @@ namespace CreditsScene
 	static Page page2{};
 	static Page page3{};
 
-	static Text::Text creditsTitle;
 	static Text::Text devTitle;
 	static Text::Text artTitle;
 	static Text::Text fontTitle;
@@ -88,7 +88,7 @@ namespace CreditsScene
 		{
 		case CreditsScene::Pages::page1:
 
-			for (int i = dev1; i < artist2 + 1; i++)
+			for (int i = dev1; i < artist3 + 1; i++)
 				CheckURLButton(creditsInfo[i]);
 
 			break;
@@ -149,7 +149,7 @@ namespace CreditsScene
 		credit.button = Button::GetButton
 		(screenWidth / 2,
 			credit.text.location.y + credit.text.fontSize + static_cast<int>(Text::Padding::minimum),
-			static_cast<float>(Text::GetTextWidth(creditsTitle)) + static_cast<float>(Text::Padding::giant) + 10,
+			Button::buttonWidth,
 			static_cast<float>(credit.text.fontSize) * 2.0f,
 			credit.name,
 			BLACK, highlightColor, WHITE,
@@ -167,39 +167,33 @@ namespace CreditsScene
 
 	static void InitCredits()
 	{
-		creditsTitle = Text::GetText
-		(screenWidth / 2,
-			static_cast<int>(Text::Padding::medium),
-			Text::Fonts::Title2,
-			static_cast<int>(Text::FontSize::medium),
-			"CREDITS",
-			SKYBLUE);
-		Text::CenterTextX(creditsTitle);
 
 #pragma region PAGE_1
 
 		devTitle = Text::GetText
 		(screenWidth / 2,
-			creditsTitle.location.y + creditsTitle.fontSize + static_cast<int>(Text::Padding::tiny),
+			static_cast<int>(Text::Padding::medium) - static_cast<int>(Text::Padding::tiny),
 			Text::Fonts::Title2,
-			creditsTitle.fontSize * 3 / 4,
+			static_cast<int> (Text::FontSize::medium) * 3/4,
 			"DEVELOPMENT",
 			MAGENTA);
 		Text::CenterTextX(devTitle);
 
-		InitCredit(creditsInfo[dev1], devTitle.location.y + devTitle.fontSize - static_cast<int>(Text::Padding::tiny));
+		InitCredit(creditsInfo[dev1], devTitle.location.y + devTitle.fontSize);
 		InitCredit(creditsInfo[dev2], creditsInfo[dev1].button.shape.y + creditsInfo[dev1].text.fontSize);
 
-		artTitle = Text::GetText(screenWidth / 2,
+		artTitle = Text::GetText
+		(screenWidth / 2,
 			creditsInfo[dev2].button.shape.y + creditsInfo[dev2].button.shape.height + static_cast<int>(Text::Padding::small),
-			Text::Fonts::Default,
+			Text::Fonts::Title2,
 			devTitle.fontSize,
 			"ART",
 			YELLOW);
 		Text::CenterTextX(artTitle);
 
-		InitCredit(creditsInfo[artist1], artTitle.location.y + artTitle.fontSize + static_cast<int>(Text::Padding::minimum));
+		InitCredit(creditsInfo[artist1], artTitle.location.y + artTitle.fontSize + static_cast<int>(Text::Padding::small));
 		InitCredit(creditsInfo[artist2], creditsInfo[artist1].button.shape.y + creditsInfo[artist1].text.fontSize + static_cast<int>(Text::Padding::small));
+		InitCredit(creditsInfo[artist3], creditsInfo[artist2].button.shape.y + creditsInfo[artist2].text.fontSize + static_cast<int>(Text::Padding::small));
 
 #pragma endregion
 
@@ -218,11 +212,11 @@ namespace CreditsScene
 
 		for (int i = music1; i < sfx5 + 1; i++)
 		{
-			float posX = static_cast <float> ((i % 2 == 0) ? screenWidth / 10 : screenWidth / 10 * 5);
+			float posX = static_cast <float> ((i % 2 == 0) ? screenWidth / 20 : screenWidth / 20 * 11);
 
 			InitCredit(creditsInfo[i], posY, posX);
 
-			if (i % 2 != 0)
+			if (i % 2 == 0)
 			{
 				posY += creditsInfo[i].button.shape.height + static_cast<int>(Text::Padding::medium);
 			}
@@ -291,6 +285,10 @@ namespace CreditsScene
 		creditsInfo[artist2].name = "Ansimuz";
 		creditsInfo[artist2].url = "https://ansimuz.itch.io/industrial-parallax-background";
 		creditsInfo[artist2].role = "PARALLAX";
+
+		creditsInfo[artist3].name = "ACTG";
+		creditsInfo[artist3].url = "https://actg.itch.io/old-pipes-tileset";
+		creditsInfo[artist3].role = "PIPES";
 #pragma endregion
 
 #pragma region MUSIC_AND_SOUNDS
@@ -301,7 +299,7 @@ namespace CreditsScene
 		creditsInfo[music1].role = "Music";
 
 		//default text
-		creditsInfo[sfx1].name = "Player jumping in a video game";
+		creditsInfo[sfx1].name = "Player jumping";
 		creditsInfo[sfx1].url = "https://mixkit.co/free-sound-effects/game/";
 		creditsInfo[sfx1].role = "Jump SFX";
 
@@ -321,14 +319,14 @@ namespace CreditsScene
 		creditsInfo[sfx4].role = "Game Over SFX";
 
 		//default text
-		creditsInfo[sfx5].name = "Winning a coin, video game";
+		creditsInfo[sfx5].name = "Winning a coin";
 		creditsInfo[sfx5].url = "https://mixkit.co/free-sound-effects/video-game/";
 		creditsInfo[sfx5].role = "Score Up SFX";
 #pragma endregion
 
 #pragma region LANGUAGE_TOOL
 
-		creditsInfo[language].name = "Github Repository";
+		creditsInfo[language].name = "GITHUB";
 		creditsInfo[language].url = "https://github.com/NicolasLeon05/Flappy-Bird-Sofi-";
 		creditsInfo[language].role = "SOURCE CODE";
 
@@ -382,7 +380,7 @@ namespace CreditsScene
 		backToMenuButton = Button::GetButton
 		(static_cast<float>(Text::Padding::tiny),
 			screenHeight,
-			80, 40,
+			90, 40,
 			"BACK",
 			BLACK, YELLOW, WHITE,
 			Text::Fonts::Default);
@@ -407,8 +405,6 @@ namespace CreditsScene
 
 	void Draw()
 	{
-		Text::DrawText(creditsTitle);
-
 		switch (currentPage)
 		{
 		case CreditsScene::Pages::page1:
@@ -423,6 +419,9 @@ namespace CreditsScene
 
 			Text::DrawText(artTitle);
 			DrawCredit(creditsInfo[artist2], true);
+
+			Text::DrawText(artTitle);
+			DrawCredit(creditsInfo[artist3], true);
 
 			break;
 		case CreditsScene::Pages::page2:

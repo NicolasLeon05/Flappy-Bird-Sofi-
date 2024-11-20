@@ -4,6 +4,8 @@
 
 namespace Button
 {
+	float buttonWidth = 320;
+
 	bool IsMouseOnButton(Button& button)
 	{
 		return GetMouseX() > button.shape.x &&

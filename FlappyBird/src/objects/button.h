@@ -7,6 +7,8 @@
 
 namespace Button
 {
+	extern float buttonWidth;
+
 	struct Button
 	{
 		Rectangle shape;

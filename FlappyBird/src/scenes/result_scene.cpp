@@ -50,6 +50,7 @@ namespace ResultScene
 			resultText.fontSize / 2,
 			"SCORE: ",
 			YELLOW);
+		Text::CenterTextX(currentScoreText);
 
 		bestScoreText = Text::GetText
 		(resultText.location.x,
@@ -58,24 +59,27 @@ namespace ResultScene
 			resultText.fontSize / 2,
 			"BEST SCORE: ",
 			YELLOW);
+		Text::CenterTextX(bestScoreText);
 
 		playAgainButton = Button::GetButton
-		(resultText.location.x,
+		(screenWidth / 2,
 			bestScoreText.location.y + bestScoreText.fontSize + static_cast<float>(Text::Padding::medium),
-			static_cast <float>(Text::GetTextWidth(resultText)),
+			Button::buttonWidth,
 			static_cast <float>(resultText.fontSize / 2),
 			"REPLAY",
 			BLACK, SKYBLUE, WHITE,
 			Text::Fonts::Default);
+		playAgainButton.shape.x -= playAgainButton.shape.width / 2;
 
 		backToMenuButton = Button::GetButton
-		(resultText.location.x,
+		(screenWidth / 2,
 			playAgainButton.shape.y + static_cast<float>(Text::Padding::medium),
-			static_cast <float>(Text::GetTextWidth(resultText)),
+			Button::buttonWidth,
 			static_cast <float>(resultText.fontSize / 2),
 			"MENU",
 			BLACK, MAGENTA, WHITE,
 			Text::Fonts::Default);
+		backToMenuButton.shape.x -= backToMenuButton.shape.width / 2;
 	}
 
 	void Update()

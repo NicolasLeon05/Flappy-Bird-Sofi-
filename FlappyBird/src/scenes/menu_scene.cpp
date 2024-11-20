@@ -47,7 +47,7 @@ void MenuScene::Init()
 	titlePart2 = Text::GetText
 	(screenWidth / 2,
 		titlePart1.location.y + titlePart1.fontSize,
-		Text::Fonts::Title2,
+		Text::Fonts::Title1,
 		static_cast<int>(Text::FontSize::big),
 		"ESCAPE",
 		YELLOW);
@@ -59,7 +59,7 @@ void MenuScene::Init()
 	singlePlayerButton = Button::GetButton
 	(static_cast<float>(GetScreenWidth()) / 2.0f - static_cast<float>(Text::GetTextWidth(titlePart2)) / 2.0f,
 		static_cast<float>(GetScreenHeight()) / 1.8f - titlePart2.fontSize,
-		static_cast<float>(Text::GetTextWidth(titlePart2)),
+		Button::buttonWidth,
 		static_cast<float>(titlePart2.fontSize) / 2.0f,
 		"SINGLE PLAYER",
 		BLACK, MAGENTA, WHITE,
@@ -68,7 +68,8 @@ void MenuScene::Init()
 	twoPlayersButton = Button::GetButton
 	(singlePlayerButton.shape.x,
 		singlePlayerButton.shape.y + singlePlayerButton.shape.height + static_cast<int>(Text::Padding::tiny),
-		singlePlayerButton.shape.width, singlePlayerButton.shape.height,
+		Button::buttonWidth,
+		singlePlayerButton.shape.height,
 		"TWO PLAYERS",
 		BLACK, MAGENTA, WHITE,
 		Text::Fonts::Default);
@@ -76,7 +77,8 @@ void MenuScene::Init()
 	creditsButton = Button::GetButton
 	(singlePlayerButton.shape.x,
 		twoPlayersButton.shape.y + twoPlayersButton.shape.height + static_cast<int>(Text::Padding::tiny),
-		singlePlayerButton.shape.width, singlePlayerButton.shape.height,
+		Button::buttonWidth,
+		singlePlayerButton.shape.height,
 		"CREDITS",
 		BLACK, SKYBLUE, WHITE,
 		Text::Fonts::Default);
@@ -84,7 +86,7 @@ void MenuScene::Init()
 	howToPlayButton = Button::GetButton
 	(creditsButton.shape.x,
 		creditsButton.shape.y + creditsButton.shape.height + static_cast<int>(Text::Padding::tiny),
-		singlePlayerButton.shape.width,
+		Button::buttonWidth,
 		singlePlayerButton.shape.height,
 		"HOW TO PLAY",
 		BLACK, YELLOW, WHITE,
@@ -93,16 +95,16 @@ void MenuScene::Init()
 	exitButton = Button::GetButton
 	(singlePlayerButton.shape.x,
 		howToPlayButton.shape.y + howToPlayButton.shape.height + static_cast<int>(Text::Padding::tiny),
-		singlePlayerButton.shape.width,
+		Button::buttonWidth,
 		singlePlayerButton.shape.height,
 		"EXIT",
 		BLACK, RED, WHITE,
 		Text::Fonts::Default);
 
 	muteBgm = Button::GetButton
-	(titlePart1.location.x + GetTextWidth(titlePart1) + static_cast<int>(Text::Padding::giant) + static_cast<int>(Text::Padding::big),
+	(titlePart1.location.x + GetTextWidth(titlePart1) + static_cast<int>(Text::Padding::giant) + static_cast<int>(Text::Padding::small),
 		static_cast<int>(Text::Padding::small),
-		singlePlayerButton.shape.width / 3,
+		Button::buttonWidth / 2.5f,
 		singlePlayerButton.shape.height,
 		"Music",
 		BLACK, RED, WHITE,
@@ -113,7 +115,7 @@ void MenuScene::Init()
 	muteSfx = Button::GetButton
 	(muteBgm.shape.x,
 		muteBgm.shape.y + muteBgm.shape.height + static_cast<int>(Text::Padding::minimum),
-		singlePlayerButton.shape.width / 3,
+		Button::buttonWidth / 2.5f,
 		singlePlayerButton.shape.height,
 		"Sounds",
 		BLACK, RED, WHITE,

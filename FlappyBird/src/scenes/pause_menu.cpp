@@ -32,7 +32,7 @@ namespace PauseScene
 		continueButton = Button::GetButton
 		(pauseTitle.location.x,
 			pauseTitle.location.y + pauseTitle.fontSize + static_cast<float>(Text::Padding::big),
-			static_cast <float> (Text::GetTextWidth(pauseTitle)),
+			Button::buttonWidth,
 			static_cast <float> (pauseTitle.fontSize / 2),
 			"CONTINUE",
 			BLACK, MAGENTA, WHITE,
@@ -41,7 +41,7 @@ namespace PauseScene
 		backToMenuButton = Button::GetButton
 		(continueButton.shape.x,
 			continueButton.shape.y + pauseTitle.fontSize + static_cast<float>(Text::Padding::small),
-			static_cast <float>(Text::GetTextWidth(pauseTitle)),
+			Button::buttonWidth,
 			static_cast <float>(pauseTitle.fontSize / 2),
 			"BACK TO MENU",
 			BLACK, SKYBLUE, WHITE,

@@ -74,7 +74,8 @@ namespace HowToPlayScene
 
 	void Update()
 	{
-		if (Button::IsButtonPrssed(backToMenuButton))
+		if (Button::IsButtonPrssed(backToMenuButton) ||
+			IsKeyPressed(KEY_ESCAPE))
 		{
 			SceneManager::SetCurrentScene(SceneManager::Menu);
 		}

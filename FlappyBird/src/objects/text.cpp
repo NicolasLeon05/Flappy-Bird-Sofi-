@@ -41,9 +41,9 @@ namespace Text
 
 	void LoadFonts()
 	{
-		titleFont1 = LoadFont("res/fonts/Swamp Witch.ttf");
-		titleFont2 = LoadFont("res/fonts/NECK ROMANCER Regular.ttf");
-		generalText = LoadFont("res/fonts/joystix monospace.otf");
+		titleFont1= LoadFont("res/fonts/NECK ROMANCER Regular.ttf");
+		titleFont2 = LoadFont("res/fonts/Swamp Witch.ttf");
+		generalText = LoadFont("res/fonts/YokoInkScratchy.ttf");
 	}
 
 	void UnloadFonts()
