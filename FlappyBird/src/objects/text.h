@@ -28,6 +28,13 @@ namespace Text
 		giant = 140
 	};
 
+	enum class Fonts
+	{
+		Title1,
+		Title2,
+		Default
+	};
+
 	struct Text
 	{
 		string content = " ";
@@ -36,6 +43,7 @@ namespace Text
 		Color currentColor;
 		Color alt1Color;
 		Color alt2Color;
+		Fonts font;
 	};
 
 
@@ -47,9 +55,15 @@ namespace Text
 
 	void CenterTextX(Text& text);
 
-	int GetTextWidth(Text text);
+	float GetTextWidth(Text text);
+
+	Font GetFont(Fonts font);
+
+	void LoadFonts();
+
+	void UnloadFonts();
 
 	//Create texts
-	Text GetText(float x, float y, int fontSize, string content, Color color);
+	Text GetText(float x, float y, Fonts font, int fontSize, string content, Color color);
 };
 

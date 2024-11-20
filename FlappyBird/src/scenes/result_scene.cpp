@@ -37,6 +37,7 @@ namespace ResultScene
 		resultText = Text::GetText
 		(screenWidth / 2,
 			screenHeight / 3 - static_cast<int>(Text::FontSize::giant),
+			Text::Fonts::Default,
 			static_cast<int>(Text::FontSize::big),
 			"YOU LOST",
 			RED);
@@ -45,6 +46,7 @@ namespace ResultScene
 		currentScoreText = Text::GetText
 		(resultText.location.x,
 			resultText.location.y + resultText.fontSize + static_cast<float>(Text::Padding::medium),
+			Text::Fonts::Default,
 			resultText.fontSize / 2,
 			"SCORE: ",
 			YELLOW);
@@ -52,6 +54,7 @@ namespace ResultScene
 		bestScoreText = Text::GetText
 		(resultText.location.x,
 			currentScoreText.location.y + currentScoreText.fontSize + static_cast<float>(Text::Padding::small),
+			Text::Fonts::Default,
 			resultText.fontSize / 2,
 			"BEST SCORE: ",
 			YELLOW);
@@ -62,7 +65,8 @@ namespace ResultScene
 			static_cast <float>(Text::GetTextWidth(resultText)),
 			static_cast <float>(resultText.fontSize / 2),
 			"REPLAY",
-			BLACK, SKYBLUE, WHITE);
+			BLACK, SKYBLUE, WHITE,
+			Text::Fonts::Default);
 
 		backToMenuButton = Button::GetButton
 		(resultText.location.x,
@@ -70,7 +74,8 @@ namespace ResultScene
 			static_cast <float>(Text::GetTextWidth(resultText)),
 			static_cast <float>(resultText.fontSize / 2),
 			"MENU",
-			BLACK, MAGENTA, WHITE);
+			BLACK, MAGENTA, WHITE,
+			Text::Fonts::Default);
 	}
 
 	void Update()

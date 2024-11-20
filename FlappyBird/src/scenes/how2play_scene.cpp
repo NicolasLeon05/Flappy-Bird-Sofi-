@@ -11,7 +11,6 @@ namespace HowToPlayScene
 	static Text::Text leftClickControl;
 	static Text::Text objectiveTitle;
 	static Text::Text objectiveText;
-	static Text::Text specialObstacleText;
 	static Button::Button backToMenuButton;
 
 	void Init()
@@ -20,6 +19,7 @@ namespace HowToPlayScene
 		controlsTitle = Text::GetText
 		(screenWidth / 2,
 			static_cast<int>(Text::Padding::medium),
+			Text::Fonts::Title1,
 			static_cast<int>(Text::FontSize::medium),
 			"CONTROLS",
 			WHITE);
@@ -28,14 +28,16 @@ namespace HowToPlayScene
 		spaceControl = Text::GetText
 		(screenWidth / 2,
 			controlsTitle.location.y + static_cast<int>(Text::Padding::medium),
+			Text::Fonts::Default,
 			static_cast<int>(Text::FontSize::small),
-			"- Space to jump as player 1 or singleplayer!",
+			"- Space to jump as player 1!",
 			WHITE);
 		Text::CenterTextX(spaceControl);
 
 		leftClickControl = Text::GetText
 		(screenWidth / 2,
 			spaceControl.location.y + static_cast<int>(Text::Padding::medium),
+			Text::Fonts::Default,
 			static_cast<int>(Text::FontSize::small),
 			"- Space to jump as player 2!",
 			WHITE);
@@ -44,6 +46,7 @@ namespace HowToPlayScene
 		objectiveTitle = Text::GetText
 		(screenWidth / 2,
 			leftClickControl.location.y + static_cast<int>(Text::Padding::big),
+			Text::Fonts::Title2,
 			static_cast<int>(Text::FontSize::medium),
 			"OBJECTIVES",
 			WHITE);
@@ -52,25 +55,19 @@ namespace HowToPlayScene
 		objectiveText = Text::GetText
 		(screenWidth / 2,
 			objectiveTitle.location.y + static_cast<int>(Text::Padding::medium),
+			Text::Fonts::Default,
 			static_cast<int>(Text::FontSize::small),
 			"- Get as far as you can!",
 			WHITE);
 		Text::CenterTextX(objectiveText);
-
-		specialObstacleText = Text::GetText
-		(screenWidth / 2,
-			objectiveText.location.y + static_cast<int>(Text::Padding::medium),
-			objectiveText.fontSize,
-			"- Once you reach a certain score the obstacles will move up and down!",
-			WHITE);
-		Text::CenterTextX(specialObstacleText);
 
 		backToMenuButton = Button::GetButton
 		(static_cast<float>(Text::Padding::small),
 			screenHeight,
 			80, 40,
 			"BACK",
-			BLACK, YELLOW, WHITE);
+			BLACK, YELLOW, WHITE,
+			Text::Fonts::Default);
 		backToMenuButton.shape.y -= backToMenuButton.shape.height + static_cast<float>(Text::Padding::small);
 
 	}
@@ -90,7 +87,6 @@ namespace HowToPlayScene
 		Text::DrawText(leftClickControl);
 		Text::DrawText(objectiveTitle);
 		Text::DrawText(objectiveText);
-		Text::DrawText(specialObstacleText);
 		Button::DrawButton(backToMenuButton);
 	}
 }

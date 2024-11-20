@@ -21,8 +21,10 @@ namespace PauseScene
 		pauseTitle = Text::GetText
 		(screenWidth / 2,
 			screenHeight / 3 - static_cast<int>(Text::FontSize::big),
+			Text::Fonts::Default,
 			static_cast<int>(Text::FontSize::big),
-			"PAUSED", WHITE);
+			"PAUSED",
+			WHITE);
 
 		Text::CenterTextX(pauseTitle);
 
@@ -32,14 +34,18 @@ namespace PauseScene
 			pauseTitle.location.y + pauseTitle.fontSize + static_cast<float>(Text::Padding::big),
 			static_cast <float> (Text::GetTextWidth(pauseTitle)),
 			static_cast <float> (pauseTitle.fontSize / 2),
-			"CONTINUE", BLACK, MAGENTA, WHITE);
+			"CONTINUE",
+			BLACK, MAGENTA, WHITE,
+			Text::Fonts::Default);
 
 		backToMenuButton = Button::GetButton
 		(continueButton.shape.x,
 			continueButton.shape.y + pauseTitle.fontSize + static_cast<float>(Text::Padding::small),
 			static_cast <float>(Text::GetTextWidth(pauseTitle)),
 			static_cast <float>(pauseTitle.fontSize / 2),
-			"BACK TO MENU", BLACK, SKYBLUE, WHITE);
+			"BACK TO MENU",
+			BLACK, SKYBLUE, WHITE,
+			Text::Fonts::Default);
 
 	}
 

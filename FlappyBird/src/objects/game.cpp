@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include "objects/parallax_handler.h"
+#include "objects/text.h"
 #include "scenes/gameplay_scene.h"
 #include "scenes/credits_scene.h"
 #include "scenes/menu_scene.h"
@@ -18,6 +19,7 @@ namespace FlappyBird
 {
 	static void Load()
 	{
+		Text::LoadFonts();
 		SoundManager::Load(); 
 		GameplayScene::LoadTextures();
 		SoundManager::currentBgm = SoundManager::menuBgm;
@@ -36,6 +38,7 @@ namespace FlappyBird
 		Parallax::Unload();
 		SoundManager::Unload();
 		GameplayScene::Unload();
+		Text::UnloadFonts();
 	}
 
 	static void Init()
