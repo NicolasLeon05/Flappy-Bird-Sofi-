@@ -19,7 +19,7 @@ namespace HowToPlayScene
 		controlsTitle = Text::GetText
 		(screenWidth / 2,
 			static_cast<int>(Text::Padding::medium),
-			Text::Fonts::Title1,
+			Text::Fonts::Title2,
 			static_cast<int>(Text::FontSize::medium),
 			"CONTROLS",
 			WHITE);
