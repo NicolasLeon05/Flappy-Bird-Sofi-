@@ -25,7 +25,7 @@ namespace FlappyBird
 		SoundManager::currentBgm = SoundManager::menuBgm;
 
 		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0004_bg.png");
-		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0003_far buildings.png");
+		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0003_far-buildings.png");
 		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0002_3.png");
 		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0001_buildings.png");
 		Parallax::PushBackLayer("res/sprites/parallax_bg/industrial-hell_0000_foreground.png");
