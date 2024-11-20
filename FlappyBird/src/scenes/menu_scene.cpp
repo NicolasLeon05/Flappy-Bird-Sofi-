@@ -110,8 +110,6 @@ void MenuScene::Init()
 		BLACK, ORANGE, WHITE,
 		Text::Fonts::Default);
 
-	cout << endl << endl << endl << GetTextWidth(titlePart1) << endl << endl << endl;
-
 	muteSfx = Button::GetButton
 	(muteBgm.shape.x,
 		muteBgm.shape.y + muteBgm.shape.height + static_cast<int>(Text::Padding::minimum),
