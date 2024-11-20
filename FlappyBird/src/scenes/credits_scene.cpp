@@ -103,8 +103,6 @@ namespace CreditsScene
 			for (int i = language; i < maxCredits; i++)
 				CheckURLButton(creditsInfo[i]);
 
-			//both sound buttons
-
 			break;
 		default:
 			break;

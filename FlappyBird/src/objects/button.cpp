@@ -20,8 +20,6 @@ namespace Button
 		{
 			button.currentColor = button.highlightColor;
 
-			//sfx = Audio::GetRandomSfx();
-
 			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 			{
 				PlaySound(SoundManager::clickButtonSfx);

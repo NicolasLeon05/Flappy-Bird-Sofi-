@@ -4,10 +4,6 @@ namespace SpritesManager
 {
 	void AnimateSprite(AnimatedSprite& sprite)
 	{
-		/*int currentFrame = ((static_cast<int>(GetTime()) - static_cast<int>(sprite.start)) * sprite.fps) % sprite.frameWidth;
-
-		sprite.atlas.source = { static_cast<float>(sprite.frameWidth * currentFrame), 0 };*/
-
 		sprite.timer += GetFrameTime();
 
 		if (sprite.timer >= sprite.updateTime)
