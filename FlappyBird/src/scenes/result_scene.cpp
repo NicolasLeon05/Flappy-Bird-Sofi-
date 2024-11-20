@@ -97,6 +97,7 @@ namespace ResultScene
 		if (Button::IsButtonPrssed(playAgainButton))
 		{
 			SceneManager::SetCurrentScene(SceneManager::Gameplay);
+			PlayMusicStream(SoundManager::currentBgm);
 		}
 
 
