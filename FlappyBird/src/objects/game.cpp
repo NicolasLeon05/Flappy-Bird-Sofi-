@@ -64,6 +64,11 @@ namespace HellEscape
 
 		case SceneManager::Menu:
 		{
+			if (!IsMusicStreamPlaying(SoundManager::currentBgm))
+			{
+				SoundManager::currentBgm = SoundManager::menuBgm;
+				PlayMusicStream(SoundManager::currentBgm);
+			}
 			MenuScene::Update();
 			Parallax::Update();
 			break;

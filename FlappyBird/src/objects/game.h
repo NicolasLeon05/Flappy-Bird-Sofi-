@@ -1,6 +1,6 @@
 #pragma once
 
-namespace FlappyBird
+namespace HellEscape
 {
 	void Play();
 }
