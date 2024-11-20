@@ -1,5 +1,4 @@
 #include "obstacle.h"
-
 #include "utils/screen_info.h"
 #include "objects/player.h"
 
@@ -29,17 +28,14 @@ namespace Obstacle
 		{
 		case Size::small:
 			obstacle.lowerColisionShape.y = static_cast<int>(SizeValues::small);
-			cout << "small" << endl;
 			break;
 
 		case Size::medium:
 			obstacle.lowerColisionShape.y = static_cast<int>(SizeValues::medium);
-			cout << "medium" << endl;
 			break;
 
 		case Size::big:
 			obstacle.lowerColisionShape.y = static_cast<int>(SizeValues::big);
-			cout << "big" << endl;
 			break;
 
 		default:
@@ -96,9 +92,6 @@ namespace Obstacle
 		obstacle.higherSprite.dest.y = obstacle.higherColisionShape.y;
 	}
 
-
-
-
 	void ResetObstacle(Obstacle& obstacle)
 	{
 		obstacle.lowerColisionShape.x = screenWidth;
@@ -107,6 +100,11 @@ namespace Obstacle
 		obstacle.higherColisionShape.width = obstacle.lowerColisionShape.width;
 		RandomizeHeight(obstacle);
 		obstacle.scoreGiven = false;
+	}
+
+	void ResetObstacleSpeed(Obstacle& obstacle)
+	{
+		obstacle.speed = { 350.0f, 100.0f };
 	}
 
 	Obstacle GetObstacle(SpritesManager::Sprite sprite)
@@ -122,17 +120,24 @@ namespace Obstacle
 		obstacle.higherColisionShape.width = obstacle.lowerColisionShape.width;
 		RandomizeHeight(obstacle);
 
-		obstacle.lowerSprite.rotation = 0;
-		obstacle.higherSprite.rotation = 0;
+		obstacle.lowerSprite.source.width = static_cast<float>(obstacle.lowerSprite.texture.width);
+		obstacle.lowerSprite.source.height = static_cast<float>(obstacle.lowerSprite.texture.height);
 
+		obstacle.lowerSprite.source.x = 0.0f;
+		obstacle.lowerSprite.source.y = 0.0f;
+
+		obstacle.higherSprite.source.width = static_cast<float>(obstacle.higherSprite.texture.width);
+		obstacle.higherSprite.source.height = static_cast<float>(obstacle.higherSprite.texture.height);
+		obstacle.higherSprite.source.x = 0.0f;
+		obstacle.higherSprite.source.y = 0.0f;
+
+		obstacle.lowerSprite.rotation = 0;
 		obstacle.lowerSprite.dest.x = obstacle.lowerColisionShape.x;
 		obstacle.lowerSprite.dest.y = obstacle.lowerColisionShape.y;
 		obstacle.lowerSprite.dest.width = obstacle.lowerColisionShape.width;
 		obstacle.lowerSprite.dest.height = obstacle.lowerColisionShape.height;
 
-
-		obstacle.higherSprite.rotation = 180;
-
+		obstacle.higherSprite.rotation = 0;
 		obstacle.higherSprite.dest.x = obstacle.higherColisionShape.x;
 		obstacle.higherSprite.dest.y = obstacle.higherColisionShape.y;
 		obstacle.higherSprite.dest.width = obstacle.higherColisionShape.width;
@@ -140,9 +145,6 @@ namespace Obstacle
 
 		obstacle.speed = { 350.0f, 100.0f };
 		obstacle.scoreGiven = false;
-
-		obstacle.lowerSprite.source.width = static_cast<float>(obstacle.lowerSprite.texture.width);
-		obstacle.lowerSprite.source.height = static_cast<float>(obstacle.lowerSprite.texture.height);
 
 		return obstacle;
 	}
@@ -152,26 +154,13 @@ namespace Obstacle
 		MoveObstacle(obstacle);
 
 		if (difficultyUp)
-			MoveObstacleVertical(obstacle);		
+		{
+			MoveObstacleVertical(obstacle);
+		}
 	}
 
 	void Draw(Obstacle& obstacle)
 	{
-		DrawRectangle
-		(static_cast<int>(obstacle.lowerColisionShape.x),
-			static_cast<int>(obstacle.lowerColisionShape.y),
-			static_cast<int>(obstacle.lowerColisionShape.width),
-			static_cast<int>(obstacle.lowerColisionShape.height),
-			RED);
-
-		DrawRectangle
-		(static_cast<int>(obstacle.higherColisionShape.x),
-			static_cast<int>(obstacle.higherColisionShape.y),
-			static_cast<int>(obstacle.higherColisionShape.width),
-			static_cast<int>(obstacle.higherColisionShape.height),
-			RED);
-
-
 		SpritesManager::DrawSprite(obstacle.lowerSprite);
 		SpritesManager::DrawSprite(obstacle.higherSprite);
 	}

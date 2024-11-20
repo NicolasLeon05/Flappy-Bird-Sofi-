@@ -19,6 +19,7 @@ namespace Obstacle
 	};
 
 	void ResetObstacle(Obstacle& obstacle);
+	void ResetObstacleSpeed(Obstacle& obstacle);
 	Obstacle GetObstacle(SpritesManager::Sprite sprite);
 
 	void Update(Obstacle& obstacle, bool difficultyUp);
