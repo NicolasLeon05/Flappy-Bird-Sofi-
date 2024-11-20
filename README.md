@@ -1,7 +1,7 @@
 # Hell Escape
 
-**Hell Escape is a version of Breakout i made for my first year in college studying videogame programing at Image Campus.
-It was made using c++ with the sigil lilbrary.**
+**Hell Escape is a version of Flappy Bird i made for my first year in college studying videogame programing at Image Campus.
+It was made using c++ with the raylib lilbrary.**
 
 [MiniShowcase](https://www.youtube.com/watch?v=2G9MGEplsns&ab_channel=Nicol%C3%A1sLe%C3%B3n)
 
