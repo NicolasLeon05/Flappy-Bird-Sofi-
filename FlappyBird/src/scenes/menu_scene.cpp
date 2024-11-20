@@ -125,7 +125,7 @@ void MenuScene::Init()
 		static_cast<float>(Text::Padding::tiny),
 		Text::Fonts::Default,
 		static_cast<int>(Text::FontSize::medium),
-		"v0.4",
+		"v1.0",
 		GRAY);
 }
 
