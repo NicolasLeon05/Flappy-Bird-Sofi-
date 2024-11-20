@@ -5,6 +5,7 @@
 #include "objects/button.h"
 #include "utils/scene_manager.h"
 #include "utils/screen_info.h"
+#include "utils/sound_manager.h"
 #include "scenes/gameplay_scene.h"
 
 namespace PauseScene
@@ -61,6 +62,7 @@ namespace PauseScene
 
 		if (Button::IsButtonPrssed(backToMenuButton))
 		{
+			SoundManager::currentBgm = SoundManager::menuBgm;
 			SceneManager::SetCurrentScene(SceneManager::Menu);
 			GameplayScene::ResetGameplay();
 		}
