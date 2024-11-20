@@ -194,7 +194,7 @@ namespace GameplayScene
 		Obstacle::Update(obstacle1, difficultyUp);
 		Obstacle::Update(obstacle2, difficultyUp);
 
-		//Back button
+		//Back
 		if (IsKeyReleased(KEY_ESCAPE))
 		{
 			SceneManager::SetCurrentScene(SceneManager::Pause);

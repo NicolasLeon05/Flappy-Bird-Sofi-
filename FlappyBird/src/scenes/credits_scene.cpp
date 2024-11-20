@@ -30,6 +30,9 @@ namespace CreditsScene
 		sfx3,
 		sfx4,
 		sfx5,
+		font1,
+		font2,
+		font3,
 		language,
 		library,
 		artTool
@@ -56,7 +59,8 @@ namespace CreditsScene
 
 	static Text::Text devTitle;
 	static Text::Text artTitle;
-	static Text::Text fontTitle;
+	static Text::Text musicAndSoundsTitle;
+	static Text::Text fontsTitle;
 	static Text::Text toolsTitle;
 
 	static Text::Text soundSubTitle;
@@ -100,7 +104,7 @@ namespace CreditsScene
 			break;
 		case CreditsScene::Pages::page3:
 
-			for (int i = language; i < maxCredits; i++)
+			for (int i = font1; i < maxCredits; i++)
 				CheckURLButton(creditsInfo[i]);
 
 			break;
@@ -197,16 +201,16 @@ namespace CreditsScene
 
 #pragma region PAGE_2
 
-		fontTitle = Text::GetText
+		musicAndSoundsTitle = Text::GetText
 		(screenWidth / 2,
 			devTitle.location.y,
 			Text::Fonts::Title2,
 			artTitle.fontSize,
 			"MUSIC AND SOUNDS",
 			artTitle.currentColor);
-		Text::CenterTextX(fontTitle);
+		Text::CenterTextX(musicAndSoundsTitle);
 
-		float posY = fontTitle.location.y + fontTitle.fontSize + static_cast<float>(Text::Padding::small);
+		float posY = musicAndSoundsTitle.location.y + musicAndSoundsTitle.fontSize + static_cast<float>(Text::Padding::small);
 
 		for (int i = music1; i < sfx5 + 1; i++)
 		{
@@ -225,22 +229,39 @@ namespace CreditsScene
 
 #pragma region PAGE_3
 
+		fontsTitle = Text::GetText
+		(screenWidth / 20,
+			devTitle.location.y,
+			Text::Fonts::Title2,
+			artTitle.fontSize,
+			"FONTS",
+		artTitle.currentColor);
+		fontsTitle.location.x += Text::GetTextWidth(fontsTitle) * 1.5f;
+
+		posY = fontsTitle.location.y + fontsTitle.fontSize + static_cast<int>(Text::Padding::small);
+
+		for (int i = font1; i < font3 + 1; i++)
+		{
+			InitCredit(creditsInfo[i], posY, screenWidth / 20);
+			posY += creditsInfo[i].button.shape.height + static_cast<int>(Text::Padding::medium);
+		}
+
+
 		toolsTitle = Text::GetText
-		(screenWidth / 2,
+		(screenWidth / 20 * 11,
 			devTitle.location.y,
 			Text::Fonts::Title2,
 			artTitle.fontSize,
 			"TOOLS",
 			artTitle.currentColor);
-		Text::CenterTextX(toolsTitle);
+		toolsTitle.location.x += Text::GetTextWidth(toolsTitle) * 1.5f;
 
 		posY = toolsTitle.location.y + toolsTitle.fontSize + static_cast<int>(Text::Padding::small);
 
 		for (int i = language; i < maxCredits; i++)
 		{
-			InitCredit(creditsInfo[i], posY);
-
-			posY += creditsInfo[i].button.shape.height + creditsInfo[i].text.fontSize + static_cast<int>(Text::Padding::small);
+			InitCredit(creditsInfo[i], posY, screenWidth / 20 * 11);
+			posY += creditsInfo[i].button.shape.height + static_cast<int>(Text::Padding::medium);
 		}
 
 #pragma endregion
@@ -320,6 +341,20 @@ namespace CreditsScene
 		creditsInfo[sfx5].name = "Winning a coin";
 		creditsInfo[sfx5].url = "https://mixkit.co/free-sound-effects/video-game/";
 		creditsInfo[sfx5].role = "Score Up SFX";
+#pragma endregion
+
+#pragma region FONTS
+		creditsInfo[font1].name = "NECK ROMANCER";
+		creditsInfo[font1].url = "https://www.dafont.com/es/neck-romancer.font";
+		creditsInfo[font1].role = "Ttile1";
+
+		creditsInfo[font2].name = "Swamp Witch";
+		creditsInfo[font2].url = "https://www.dafont.com/es/swamp-witch.font";
+		creditsInfo[font2].role = "Title2";
+
+		creditsInfo[font3].name = "YokoInkScratchy";
+		creditsInfo[font3].url = "https://www.dafont.com/es/yoko-ink-scratchy.font";
+		creditsInfo[font3].role = "Default";
 #pragma endregion
 
 #pragma region LANGUAGE_TOOL
@@ -424,13 +459,18 @@ namespace CreditsScene
 			break;
 		case CreditsScene::Pages::page2:
 
-			Text::DrawText(fontTitle);
+			Text::DrawText(musicAndSoundsTitle);
 
 			for (int i = music1; i < sfx5 + 1; i++)
 				DrawCredit(creditsInfo[i], true);
 
 			break;
 		case CreditsScene::Pages::page3:
+
+			Text::DrawText(fontsTitle);
+			for (int i = font1; i < font3 + 1; i++)
+				DrawCredit(creditsInfo[i], true);
+
 
 			Text::DrawText(toolsTitle);
 
